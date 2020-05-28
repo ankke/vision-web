@@ -7,6 +7,8 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+import routes from './constants/routes'
+import Menu from "./components/Menu";
 
 
 function App({store, history}) {
@@ -14,8 +16,8 @@ function App({store, history}) {
       <Provider store={store}>
         <Router history={history}>
             <Switch>
-                <Route path="/" component={Example} />
-                <Route path="/route" component={Example} />
+                <Route exact path={routes.HOME} component={Example} />
+                <Route path={routes.EXAMPLE} component={Menu} />
             </Switch>
         </Router>
       </Provider>
