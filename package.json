@@ -12,6 +12,7 @@
     "connected-react-router": "^6.8.0",
     "customize-cra": "^0.9.1",
     "customize-cra-react-refresh": "^1.0.1",
+    "dgram": "^1.0.1",
     "history": "^4.10.1",
     "react": "^16.13.1",
     "react-app-rewired": "^2.1.6",
@@ -20,7 +21,8 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "websocket": "^1.0.31"
   },
   "scripts": {
     "start": "react-app-rewired start",

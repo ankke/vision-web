@@ -1,20 +1,31 @@
-import React from 'react';
-import logo from '../logo.png';
+import React, {Component} from 'react';
 import '../App.css';
-import routes from '../constants/routes'
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 import {NavLink} from "react-router-dom";
-function Example() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
+import routes from '../constants/routes'
+
+const client = new W3CWebSocket('ws://127.0.0.1:5000');
+
+class Example extends Component {
+    componentDidMount() {
+        client.onopen = () => {
+            console.log('WebSocket Client Connected');
+        };
+        client.onmessage = (message) => {
+            console.log(message);
+        };
+    }
+
+    render() {
+        return (
+            <div className="App">
                 <NavLink to={routes.EXAMPLE}>
                     Menu
                 </NavLink>
-            </header>
-        </div>
-        );
+                <img src={'http://127.0.0.1:8000/show?id=41'}  alt={'frame'} width={'80%'} height={'80%'}/>
+            </div>);
     }
+}
 
 
 export default Example;
