@@ -1,0 +1,36 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:prettier/recommended",
+        "prettier/react"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": "error"
+    },
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "detect",
+            "flowVersion": "0.53"
+        },
+        "linkComponents": [
+            "Hyperlink",
+            {"name": "Link", "linkAttribute": "to"}
+        ]
+    }
+}
