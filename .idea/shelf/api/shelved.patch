@@ -1,0 +1,111 @@
+Index: src/api/requests.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/api/requests.js	(date 1592054690590)
++++ src/api/requests.js	(date 1592054690590)
+@@ -0,0 +1,42 @@
++export function get(address) {
++  return _get(address);
++}
++
++export function post(address, { params = {} } = {}) {
++  return _withBody("POST")(address, { params });
++}
++
++export function put(address, { params = {} } = {}) {
++  return _withBody("PUT")(address, { params });
++}
++
++export function patch(address, { params = {} } = {}) {
++  return _withBody("PATCH")(address, { params });
++}
++
++export function _delete(address, { params = {} } = {}) {
++  return _del(address, { params });
++}
++
++const _get = (address, { headers, withToken }) =>
++  Promise.resolve(
++    fetch(address, {
++      method: "GET",
++    })
++  );
++
++const _withBody = (method) => (address, { params }) =>
++  Promise.resolve(
++    fetch(address, {
++      method: method,
++      body: JSON.stringify(params),
++    })
++  );
++
++const _del = (address, { params } = {}) =>
++  Promise.resolve(
++    fetch(address, {
++      method: "DELETE",
++      body: JSON.stringify(params),
++    })
++  );
+Index: src/screens/list/CamerasList.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/screens/list/CamerasList.js	(date 1592055471807)
++++ src/screens/list/CamerasList.js	(date 1592055471807)
+@@ -0,0 +1,0 @@
+Index: src/api/apiConf.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>export const apiConf = {\n  apiUrl: \"http://127.0.0.1:8000\",\n};\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/api/apiConf.js	(revision f0747d311674917dc1fd83314d2e8fadaa615b78)
++++ src/api/apiConf.js	(date 1592055344971)
+@@ -1,3 +1,9 @@
+-export const apiConf = {
+-  apiUrl: "http://127.0.0.1:8000",
+-};
++const apiUrl = "http://127.0.0.1:8000";
++export const cameras = apiUrl + "/cameras";
++export const camera = (cameraId) => cameras + "/?id=" + cameraId;
++export const deleteCamera = (cameraId) => cameras + "/delete/?id=" + cameraId;
++export const showCamera = (cameraId) => cameras + "/show/?id=" + cameraId;
++export const takePhoto = (cameraId) => cameras + "/photo/?id=" + cameraId;
++export const killCamera = (cameraId) => cameras + "/kill/?id=" + cameraId;
++export const addCamera = cameras + "/add";
++export const editCamera = cameras + "/edit";
+Index: src/screens/list/reducer.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/screens/list/reducer.js	(date 1592055456265)
++++ src/screens/list/reducer.js	(date 1592055456265)
+@@ -0,0 +1,0 @@
+Index: src/App.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import gitReact from \"react\";\nimport \"./App.css\";\nimport { Provider } from \"react-redux\";\nimport Example from \"./screens/Example\";\nimport { BrowserRouter as Router, Switch, Route } from \"react-router-dom\";\nimport routes from \"./constants/routes\";\nimport Menu from \"./components/Menu\";\n\nfunction App({ store, history }) {\n  return (\n    <Provider store={store}>\n      <Router history={history}>\n        <Switch>\n          <Route exact path={routes.HOME} component={Example} />\n          <Route path={routes.EXAMPLE} component={Menu} />\n        </Switch>\n      </Router>\n    </Provider>\n  );\n}\n\nexport default App;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/App.js	(revision f0747d311674917dc1fd83314d2e8fadaa615b78)
++++ src/App.js	(date 1592052690172)
+@@ -1,4 +1,4 @@
+-import gitReact from "react";
++import React from "react";
+ import "./App.css";
+ import { Provider } from "react-redux";
+ import Example from "./screens/Example";
+Index: src/screens/list/actions.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/screens/list/actions.js	(date 1592055447339)
++++ src/screens/list/actions.js	(date 1592055447339)
+@@ -0,0 +1,0 @@
