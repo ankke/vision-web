@@ -1,15 +1,16 @@
-import React, { Component } from "react";
-import "../App.css";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { NavLink } from "react-router-dom";
-import routes from "../constants/routes";
+import React, { Component } from 'react';
+import '../App.css';
+import { w3cwebsocket as W3CWebSocket } from 'websocket';
+import { NavLink } from 'react-router-dom';
+import { routes } from '../constants/routes';
+import { addCameraRequest } from './thunks';
 
-const client = new W3CWebSocket("ws://127.0.0.1:5000");
+const client = new W3CWebSocket('ws://127.0.0.1:5000');
 
 class Example extends Component {
   componentDidMount() {
     client.onopen = () => {
-      console.log("WebSocket Client Connected");
+      console.log('WebSocket Client Connected');
     };
     client.onmessage = (message) => {
       console.log(message);
@@ -19,13 +20,15 @@ class Example extends Component {
   render() {
     return (
       <div className="App">
-        <NavLink to={routes.EXAMPLE}>Menu</NavLink>
-        <img
-          src={"http://127.0.0.1:8000/show?id=41"}
-          alt={"frame"}
-          width={"80%"}
-          height={"80%"}
-        />
+        <NavLink to={routes.homepage}>Menu</NavLink>
+        <img src={'logo.png'} alt={'frame'} width={'50%'} height={'50%'} />
+        <button
+          onClick={() => {
+            this.props.get();
+          }}
+        >
+          Add camera
+        </button>
       </div>
     );
   }
