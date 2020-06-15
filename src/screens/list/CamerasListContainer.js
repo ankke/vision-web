@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { closeErrorModal, openErrorModal } from 'shipment/actions';
 import CamerasList from './CamerasList';
+import { getCamerasRequest } from '../thunks';
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    cameras: state.cameras,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    openErrorModal: (message) => dispatch(openErrorModal(message)),
-    closeErrorModal: (message) => dispatch(closeErrorModal(message)),
+    getCameras: () => dispatch(getCamerasRequest()),
   };
 }
 

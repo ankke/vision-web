@@ -18,6 +18,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import colors from '../constants/colors';
 import { Route } from 'react-router';
+import { routes } from '../constants/routes';
+import CamerasListContainer from './list/CamerasListContainer';
+import { useHistory } from 'react-router';
 
 const drawerWidth = 240;
 
@@ -88,6 +91,7 @@ export default function Menu() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const history = useHistory();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -146,13 +150,25 @@ export default function Menu() {
           </IconButton>
         </div>
         <List>
-          <ListItem button key={'Cameras'}>
+          <ListItem
+            button
+            key={'Cameras'}
+            onClick={() => {
+              history.push(routes.camerasList);
+            }}
+          >
             <ListItemIcon>
               <Camera />
             </ListItemIcon>
             <ListItemText primary={'Cameras'} />
           </ListItem>
-          <ListItem button key={'Presets'}>
+          <ListItem
+            button
+            key={'Presets'}
+            onClick={() => {
+              history.push(routes.example);
+            }}
+          >
             <ListItemIcon>
               <GridOn />
             </ListItemIcon>
@@ -168,11 +184,11 @@ export default function Menu() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {/*<Route*/}
-        {/*  exact*/}
-        {/*  path={routes.homepage}*/}
-        {/*  component={GiveShipmentPackageViewContainer}*/}
-        {/*/>*/}
+        <Route
+          exact
+          path={routes.camerasList}
+          component={CamerasListContainer}
+        />
       </main>
     </div>
   );

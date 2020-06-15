@@ -25,7 +25,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux-logger": "^3.0.6",
-    "websocket": "^1.0.31"
+    "websocket": "^1.0.31",
+    "prop-types": "latest"
   },
   "scripts": {
     "start": "react-app-rewired start",

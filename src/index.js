@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import counter from './reducer';
+import rootReducer from './reducer';
 import { createHashHistory } from 'history';
 import { logger } from 'redux-logger';
 import { routerMiddleware } from 'connected-react-router';
 
 const store = configureStore({
-  reducer: counter,
+  reducer: rootReducer,
   middleware: [
     ...getDefaultMiddleware(),
     logger,
