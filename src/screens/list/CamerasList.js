@@ -9,6 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import { Fade } from '@material-ui/core';
 import ModalContainer from './ModalContainer';
+import colors from '../../constants/colors'
 
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
@@ -39,7 +40,7 @@ const styles = {
     maxWidth: 550,
     display: 'flex',
     justifyContent: 'space-between',
-    background: 'linear-gradient(45deg, #6d597a 50%, #963D5A 100%)',
+    background: `linear-gradient(45deg, ${colors.MAIN} 50%, ${colors.MAIN_V} 100%)`,
     borderRadius: 3,
     border: 0,
     color: 'white',
@@ -64,10 +65,10 @@ const styles = {
   addButton: {
     outline: 'none',
     background: 'white',
-    borderColor: '#6d597a',
+    borderColor: colors.MAIN,
     borderRadius: '50%',
     border: 2,
-    color: '#6d597a',
+    color: colors.MAIN,
     height: 60,
     width: 60,
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
@@ -77,16 +78,13 @@ const styles = {
 };
 
 class CamerasList extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.props.getCameras();
   }
 
-  renderRow(camera, classes) {
+  renderRow(camera, classes, key) {
     return (
-      <div className={classes.row}>
+      <div className={classes.row} key={key}>
         <div className={classes.name}>{camera.name}</div>
         <div className={classes.buttons}>
           <LightTooltip
@@ -97,7 +95,7 @@ class CamerasList extends Component {
             <a
               href={'http://127.0.0.1:3000/play/' + camera.id}
               target={'_blank'}
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <IconButton className={classes.button} aria-label="play">
                 <PlayArrowIcon />
@@ -157,7 +155,9 @@ class CamerasList extends Component {
           </IconButton>
         </LightTooltip>
         <div className={classes.root}>
-          {this.props.cameras.map((camera) => this.renderRow(camera, classes))}
+          {this.props.cameras.map((camera, index) =>
+            this.renderRow(camera, classes, index)
+          )}
           <ModalContainer />
         </div>
       </div>
@@ -169,7 +169,6 @@ CamerasList.propTypes = {
   history: PropTypes.object.isRequired,
   cameras: PropTypes.array.isRequired,
   getCameras: PropTypes.func.isRequired,
-  play: PropTypes.func.isRequired,
   delete: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,

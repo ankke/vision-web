@@ -42,7 +42,6 @@ export const getCamerasRequest = () => {
     const cam = await get(cameras)
       .then((res) => {
         const json = res.json();
-        console.log(json);
         return json;
       })
       .catch((err) => {

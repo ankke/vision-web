@@ -5,6 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Checkbox from '@material-ui/core/Checkbox';
+import colors from '../../constants/colors';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -18,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     background: 'white',
-    borderColor: '#6d597a',
+    borderColor: colors.MAIN,
     borderRadius: 3,
     border: 2,
-    color: '#6d597a',
+    color: colors.MAIN,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     fontSize: 20,
     textAlign: 'center',
@@ -31,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
   item: {
     outline: 'none',
     background: 'white',
-    borderColor: '#6d597a',
+    borderColor: colors.MAIN,
     borderRadius: 3,
     border: 2,
-    color: '#6d597a',
+    color: colors.MAIN,
     height: 30,
     padding: '0 30px',
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-start',
   },
   button: {
-    background: 'linear-gradient(45deg, #6d597a 50%, #963D5A 100%)',
+    background: `linear-gradient(45deg, ${colors.MAIN} 50%, ${colors.MAIN_V} 100%)`,
     borderRadius: 3,
     border: 0,
     color: 'white',
@@ -142,7 +143,7 @@ export default function FadeModal({ addCamera, isOpen, closeModal }) {
               checked={udp}
               onChange={(event) => setUdp(event.target.checked)}
               name="udp"
-              color="#6d597a"
+              color={colors.MAIN}
             />
           </label>
           <label>
@@ -151,7 +152,7 @@ export default function FadeModal({ addCamera, isOpen, closeModal }) {
               checked={ptz}
               onChange={(event) => setPtz(event.target.checked)}
               name="ptz"
-              color="#6d597a"
+              color={colors.MAIN}
             />
           </label>
           <button

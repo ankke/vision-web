@@ -27,6 +27,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    alignSelf: 'center',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -85,10 +86,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-  color: {
-    color: '#6d597a',
-    fontSize: 30,
+  shadow: {
+    boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
   },
+  color: {
+    color: colors.MAIN,
+    fontSize: 30,},
 }));
 
 export default function Menu() {
@@ -114,7 +117,7 @@ export default function Menu() {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.shadow}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -126,7 +129,7 @@ export default function Menu() {
           >
             <MenuIcon className={classes.color} />
           </IconButton>
-          <Typography variant="h6" noWrap className={classes.color}>
+          <Typography noWrap className={classes.color}>
             Camera Vision
           </Typography>
         </Toolbar>

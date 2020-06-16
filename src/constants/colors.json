@@ -1,5 +1,9 @@
 {
   "YELLOW_MAIN": "#F3DA49",
   "NAVY_MAIN": "#2E6A8C",
-  "LIGHT_GRAY": "#CBCCCD"
+  "LIGHT_GRAY": "#CBCCCD",
+  "MAIN": "#6d597a",
+  "MAIN_V": "#b56576",
+  "KILL": "#ef233c",
+  "PHOTO": "#007ea7"
 }

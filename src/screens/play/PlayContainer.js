@@ -12,12 +12,13 @@ const mapStateToProps = (state, ownProps) => {
   } = ownProps;
 
   return {
+    id: id,
     src: showCamera(id),
   };
 };
 function mapDispatchToProps(dispatch) {
   return {
-    killCamera: () => dispatch(killCamerasRequest()),
+    killCamera: (id) => dispatch(killCamerasRequest(id)),
     takePhoto: (id) => dispatch(takePhotoRequest(id)),
   };
 }
