@@ -1,6 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import reducer from './screens/camerasSlice';
+import camerasReducer from './screens/camerasSlice';
+import listReducer from './screens/list/listSlice';
 
 export default combineReducers({
-  cameras: reducer,
+  cameras: camerasReducer,
+  list: listReducer,
 });

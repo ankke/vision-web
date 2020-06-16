@@ -85,6 +85,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  color: {
+    color: '#6d597a',
+    fontSize: 30,
+  },
 }));
 
 export default function Menu() {
@@ -120,9 +124,9 @@ export default function Menu() {
               [classes.hide]: open,
             })}
           >
-            <MenuIcon />
+            <MenuIcon className={classes.color} />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap className={classes.color}>
             Camera Vision
           </Typography>
         </Toolbar>
@@ -143,9 +147,9 @@ export default function Menu() {
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
+              <ChevronRightIcon className={classes.color} />
             ) : (
-              <ChevronLeftIcon />
+              <ChevronLeftIcon className={classes.color} />
             )}
           </IconButton>
         </div>
@@ -158,9 +162,9 @@ export default function Menu() {
             }}
           >
             <ListItemIcon>
-              <Camera />
+              <Camera className={classes.color} />
             </ListItemIcon>
-            <ListItemText primary={'Cameras'} />
+            <ListItemText primary={'Cameras'} className={classes.color} />
           </ListItem>
           <ListItem
             button
@@ -170,15 +174,15 @@ export default function Menu() {
             }}
           >
             <ListItemIcon>
-              <GridOn />
+              <GridOn className={classes.color} />
             </ListItemIcon>
-            <ListItemText primary={'Presets'} />
+            <ListItemText primary={'Presets'} className={classes.color} />
           </ListItem>
           <ListItem button key={'Settings'}>
             <ListItemIcon>
-              <Settings />
+              <Settings className={classes.color} />
             </ListItemIcon>
-            <ListItemText primary={'Settings'} />
+            <ListItemText primary={'Settings'} className={classes.color} />
           </ListItem>
         </List>
       </Drawer>
