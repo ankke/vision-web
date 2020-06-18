@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import DeleteIcon from '@material-ui/icons/Delete';
 import Add from '@material-ui/icons/Add';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import EditIcon from '@material-ui/icons/Edit';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import { Fade } from '@material-ui/core';
 import ModalContainer from './ModalContainer';
-import colors from '../../constants/colors'
+import colors from '../../constants/colors';
+import { CameraRow } from './CameraRow';
 
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
@@ -23,44 +21,16 @@ const LightTooltip = withStyles((theme) => ({
 const styles = {
   container: {
     display: 'flex',
-    flexDirection: 'column',
     flex: 1,
     alignItems: 'flex-start',
-    paddingLeft: 30,
+    padding: '20px 20px',
   },
   root: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-  },
-  row: {
-    flexGrow: 1,
-    flexBasis: 550,
-    maxWidth: 550,
-    display: 'flex',
-    justifyContent: 'space-between',
-    background: `linear-gradient(45deg, ${colors.MAIN} 50%, ${colors.MAIN_V} 100%)`,
-    borderRadius: 3,
-    border: 0,
-    color: 'white',
-    height: 60,
-    padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
-    marginBottom: 10,
-    marginRight: 30,
-  },
-  name: {
-    fontSize: 20,
-    alignSelf: 'center',
-  },
-  buttons: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  button: {
-    color: 'white',
+    marginLeft: 30,
   },
   addButton: {
     outline: 'none',
@@ -82,82 +52,32 @@ class CamerasList extends Component {
     this.props.getCameras();
   }
 
-  renderRow(camera, classes, key) {
-    return (
-      <div className={classes.row} key={key}>
-        <div className={classes.name}>{camera.name}</div>
-        <div className={classes.buttons}>
-          <LightTooltip
-            TransitionComponent={Fade}
-            TransitionProps={{ timeout: 600 }}
-            title="Play"
-          >
-            <a
-              href={'http://127.0.0.1:3000/play/' + camera.id}
-              target={'_blank'}
-              rel="noopener noreferrer"
-            >
-              <IconButton className={classes.button} aria-label="play">
-                <PlayArrowIcon />
-              </IconButton>
-            </a>
-          </LightTooltip>
-          <LightTooltip
-            TransitionComponent={Fade}
-            TransitionProps={{ timeout: 600 }}
-            title="Edit"
-          >
-            <IconButton
-              className={classes.button}
-              aria-label="play"
-              onClick={() => console.log('edit')}
-            >
-              <EditIcon />
-            </IconButton>
-          </LightTooltip>
-          <LightTooltip
-            TransitionComponent={Fade}
-            TransitionProps={{ timeout: 600 }}
-            title="Delete"
-          >
-            <IconButton
-              className={classes.button}
-              aria-label="play"
-              onClick={() => {
-                console.log(camera);
-                this.props.delete(camera.id);
-              }}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </LightTooltip>
-        </div>
-      </div>
-    );
-  }
-
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <LightTooltip
-          TransitionComponent={Fade}
-          TransitionProps={{ timeout: 600 }}
-          title="Add new camera"
-          placement="right"
-        >
-          <IconButton
-            className={classes.addButton}
-            aria-label="add"
-            onClick={() => this.props.openModal()}
-          >
-            <Add />
-          </IconButton>
-        </LightTooltip>
         <div className={classes.root}>
-          {this.props.cameras.map((camera, index) =>
-            this.renderRow(camera, classes, index)
-          )}
+          <LightTooltip
+            TransitionComponent={Fade}
+            TransitionProps={{ timeout: 600 }}
+            title="Add new camera"
+            placement="right"
+          >
+            <IconButton
+              className={classes.addButton}
+              aria-label="add"
+              onClick={() => this.props.openModal()}
+            >
+              <Add />
+            </IconButton>
+          </LightTooltip>
+          {this.props.cameras.map((camera, index) => (
+            <CameraRow
+              camera={camera}
+              key={index}
+              _delete={this.props.delete}
+            />
+          ))}
           <ModalContainer />
         </div>
       </div>
