@@ -21,9 +21,3 @@ function App({ store, history }) {
 
 export default App;
 
-//
-// const {
-//     match: {
-//         params: { id },
-//     },
-// } = ownProps;

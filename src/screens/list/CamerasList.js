@@ -20,17 +20,10 @@ const LightTooltip = withStyles((theme) => ({
 
 const styles = {
   container: {
-    display: 'flex',
-    flex: 1,
-    alignItems: 'flex-start',
     padding: '20px 20px',
-  },
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    marginLeft: 30,
+    marginTop: 64,
+    flex: 1,
+    maxWidth: 500,
   },
   addButton: {
     outline: 'none',
@@ -56,30 +49,24 @@ class CamerasList extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <div className={classes.root}>
-          <LightTooltip
-            TransitionComponent={Fade}
-            TransitionProps={{ timeout: 600 }}
-            title="Add new camera"
-            placement="right"
+        <LightTooltip
+          TransitionComponent={Fade}
+          TransitionProps={{ timeout: 600 }}
+          title="Add new camera"
+          placement="right"
+        >
+          <IconButton
+            className={classes.addButton}
+            aria-label="add"
+            onClick={() => this.props.openModal()}
           >
-            <IconButton
-              className={classes.addButton}
-              aria-label="add"
-              onClick={() => this.props.openModal()}
-            >
-              <Add />
-            </IconButton>
-          </LightTooltip>
-          {this.props.cameras.map((camera, index) => (
-            <CameraRow
-              camera={camera}
-              key={index}
-              _delete={this.props.delete}
-            />
-          ))}
-          <ModalContainer />
-        </div>
+            <Add />
+          </IconButton>
+        </LightTooltip>
+        {this.props.cameras.map((camera, index) => (
+          <CameraRow camera={camera} key={index} _delete={this.props.delete} />
+        ))}
+        <ModalContainer />
       </div>
     );
   }

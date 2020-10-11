@@ -17,16 +17,17 @@
     "eslint": "^7.2.0",
     "eslint-plugin-react": "^7.20.0",
     "history": "^4.10.1",
+    "prop-types": "latest",
     "react": "^16.13.1",
     "react-app-rewired": "^2.1.6",
     "react-dom": "^16.13.1",
+    "react-lines-ellipsis": "^0.14.1",
     "react-redux": "^7.2.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux-logger": "^3.0.6",
-    "websocket": "^1.0.31",
-    "prop-types": "latest"
+    "websocket": "^1.0.31"
   },
   "scripts": {
     "start": "react-app-rewired start",

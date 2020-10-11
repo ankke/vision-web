@@ -3,4 +3,5 @@ export const routes = {
   editCamera: '/edit',
   camerasList: '/list',
   play: '/play/:id',
+  presets: '/presets',
 };

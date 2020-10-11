@@ -5,7 +5,7 @@ import {
   killCamera,
   takePhoto,
 } from '../api/apiConf';
-import { post, get } from '../api/requests';
+import { get, post } from '../api/requests';
 import { getCameras } from './camerasSlice';
 
 export const addCameraRequest = ({ camera }) => {
@@ -41,8 +41,7 @@ export const getCamerasRequest = () => {
   return async (dispatch) => {
     const cam = await get(cameras)
       .then((res) => {
-        const json = res.json();
-        return json;
+        return res.json();
       })
       .catch((err) => {
         console.log(err);

@@ -69,9 +69,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
+    width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
+      width: theme.spacing(9),
     },
   },
   toolbar: {
@@ -85,13 +85,15 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    marginTop: theme.spacing(3),
   },
   shadow: {
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
   },
   color: {
     color: colors.MAIN,
-    fontSize: 30,},
+    fontSize: 30,
+  },
 }));
 
 export default function Menu() {
@@ -189,14 +191,7 @@ export default function Menu() {
           </ListItem>
         </List>
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Route
-          exact
-          path={routes.camerasList}
-          component={CamerasListContainer}
-        />
-      </main>
+      <Route exact path={routes.camerasList} component={CamerasListContainer} />
     </div>
   );
 }

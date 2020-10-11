@@ -12,6 +12,10 @@ import Collapse from '@material-ui/core/Collapse';
 import { ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
 import Typography from '@material-ui/core/Typography';
+import LinesEllipsis from 'react-lines-ellipsis';
+import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
+
+const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
@@ -27,12 +31,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 60,
   },
   row: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
     background: `linear-gradient(45deg, ${colors.MAIN} 50%, ${colors.MAIN_V} 100%)`,
     borderRadius: 3,
     border: 0,
@@ -40,12 +40,11 @@ const useStyles = makeStyles((theme) => ({
     padding: '5px 30px',
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
     marginBottom: 10,
-    minHeight: 60,
-    justifyContent: 'center',
   },
   name: {
     fontSize: 20,
     alignSelf: 'center',
+    flex: 1,
   },
   buttons: {
     display: 'flex',
@@ -77,7 +76,14 @@ export function CameraRow({ camera, key, _delete }) {
   return (
     <div className={classes.row} key={key}>
       <div className={classes.container}>
-        <div className={classes.name}>{camera.name}</div>
+        <ResponsiveEllipsis
+          text={camera.name}
+          maxLine="1"
+          ellipsis="..."
+          trimRight
+          basedOn="letters"
+          className={classes.name}
+        />
         <div className={classes.buttons}>
           <LightTooltip
             TransitionComponent={Fade}
