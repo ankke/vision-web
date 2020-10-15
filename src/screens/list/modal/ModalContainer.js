@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { addCameraRequest } from '../thunks';
+import { addCameraRequest } from '../../thunks';
 import Modal from './AddCameraModal';
-import { closeModal } from './listSlice';
+import { closeModal } from '../listSlice';
 
 function mapStateToProps(state) {
   return {

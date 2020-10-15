@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import { Fade } from '@material-ui/core';
-import ModalContainer from './ModalContainer';
+import ModalContainer from './modal/ModalContainer';
 import colors from '../../constants/colors';
 import { CameraRow } from './CameraRow';
 
