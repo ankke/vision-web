@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function CameraRow({ camera, key, _delete }) {
+export function CameraRow({ camera, _delete }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -74,7 +74,7 @@ export function CameraRow({ camera, key, _delete }) {
   };
 
   return (
-    <div className={classes.row} key={key}>
+    <div className={classes.row}>
       <div className={classes.container}>
         <ResponsiveEllipsis
           text={camera.name}
@@ -148,9 +148,9 @@ export function CameraRow({ camera, key, _delete }) {
         </div>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <Typography paragraph>{camera.url}</Typography>
-        <Typography paragraph>{camera.sub_stream}</Typography>
-        <Typography paragraph>{camera.suffix}</Typography>
+        <Typography paragraph>url: {camera.url}</Typography>
+        <Typography paragraph>sub streams: {camera.sub_streams}</Typography>
+        <Typography paragraph>suffix: {camera.suffix}</Typography>
         {/*<Typography paragraph>{camera.ptz_app}</Typography>*/}
         {/*<Typography paragraph>{camera.udp_supported}</Typography>*/}
         {/*<Typography paragraph>{camera.enabled}</Typography>*/}
@@ -161,6 +161,5 @@ export function CameraRow({ camera, key, _delete }) {
 
 CameraRow.propTypes = {
   camera: PropTypes.object.isRequired,
-  key: PropTypes.string.isRequired,
   _delete: PropTypes.func.isRequired,
 };

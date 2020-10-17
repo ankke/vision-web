@@ -1,11 +1,5 @@
-import {
-  addCamera,
-  cameras,
-  deleteCamera,
-  killCamera,
-  takePhoto,
-} from '../api/apiConf';
-import { get, post } from '../api/requests';
+import { cameras, killCamera, takePhoto, camera_, deleteCamera } from '../api/apiConf';
+import { get, post, _delete } from '../api/requests';
 import { getCameras } from './camerasSlice';
 
 export const addCameraRequest = ({ camera }) => {
@@ -13,16 +7,16 @@ export const addCameraRequest = ({ camera }) => {
     const {
       name,
       url,
-      sub_stream,
+      sub_streams,
       suffix,
       udp_supported,
       ptz_app,
       enabled,
     } = camera;
-    await post(addCamera, {
+    await post(camera_, {
       name,
       url,
-      sub_stream,
+      sub_streams,
       suffix,
       udp_supported,
       ptz_app,
@@ -51,8 +45,9 @@ export const getCamerasRequest = () => {
 };
 
 export const deleteCamerasRequest = (id) => {
+  console.log({ id });
   return async (dispatch) => {
-    await get(deleteCamera(id))
+    await _delete(deleteCamera(id))
       .then((res) => {
         dispatch(getCamerasRequest());
       })

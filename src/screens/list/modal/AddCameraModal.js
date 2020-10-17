@@ -61,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
   addRemove: {
     display: 'flex',
     alignSelf: 'center',
-
   },
 }));
 
@@ -75,7 +74,7 @@ export default function FadeModal({ addCamera, isOpen, closeModal }) {
   const initialState = {
     name: '',
     url: '',
-    sub_stream: [],
+    sub_streams: [],
     suffix: '',
     ptz_app: false,
     udp_supported: false,
@@ -92,14 +91,28 @@ export default function FadeModal({ addCamera, isOpen, closeModal }) {
     });
   };
 
-  const render_sub_stream_rows = () => {
-    const sub_stream_rows = [];
+  const addSubStream = (event) => {
+    console.log(state);
+    const newList = state.sub_streams.concat(event.target.value);
+    setState({
+      ...state,
+      sub_streams: newList,
+    });
+  };
+
+  const render_sub_streams_rows = () => {
+    const sub_streams_rows = [];
     for (let i = 0; i < sub_streams_no; i++) {
-      sub_stream_rows.push(
-        <InputRow label={''} name={'sub_streams'} onChange={onChange} key={0} />
+      sub_streams_rows.push(
+        <InputRow
+          label={''}
+          name={'sub_streams'}
+          onChange={addSubStream}
+          key={0}
+        />
       );
     }
-    return sub_stream_rows;
+    return sub_streams_rows;
   };
 
   const rows = [
@@ -134,8 +147,8 @@ export default function FadeModal({ addCamera, isOpen, closeModal }) {
       tag: InputRow,
       args: {
         label: 'Sub streams:',
-        name: 'sub_stream',
-        onChange: onChange,
+        name: 'sub_streams',
+        onChange: addSubStream,
       },
     },
   ];
@@ -158,7 +171,7 @@ export default function FadeModal({ addCamera, isOpen, closeModal }) {
           {rows.map((row, index) => {
             return <row.tag {...row.args} key={index} />;
           })}
-          {render_sub_stream_rows()}
+          {render_sub_streams_rows()}
           <div className={classes.addRemove}>
             <IconButton
               className={classes.circleButton}
