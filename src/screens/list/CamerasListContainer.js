@@ -1,7 +1,12 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CamerasList from './CamerasList';
-import { deleteCamerasRequest, getCamerasRequest } from '../thunks';
+import {
+  addCameraRequest,
+  deleteCamerasRequest,
+  editCameraRequest,
+  getCamerasRequest,
+} from '../thunks';
 import { openModal } from './listSlice';
 
 function mapStateToProps(state) {
@@ -16,6 +21,8 @@ function mapDispatchToProps(dispatch) {
     getCameras: () => dispatch(getCamerasRequest()),
     delete: (id) => dispatch(deleteCamerasRequest(id)),
     openModal: () => dispatch(openModal()),
+    addCamera: (camera) => dispatch(addCameraRequest({ camera })),
+    editCamera: (camera) => dispatch(editCameraRequest({ camera })),
   };
 }
 

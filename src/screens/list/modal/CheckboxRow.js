@@ -8,7 +8,7 @@ export default function CheckboxRow({ label, name, state, onChange }) {
     <label>
       <Checkbox
         checked={state}
-        onChange={onChange}
+        onChange={(event) => onChange(event.target.checked, name)}
         name={name}
         color={colors.MAIN}
       />

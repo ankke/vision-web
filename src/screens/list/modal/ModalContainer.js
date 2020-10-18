@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { addCameraRequest } from '../../thunks';
-import Modal from './AddCameraModal';
+import Modal from './CameraModal';
 import { closeModal } from '../listSlice';
 
 function mapStateToProps(state) {
@@ -11,7 +11,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addCamera: (camera) => dispatch(addCameraRequest({ camera })),
     closeModal: () => dispatch(closeModal()),
   };
 }

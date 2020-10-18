@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FadeModal({ addCamera, isOpen, closeModal }) {
+export default function FadeModal({ action, isOpen, closeModal}) {
   const classes = useStyles();
 
   const handleClose = () => {
@@ -84,16 +84,16 @@ export default function FadeModal({ addCamera, isOpen, closeModal }) {
   const [state, setState] = useState(initialState);
   const [sub_streams_no, setSubStreamsNo] = useState(0);
 
-  const onChange = (event, name) => {
+  const onChange = (value, name) => {
     setState({
       ...state,
-      [name]: event.target.value,
+      [name]: value,
     });
   };
 
-  const addSubStream = (event) => {
+  const addSubStream = (value) => {
     console.log(state);
-    const newList = state.sub_streams.concat(event.target.value);
+    const newList = state.sub_streams.concat(value);
     setState({
       ...state,
       sub_streams: newList,
@@ -191,12 +191,12 @@ export default function FadeModal({ addCamera, isOpen, closeModal }) {
           <button
             className={classes.button}
             onClick={() => {
-              addCamera(state);
+              action(state);
               setState(initialState);
               handleClose();
             }}
           >
-            Add camera
+            Save
           </button>
         </div>
       </Fade>
@@ -205,7 +205,7 @@ export default function FadeModal({ addCamera, isOpen, closeModal }) {
 }
 
 FadeModal.propTypes = {
-  addCamera: PropTypes.func.isRequired,
+  action: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
 };

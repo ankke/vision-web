@@ -64,9 +64,15 @@ class CamerasList extends Component {
           </IconButton>
         </LightTooltip>
         {this.props.cameras.map((camera, index) => (
-          <CameraRow camera={camera} key={index} _delete={this.props.delete} />
+          <CameraRow
+            camera={camera}
+            key={index}
+            _delete={this.props.delete}
+            editCamera={this.props.editCamera}
+            openModal={this.props.openModal}
+          />
         ))}
-        <ModalContainer />
+        <ModalContainer action={this.props.addCamera}/>
       </div>
     );
   }
@@ -76,6 +82,8 @@ CamerasList.propTypes = {
   history: PropTypes.object.isRequired,
   cameras: PropTypes.array.isRequired,
   getCameras: PropTypes.func.isRequired,
+  addCamera: PropTypes.func.isRequired,
+  editCamera: PropTypes.func.isRequired,
   delete: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,

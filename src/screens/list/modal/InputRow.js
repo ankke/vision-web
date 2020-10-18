@@ -37,7 +37,7 @@ export default function InputRow({ label, name, onChange }) {
         className={classes.item}
         type={'text'}
         name={'name'}
-        onChange={(event) => onChange(event, name)}
+        onChange={(event) => onChange(event.target.value, name)}
       />
     </label>
   );
