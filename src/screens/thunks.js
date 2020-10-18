@@ -39,7 +39,9 @@ export const addCameraRequest = ({ camera }) => {
 
 export const editCameraRequest = ({ camera }) => {
   return async (dispatch) => {
+    console.log(camera);
     const {
+      id,
       name,
       url,
       sub_streams,
@@ -49,6 +51,7 @@ export const editCameraRequest = ({ camera }) => {
       enabled,
     } = camera;
     await put(camera_, {
+      id,
       name,
       url,
       sub_streams,

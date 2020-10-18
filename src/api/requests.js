@@ -10,12 +10,12 @@ export function post(address, params = {}) {
   return _withBody('POST')(address, params);
 }
 
-export function put(address, { params } = {}) {
-  return _withBody('PUT')(address, { params });
+export function put(address, params = {}) {
+  return _withBody('PUT')(address, params);
 }
 
 export function patch(address, { params } = {}) {
-  return _withBody('PATCH')(address, { params });
+  return _withBody('PATCH')(address, params);
 }
 
 export function _delete(address, { params } = {}) {

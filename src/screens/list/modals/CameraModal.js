@@ -79,12 +79,24 @@ export default function FadeModal({
     closeModal(modalId);
   };
 
-  const [state, setState] = useState(camera);
+  const initialState = {
+    name: '',
+    url: '',
+    sub_streams: [],
+    suffix: '',
+    ptz_app: false,
+    udp_supported: false,
+    enabled: false,
+  };
+
+  const [state, setState] = useState(initialState);
   const [sub_streams_no, setSubStreamsNo] = useState(0);
 
   useEffect(() => {
-    setState(camera);
-  });
+    if (camera.id) {
+      setState(camera);
+    }
+  }, [camera]);
 
   const onChange = (value, name) => {
     setState({
@@ -213,7 +225,7 @@ export default function FadeModal({
           <button
             className={classes.button}
             onClick={() => {
-              action(state);
+              action.action(state);
               setState(camera);
               handleClose(modalId);
             }}
