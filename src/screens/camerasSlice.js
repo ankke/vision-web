@@ -2,14 +2,26 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const camerasSlice = createSlice({
   name: 'cameras',
-  initialState: [],
+  initialState: {
+    list: [],
+    current: {},
+  },
   reducers: {
     getCameras(state, action) {
-      return action.payload;
+      return {
+        ...state,
+        list: action.payload,
+      };
+    },
+    setCurrent(state, action) {
+      return {
+        ...state,
+        current: { ...action.payload.camera },
+      };
     },
   },
 });
 
-export const { getCameras } = camerasSlice.actions;
+export const { getCameras, setCurrent } = camerasSlice.actions;
 
 export default camerasSlice.reducer;

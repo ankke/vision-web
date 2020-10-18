@@ -3,18 +3,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import EditIcon from '@material-ui/icons/Edit';
 import PropTypes from 'prop-types';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-import {Fade} from '@material-ui/core';
+import { Fade } from '@material-ui/core';
 import colors from '../../constants/colors';
 import Collapse from '@material-ui/core/Collapse';
-import {ExpandMore} from '@material-ui/icons';
+import { ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
 import LinesEllipsis from 'react-lines-ellipsis';
 import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
 import InfoRow from './InfoRow';
-import ModalContainer from "./modal/ModalContainer";
+import { EDIT_MODAL } from './modals/types';
 
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function CameraRow({ camera, _delete, editCamera, openModal }) {
+export function CameraRow({ camera, _delete, openModal, setCurrent }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -109,7 +109,10 @@ export function CameraRow({ camera, _delete, editCamera, openModal }) {
             <IconButton
               className={classes.button}
               aria-label="edit"
-              onClick={() => openModal()}
+              onClick={() => {
+                setCurrent(camera);
+                openModal(EDIT_MODAL);
+              }}
             >
               <EditIcon />
             </IconButton>
@@ -123,7 +126,6 @@ export function CameraRow({ camera, _delete, editCamera, openModal }) {
               className={classes.button}
               aria-label="play"
               onClick={() => {
-                console.log(camera);
                 _delete(camera.id);
               }}
             >
@@ -155,7 +157,6 @@ export function CameraRow({ camera, _delete, editCamera, openModal }) {
         <InfoRow name={'Ptz app:'} value={camera.ptz_app} />
         <InfoRow name={'Udp:'} value={camera.udp_supported} />
       </Collapse>
-      <ModalContainer action={editCamera} />
     </div>
   );
 }
@@ -163,6 +164,6 @@ export function CameraRow({ camera, _delete, editCamera, openModal }) {
 CameraRow.propTypes = {
   camera: PropTypes.object.isRequired,
   _delete: PropTypes.func.isRequired,
-  editCamera: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
+  setCurrent: PropTypes.func.isRequired,
 };

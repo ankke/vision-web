@@ -5,9 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import { Fade } from '@material-ui/core';
-import ModalContainer from './modal/ModalContainer';
 import colors from '../../constants/colors';
 import { CameraRow } from './CameraRow';
+import { ADD_MODAL, ModalsTranslator } from './modals/types';
 
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
@@ -58,7 +58,7 @@ class CamerasList extends Component {
           <IconButton
             className={classes.addButton}
             aria-label="add"
-            onClick={() => this.props.openModal()}
+            onClick={() => this.props.openModal(ADD_MODAL)}
           >
             <Add />
           </IconButton>
@@ -68,11 +68,12 @@ class CamerasList extends Component {
             camera={camera}
             key={index}
             _delete={this.props.delete}
-            editCamera={this.props.editCamera}
             openModal={this.props.openModal}
+            setCurrent={this.props.setCurrent}
           />
         ))}
-        <ModalContainer action={this.props.addCamera}/>
+        <ModalsTranslator.ADD_MODAL action={this.props.addCamera} />
+        <ModalsTranslator.EDIT_MODAL action={this.props.editCamera} />
       </div>
     );
   }
@@ -86,6 +87,7 @@ CamerasList.propTypes = {
   editCamera: PropTypes.func.isRequired,
   delete: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
+  setCurrent: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 

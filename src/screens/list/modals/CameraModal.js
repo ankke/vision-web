@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -64,25 +64,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FadeModal({ action, isOpen, closeModal}) {
+export default function FadeModal({
+  action,
+  opened,
+  closeModal,
+  camera,
+  modalId,
+  setCurrent,
+}) {
   const classes = useStyles();
 
   const handleClose = () => {
-    closeModal();
+    setCurrent({});
+    closeModal(modalId);
   };
 
-  const initialState = {
-    name: '',
-    url: '',
-    sub_streams: [],
-    suffix: '',
-    ptz_app: false,
-    udp_supported: false,
-    enabled: false,
-  };
-
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState(camera);
   const [sub_streams_no, setSubStreamsNo] = useState(0);
+
+  useEffect(() => {
+    setState(camera);
+  });
 
   const onChange = (value, name) => {
     setState({
@@ -92,7 +94,6 @@ export default function FadeModal({ action, isOpen, closeModal}) {
   };
 
   const addSubStream = (value) => {
-    console.log(state);
     const newList = state.sub_streams.concat(value);
     setState({
       ...state,
@@ -101,14 +102,21 @@ export default function FadeModal({ action, isOpen, closeModal}) {
   };
 
   const render_sub_streams_rows = () => {
-    const sub_streams_rows = [];
-    for (let i = 0; i < sub_streams_no; i++) {
+    const sub_streams_rows = [
+      <InputRow
+        label={'Sub streams:'}
+        name={'sub_streams'}
+        onChange={addSubStream}
+        key={0}
+      />,
+    ];
+    for (let i = 1; i < sub_streams_no; i++) {
       sub_streams_rows.push(
         <InputRow
           label={''}
           name={'sub_streams'}
           onChange={addSubStream}
-          key={0}
+          key={i}
         />
       );
     }
@@ -118,12 +126,30 @@ export default function FadeModal({ action, isOpen, closeModal}) {
   const rows = [
     {
       tag: InputRow,
-      args: { label: 'Name:', name: 'name', onChange: onChange },
+      args: {
+        label: 'Name:',
+        name: 'name',
+        value: state['name'],
+        onChange: onChange,
+      },
     },
-    { tag: InputRow, args: { label: 'Url:', name: 'url', onChange: onChange } },
     {
       tag: InputRow,
-      args: { label: 'Suffix:', name: 'suffix', onChange: onChange },
+      args: {
+        label: 'Url:',
+        name: 'url',
+        value: state['url'],
+        onChange: onChange,
+      },
+    },
+    {
+      tag: InputRow,
+      args: {
+        label: 'Suffix:',
+        name: 'suffix',
+        value: state['suffix'],
+        onChange: onChange,
+      },
     },
     {
       tag: CheckboxRow,
@@ -143,22 +169,18 @@ export default function FadeModal({ action, isOpen, closeModal}) {
         onChange: onChange,
       },
     },
-    {
-      tag: InputRow,
-      args: {
-        label: 'Sub streams:',
-        name: 'sub_streams',
-        onChange: addSubStream,
-      },
-    },
   ];
+
+  const isOpen = () => {
+    return opened.includes(modalId);
+  };
 
   return (
     <Modal
       aria-labelledby="transition-modal-add-camera"
       aria-describedby="transition-modal-add-camera-form"
       className={classes.modal}
-      open={isOpen}
+      open={isOpen()}
       onClose={handleClose}
       closeAfterTransition
       BackdropComponent={Backdrop}
@@ -166,7 +188,7 @@ export default function FadeModal({ action, isOpen, closeModal}) {
         timeout: 500,
       }}
     >
-      <Fade in={isOpen}>
+      <Fade in={isOpen()}>
         <div className={classes.paper}>
           {rows.map((row, index) => {
             return <row.tag {...row.args} key={index} />;
@@ -192,8 +214,8 @@ export default function FadeModal({ action, isOpen, closeModal}) {
             className={classes.button}
             onClick={() => {
               action(state);
-              setState(initialState);
-              handleClose();
+              setState(camera);
+              handleClose(modalId);
             }}
           >
             Save
@@ -207,5 +229,8 @@ export default function FadeModal({ action, isOpen, closeModal}) {
 FadeModal.propTypes = {
   action: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
+  setCurrent: PropTypes.func.isRequired,
+  opened: PropTypes.array.isRequired,
+  camera: PropTypes.object,
+  modalId: PropTypes.string.isRequired,
 };

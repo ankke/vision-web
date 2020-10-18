@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function InputRow({ label, name, onChange }) {
+export default function InputRow({ label, name, onChange, value }) {
   const classes = useStyles();
 
   return (
@@ -37,6 +37,7 @@ export default function InputRow({ label, name, onChange }) {
         className={classes.item}
         type={'text'}
         name={'name'}
+        value={value}
         onChange={(event) => onChange(event.target.value, name)}
       />
     </label>
@@ -46,5 +47,6 @@ export default function InputRow({ label, name, onChange }) {
 InputRow.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };

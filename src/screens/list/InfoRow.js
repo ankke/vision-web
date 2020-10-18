@@ -26,10 +26,6 @@ export default function InfoRow({ name, value }) {
   const classes = useStyles();
 
   const render_value = (value) => {
-    console.log(value);
-    console.log(typeof value == 'string');
-    console.log('-----');
-
     if (Array.isArray(value)) {
       const rows = value.map((val) => (
         <div key={val} className={classes.item}>

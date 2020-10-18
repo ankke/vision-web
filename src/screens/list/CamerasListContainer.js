@@ -7,10 +7,11 @@ import {
   editCameraRequest,
   getCamerasRequest,
 } from '../thunks';
-import { openModal } from './listSlice';
+import { openModal } from './modals/modalsSlice';
+import { setCurrent } from '../camerasSlice';
 
 function mapStateToProps(state) {
-  const cameras = state.cameras;
+  const cameras = state.cameras.list;
   return {
     cameras: cameras.slice().reverse(),
   };
@@ -20,9 +21,10 @@ function mapDispatchToProps(dispatch) {
   return {
     getCameras: () => dispatch(getCamerasRequest()),
     delete: (id) => dispatch(deleteCamerasRequest(id)),
-    openModal: () => dispatch(openModal()),
+    openModal: (modalId) => dispatch(openModal(modalId)),
     addCamera: (camera) => dispatch(addCameraRequest({ camera })),
     editCamera: (camera) => dispatch(editCameraRequest({ camera })),
+    setCurrent: (camera) => dispatch(setCurrent({ camera })),
   };
 }
 
