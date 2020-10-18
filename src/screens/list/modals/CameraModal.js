@@ -16,8 +16,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    flexBasis: 500,
   },
   paper: {
+    overflowY: 'scroll',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -32,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     padding: '30px 50px',
     outline: 'none',
+    maxHeight: '70%',
   },
   button: {
     background: `linear-gradient(45deg, ${colors.MAIN} 50%, ${colors.MAIN_V} 100%)`,
@@ -95,6 +98,10 @@ export default function FadeModal({
   useEffect(() => {
     if (camera.id) {
       setState(camera);
+      setSubStreamsNo(camera.sub_streams.length);
+    } else {
+      setState(initialState);
+      setSubStreamsNo(0);
     }
   }, [camera]);
 
@@ -226,7 +233,7 @@ export default function FadeModal({
             className={classes.button}
             onClick={() => {
               action.action(state);
-              setState(camera);
+              setState(initialState);
               handleClose(modalId);
             }}
           >
