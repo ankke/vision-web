@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core';
 import colors from '../../constants/colors';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = {
+const useStyles = makeStyles(() => ({
   container: {
     flex: 1,
-    padding: 30,
     display: 'flex',
+    padding: '0px 30px',
     flexDirection: 'row',
     alignItems: 'center',
+    height: '100%',
+    justifyContent: 'flex-end',
   },
   video: {
     height: '100%',
@@ -17,8 +19,8 @@ const styles = {
     borderRadius: 3,
   },
   videoContainer: {
-    width: 1300,
-    height: 900,
+    width: '80%',
+    height: '90%',
     borderColor: colors.MAIN,
     borderRadius: 3,
     border: 10,
@@ -28,6 +30,7 @@ const styles = {
     justifyContent: 'center',
     padding: 3,
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
+    marginRight: 30,
   },
   killButton: {
     outline: 'none',
@@ -54,43 +57,40 @@ const styles = {
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
   },
   buttons: {
-    flex: 1,
     justifyContent: 'center',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-};
+}));
 
-class Play extends Component {
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.container}>
-        <div className={classes.videoContainer}>
-          <img className={classes.video} src={this.props.src} alt={'video'} />
-        </div>
-        <div className={classes.buttons}>
-          <button
-            className={classes.killButton}
-            onClick={() => {
-              this.props.killCamera(this.props.id);
-            }}
-          >
-            Stop camera
-          </button>
-          <button
-            className={classes.photoButton}
-            onClick={() => {
-              this.props.takePhoto(this.props.id);
-            }}
-          >
-            Take a photo
-          </button>
-        </div>
+export default function Play({ src, id, killCamera, takePhoto }) {
+  const classes = useStyles();
+  const [rotation, setRotation] = useState(0);
+
+  const calcRotation = (incr) => {
+    return (rotation + incr) % 360;
+  };
+
+  const rot = {
+    transform: `rotate(${rotation}deg)`,
+  };
+
+  return (
+    <div className={classes.container}>
+      <div className={classes.videoContainer} style={rot}>
+        <img className={classes.video} src={src} alt={'No feed from camera'} />
       </div>
-    );
-  }
+      <div className={classes.buttons}>
+        <button className={classes.killButton} onClick={() => killCamera(id)}>
+          Stop camera
+        </button>
+        <button className={classes.photoButton} onClick={() => takePhoto(id)}>
+          Take a photo
+        </button>
+      </div>
+    </div>
+  );
 }
 
 Play.propTypes = {
@@ -101,5 +101,3 @@ Play.propTypes = {
   takePhoto: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
-
-export default withStyles(styles)(Play);
