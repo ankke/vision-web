@@ -77,6 +77,7 @@ export const getCamerasRequest = () => {
       })
       .catch((err) => {
         console.log(err);
+        return [];
       });
     dispatch(getCameras(cam));
   };

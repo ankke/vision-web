@@ -15,17 +15,9 @@ import LinesEllipsis from 'react-lines-ellipsis';
 import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
 import InfoRow from './InfoRow';
 import { EDIT_MODAL } from './modals/types';
+import LightTooltip from "../utils/LightTooltip";
 
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
-
-const LightTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
-    boxShadow: theme.shadows[1],
-    fontSize: 11,
-  },
-}))(Tooltip);
 
 const useStyles = makeStyles((theme) => ({
   container: {
