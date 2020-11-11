@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
 export default function Label({ label, style, children }) {
   const classes = useStyles();
   return (
-    <div className={classNames(classes.label, style)}>
+    <div className={classNames(style, classes.label)}>
       {label}
       {children}
     </div>

@@ -17,7 +17,6 @@ const useStyles = makeStyles(() => ({
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 15,
     marginTop: 5,
     display: 'flex',
     alignSelf: 'stretch',

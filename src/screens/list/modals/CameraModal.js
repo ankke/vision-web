@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexBasis: 500,
   },
   paper: {
     overflowY: 'scroll',
@@ -45,6 +44,14 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
     alignSelf: 'flex-end',
+  },
+  checkBoxLabel: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  row: {
+    margin: '5px 0px',
   },
 }));
 
@@ -80,7 +87,6 @@ export default function FadeModal({
     if (camera === undefined) {
       setState(initialState);
     } else {
-      console.log(camera);
       setState(camera);
     }
   }, [camera]);
@@ -92,52 +98,52 @@ export default function FadeModal({
   const rows = [
     {
       tag: InputRow,
-      label: 'Name:',
-
+      label: {
+        label: 'Name:',
+      },
       args: {
         name: 'name',
         value: state['name'],
-        onChange: onChange,
       },
     },
     {
       tag: InputRow,
-      label: 'Url:',
-
+      label: { label: 'Url:' },
       args: {
         name: 'url',
         value: state['url'],
-        onChange: onChange,
       },
     },
     {
       tag: InputRow,
-      label: 'Suffix:',
-
+      label: {
+        label: 'Suffix:',
+      },
       args: {
         name: 'suffix',
         value: state['suffix'],
-        onChange: onChange,
       },
     },
     {
       tag: CheckboxRow,
-      label: 'Udp supported',
-
+      label: {
+        label: 'Udp supported',
+        style: classes.checkBoxLabel,
+      },
       args: {
         state: state['udp_supported'],
         name: 'udp_supported',
-        onChange: onChange,
       },
     },
     {
       tag: CheckboxRow,
-      label: 'Ptz camera',
-
+      label: {
+        label: 'Ptz camera',
+        style: classes.checkBoxLabel,
+      },
       args: {
         state: state['ptz_app'],
         name: 'ptz_app',
-        onChange: onChange,
       },
     },
   ];
@@ -163,9 +169,11 @@ export default function FadeModal({
         <div className={classes.paper}>
           {rows.map((row, index) => {
             return (
-              <Label key={index} label={row.label}>
-                <row.tag {...row.args} key={index} />
-              </Label>
+              <div key={index} className={classes.row}>
+                <Label key={index} {...row.label}>
+                  <row.tag {...row.args} key={index} onChange={onChange} />
+                </Label>
+              </div>
             );
           })}
           <ListWithAddDeleteButton

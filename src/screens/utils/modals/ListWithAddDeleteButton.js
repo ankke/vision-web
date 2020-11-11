@@ -81,9 +81,7 @@ export default function ListWithAddDeleteButton({ list, label, onChange }) {
         style={classes.circleButton}
         label="add row"
         onClick={addElement}
-      >
-        <Add />
-      </AddButton>
+      />
     </div>
   );
 }
