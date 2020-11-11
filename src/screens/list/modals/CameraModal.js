@@ -55,6 +55,7 @@ export default function FadeModal({
   camera,
   modalId,
   removeCurrent,
+  editCurrent,
 }) {
   const classes = useStyles();
 
@@ -76,19 +77,16 @@ export default function FadeModal({
   const [state, setState] = useState(initialState);
 
   useEffect(() => {
-    console.log(camera);
     if (camera === undefined) {
       setState(initialState);
     } else {
+      console.log(camera);
       setState(camera);
     }
   }, [camera]);
 
   const onChange = (value, name) => {
-    setState({
-      ...state,
-      [name]: value,
-    });
+    editCurrent(name)(value);
   };
 
   const rows = [
@@ -172,7 +170,8 @@ export default function FadeModal({
           })}
           <ListWithAddDeleteButton
             label={'Sub streams: '}
-            list={state.sub_streams}
+            list={camera ? camera.sub_streams : []}
+            onChange={editCurrent('sub_streams')}
           />
           <button
             className={classes.button}
@@ -193,6 +192,7 @@ export default function FadeModal({
 FadeModal.propTypes = {
   action: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
+  editCurrent: PropTypes.func.isRequired,
   removeCurrent: PropTypes.func.isRequired,
   opened: PropTypes.array.isRequired,
   camera: PropTypes.object,

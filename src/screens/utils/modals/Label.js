@@ -17,7 +17,6 @@ const useStyles = makeStyles(() => ({
 
 export default function Label({ label, style, children }) {
   const classes = useStyles();
-  console.log({ style });
   return (
     <div className={classNames(classes.label, style)}>
       {label}

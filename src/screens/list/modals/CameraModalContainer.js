@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Modal from './CameraModal';
 import { closeModal } from '../../utils/modals/modalsSlice';
-import { removeCurrent } from '../../camerasSlice';
+import { editCurrent, removeCurrent } from '../../camerasSlice';
 
 function mapStateToProps(state) {
   return {
@@ -14,6 +14,7 @@ function mapDispatchToProps(dispatch) {
   return {
     closeModal: (modalId) => dispatch(closeModal(modalId)),
     removeCurrent: () => dispatch(removeCurrent()),
+    editCurrent: (key) => (value) => dispatch(editCurrent({ [key]: value })),
   };
 }
 

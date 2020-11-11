@@ -1,20 +1,19 @@
 import React from 'react';
-import DeleteIcon from '@material-ui/icons/Delete';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import EditIcon from '@material-ui/icons/Edit';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import { Fade } from '@material-ui/core';
 import colors from '../../constants/colors';
 import Collapse from '@material-ui/core/Collapse';
-import { ExpandMore } from '@material-ui/icons';
+import {ExpandMore} from '@material-ui/icons';
 import clsx from 'clsx';
 import LinesEllipsis from 'react-lines-ellipsis';
 import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
-import InfoRow from './InfoRow';
-import { EDIT_MODAL } from '../utils/modals/types';
-import LightTooltip from '../utils/LightTooltip';
+import InfoRow from '../utils/InfoRow';
+import {EDIT_MODAL} from '../utils/modals/types';
+import WithTooltip from '../utils/buttons/WithTooltip';
+import EditButtonWithTooltip from '../utils/buttons/EditButtonWithTooltip';
+import DeleteButtonWithTooltip from '../utils/buttons/DeleteButtonWithTooltip';
 
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 
@@ -77,11 +76,7 @@ export function CameraRow({ camera, _delete, openModal, setCurrent }) {
           className={classes.name}
         />
         <div className={classes.buttons}>
-          <LightTooltip
-            TransitionComponent={Fade}
-            TransitionProps={{ timeout: 600 }}
-            title="Play"
-          >
+          <WithTooltip title={'Play camera'}>
             <a
               href={'http://127.0.0.1:3000/play/' + camera.id}
               target={'_blank'}
@@ -91,43 +86,21 @@ export function CameraRow({ camera, _delete, openModal, setCurrent }) {
                 <PlayArrowIcon />
               </IconButton>
             </a>
-          </LightTooltip>
-          <LightTooltip
-            TransitionComponent={Fade}
-            TransitionProps={{ timeout: 600 }}
-            title="Edit"
-          >
-            <IconButton
-              className={classes.button}
-              aria-label="edit"
-              onClick={() => {
-                setCurrent(camera);
-                openModal(EDIT_MODAL);
-              }}
-            >
-              <EditIcon />
-            </IconButton>
-          </LightTooltip>
-          <LightTooltip
-            TransitionComponent={Fade}
-            TransitionProps={{ timeout: 600 }}
-            title="Delete"
-          >
-            <IconButton
-              className={classes.button}
-              aria-label="play"
-              onClick={() => {
-                _delete(camera.id);
-              }}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </LightTooltip>
-          <LightTooltip
-            TransitionComponent={Fade}
-            TransitionProps={{ timeout: 600 }}
-            title="Show details"
-          >
+          </WithTooltip>
+          <EditButtonWithTooltip
+            onClick={() => {
+              setCurrent(camera);
+              openModal(EDIT_MODAL);
+            }}
+            style={classes.button}
+          />
+          <DeleteButtonWithTooltip
+            onClick={() => {
+              _delete(camera.id);
+            }}
+            style={classes.button}
+          />
+          <WithTooltip title="Show details">
             <IconButton
               className={clsx(classes.expand, classes.button, {
                 [classes.expandOpen]: expanded,
@@ -138,7 +111,7 @@ export function CameraRow({ camera, _delete, openModal, setCurrent }) {
             >
               <ExpandMore />
             </IconButton>
-          </LightTooltip>
+          </WithTooltip>
         </div>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>

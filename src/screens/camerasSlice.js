@@ -27,6 +27,15 @@ const camerasSlice = createSlice({
         current: { ...action.payload },
       };
     },
+    editCurrent(state, action) {
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          ...action.payload,
+        },
+      };
+    },
     removeCurrent(state) {
       return {
         ...state,
@@ -44,6 +53,6 @@ const camerasSlice = createSlice({
   },
 });
 
-export const { getCameras, setCurrent, removeCurrent } = camerasSlice.actions;
+export const { getCameras, setCurrent, removeCurrent, editCurrent } = camerasSlice.actions;
 
 export default camerasSlice.reducer;

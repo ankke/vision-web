@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import InputRow from './InputRow';
 import Label from './Label';
 import Add from '@material-ui/icons/Add';
-import RemoveButton from '../RemoveButton';
-import AddButton from "../AddButton";
+import RemoveButton from '../buttons/RemoveButton';
+import AddButton from '../buttons/AddButton';
 
 const useStyles = makeStyles((theme) => ({
   circleButton: {
@@ -25,28 +25,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ListWithAddDeleteButton({ list, label }) {
+export default function ListWithAddDeleteButton({ list, label, onChange }) {
   const classes = useStyles();
+
+  useEffect(() => {
+    setState(list);
+  }, [list]);
 
   const [state, setState] = useState(list);
 
   const removeElement = (index) => {
     return () => {
       const newState = state.filter((_, i) => i !== index);
-      setState(newState);
+      onChange(newState);
     };
   };
 
   const addElement = () => {
     const newState = state.concat('');
-    setState(newState);
+    onChange(newState);
   };
 
   const editElement = (index) => {
     return (value) => {
       const newState = Object.assign([], state);
       newState[index] = value;
-      setState(newState);
+      onChange(newState);
     };
   };
 
@@ -87,4 +91,5 @@ export default function ListWithAddDeleteButton({ list, label }) {
 ListWithAddDeleteButton.propTypes = {
   list: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };

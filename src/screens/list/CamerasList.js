@@ -8,7 +8,8 @@ import colors from '../../constants/colors';
 import { CameraRow } from './CameraRow';
 import { ADD_MODAL, ModalsTranslator } from '../utils/modals/types';
 import LightTooltip from '../utils/LightTooltip';
-import AddButton from '../utils/AddButton';
+import AddButton from '../utils/buttons/AddButton';
+import AddButtonWithTooltip from '../utils/buttons/AddButtonWithTooltip';
 
 const styles = {
   container: {
@@ -34,18 +35,11 @@ class CamerasList extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <LightTooltip
-          TransitionComponent={Fade}
-          TransitionProps={{ timeout: 600 }}
-          title="Add new camera"
-          placement="right"
-        >
-          <AddButton
-            onClick={() => this.props.openModal(ADD_MODAL)}
-            label={'Add camera'}
-            style={classes.addButton}
-          />
-        </LightTooltip>
+        <AddButtonWithTooltip
+          onClick={() => this.props.openModal(ADD_MODAL)}
+          label={'Add camera'}
+          style={classes.addButton}
+        />
         {this.props.cameras.map((camera, index) => (
           <CameraRow
             camera={camera}
