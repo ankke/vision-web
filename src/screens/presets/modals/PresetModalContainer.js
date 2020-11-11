@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import Modal from './CameraModal';
-import { closeModal } from '../../utils/modals/modalsSlice';
-import { removeCurrent } from '../../camerasSlice';
+import Modal from './PresetModal';
+import { closeModal } from './modalsSlice';
+import { setCurrent } from '../../camerasSlice';
 
 function mapStateToProps(state) {
   return {
@@ -13,7 +13,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     closeModal: (modalId) => dispatch(closeModal(modalId)),
-    removeCurrent: () => dispatch(removeCurrent()),
+    setCurrent: (camera) => dispatch(setCurrent(camera)),
   };
 }
 

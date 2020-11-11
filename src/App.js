@@ -3,7 +3,7 @@ import './App.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { routes } from './constants/routes';
-import Menu from './screens/Menu';
+import Menu from './screens/menu/Menu';
 import PlayContainer from './screens/play/PlayContainer';
 
 function App({ store, history }) {

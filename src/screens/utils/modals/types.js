@@ -1,5 +1,5 @@
 import React from 'react';
-import CameraModalContainer from './CameraModalContainer';
+import CameraModalContainer from '../../list/modals/CameraModalContainer';
 
 export const EDIT_MODAL = 'EDIT_MODAL';
 export const ADD_MODAL = 'ADD_MODAL';

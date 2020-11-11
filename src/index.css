@@ -17,3 +17,7 @@ html, #root{
   height: 100%;
 }
 
+#root {
+  display: flex;
+}
+

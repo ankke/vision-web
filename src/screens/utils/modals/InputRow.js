@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import colors from '../../../constants/colors.json';
+const classNames = require('classnames');
 
 const useStyles = makeStyles(() => ({
   item: {
@@ -18,35 +19,27 @@ const useStyles = makeStyles(() => ({
     textAlign: 'center',
     marginBottom: 15,
     marginTop: 5,
-    width: 400,
-  },
-  label: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignSelf: 'stretch',
   },
 }));
 
-export default function InputRow({ label, name, onChange, value }) {
+export default function InputRow({ name, onChange, value, style }) {
   const classes = useStyles();
 
   return (
-    <label className={classes.label}>
-      {label}
-      <input
-        className={classes.item}
-        type={'text'}
-        name={'name'}
-        value={value}
-        onChange={(event) => onChange(event.target.value, name)}
-      />
-    </label>
+    <input
+      className={classNames(classes.item, style)}
+      type={'text'}
+      value={value}
+      onChange={(event) => onChange(event.target.value, name)}
+    />
   );
 }
 
 InputRow.propTypes = {
-  label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  style: PropTypes.object,
 };

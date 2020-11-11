@@ -4,4 +4,5 @@ export const routes = {
   camerasList: '/list',
   play: '/play/:id',
   presets: '/presets',
+  settings: '/settings',
 };

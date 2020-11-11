@@ -2,21 +2,13 @@ import React, { Component } from 'react';
 import Add from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import { Fade } from '@material-ui/core';
 import colors from '../../constants/colors';
 import { CameraRow } from './CameraRow';
-import { ADD_MODAL, ModalsTranslator } from './modals/types';
-
-const LightTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
-    boxShadow: theme.shadows[1],
-    fontSize: 11,
-  },
-}))(Tooltip);
+import { ADD_MODAL, ModalsTranslator } from '../utils/modals/types';
+import LightTooltip from '../utils/LightTooltip';
+import AddButton from '../utils/AddButton';
 
 const styles = {
   container: {
@@ -26,15 +18,8 @@ const styles = {
     maxWidth: 500,
   },
   addButton: {
-    outline: 'none',
-    background: 'white',
-    borderColor: colors.MAIN,
-    borderRadius: '50%',
-    border: 2,
-    color: colors.MAIN,
     height: 60,
     width: 60,
-    boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
     marginBottom: 30,
     marginRight: 30,
   },
@@ -55,21 +40,19 @@ class CamerasList extends Component {
           title="Add new camera"
           placement="right"
         >
-          <IconButton
-            className={classes.addButton}
-            aria-label="add"
+          <AddButton
             onClick={() => this.props.openModal(ADD_MODAL)}
-          >
-            <Add />
-          </IconButton>
+            label={'Add camera'}
+            style={classes.addButton}
+          />
         </LightTooltip>
         {this.props.cameras.map((camera, index) => (
           <CameraRow
             camera={camera}
             key={index}
             _delete={this.props.delete}
-            openModal={this.props.openModal}
             setCurrent={this.props.setCurrent}
+            openModal={this.props.openModal}
           />
         ))}
         <ModalsTranslator.ADD_MODAL action={this.props.addCamera} />

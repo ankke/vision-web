@@ -16,11 +16,12 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import colors from '../constants/colors';
+import colors from '../../constants/colors.json';
 import { Route } from 'react-router';
-import { routes } from '../constants/routes';
-import CamerasListContainer from './list/CamerasListContainer';
+import { routes } from '../../constants/routes';
+import CamerasListContainer from '../list/CamerasListContainer';
 import { useHistory } from 'react-router';
+import SettingsContainer from "../settings/SettingsContainer";
 
 const drawerWidth = 240;
 
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignSelf: 'center',
     height: '100%',
+    flex: 1,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -176,7 +178,7 @@ export default function Menu() {
             button
             key={'Presets'}
             onClick={() => {
-              history.push(routes.example);
+              history.push(routes.presets);
             }}
           >
             <ListItemIcon>
@@ -184,7 +186,13 @@ export default function Menu() {
             </ListItemIcon>
             <ListItemText primary={'Presets'} className={classes.color} />
           </ListItem>
-          <ListItem button key={'Settings'}>
+          <ListItem
+            button
+            key={'Settings'}
+            onClick={() => {
+              history.push(routes.settings);
+            }}
+          >
             <ListItemIcon>
               <Settings className={classes.color} />
             </ListItemIcon>
@@ -193,6 +201,9 @@ export default function Menu() {
         </List>
       </Drawer>
       <Route exact path={routes.camerasList} component={CamerasListContainer} />
+      <Route exact path={routes.presets} component={CamerasListContainer} />
+      <Route exact path={routes.presets} component={CamerasListContainer} />
+      <Route exact path={routes.settings} component={SettingsContainer} />
     </div>
   );
 }

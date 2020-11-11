@@ -4,7 +4,15 @@ const camerasSlice = createSlice({
   name: 'cameras',
   initialState: {
     list: [],
-    current: {},
+    current: {
+      name: '',
+      url: '',
+      sub_streams: [],
+      suffix: '',
+      ptz_app: false,
+      udp_supported: false,
+      enabled: false,
+    },
   },
   reducers: {
     getCameras(state, action) {
@@ -16,12 +24,26 @@ const camerasSlice = createSlice({
     setCurrent(state, action) {
       return {
         ...state,
-        current: { ...action.payload.camera },
+        current: { ...action.payload },
+      };
+    },
+    removeCurrent(state) {
+      return {
+        ...state,
+        current: {
+          name: '',
+          url: '',
+          sub_streams: [],
+          suffix: '',
+          ptz_app: false,
+          udp_supported: false,
+          enabled: false,
+        },
       };
     },
   },
 });
 
-export const { getCameras, setCurrent } = camerasSlice.actions;
+export const { getCameras, setCurrent, removeCurrent } = camerasSlice.actions;
 
 export default camerasSlice.reducer;

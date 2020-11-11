@@ -1,36 +1,33 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import StopIcon from '@material-ui/icons/Stop';
 import PanoramaHorizontalIcon from '@material-ui/icons/PanoramaHorizontal';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import { Fade } from '@material-ui/core';
-import Tooltip from '@material-ui/core/Tooltip';
-import LightTooltip from "../utils/LightTooltip";
-import Arrows from "./Arrows";
+import LightTooltip from '../utils/LightTooltip';
+import Arrows from './Arrows';
 
 const useStyles = makeStyles(() => ({
   container: {
     flex: 1,
     display: 'flex',
-    padding: '0px 30px',
+    padding: '30px 30px',
     flexDirection: 'row',
-    alignItems: 'center',
-    height: '100%',
-    justifyContent: 'flex-end',
+    alignItems: 'stretch',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
   },
   video: {
-    height: '100%',
-    width: '100%',
     borderRadius: 3,
     backgroundColor: '#00000',
   },
   videoContainer: {
     flex: 1,
-    height: '90vh',
+    // maxHeight: '96vh',
     borderRadius: 3,
     border: 10,
     display: 'flex',
@@ -40,6 +37,7 @@ const useStyles = makeStyles(() => ({
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
   },
   buttons: {
+    alignSelf: 'center',
     justifyContent: 'space-between',
     display: 'flex',
     flexDirection: 'column',
@@ -72,8 +70,8 @@ export default function Play({
   }, []);
   const [rotation, setRotation] = useState(0);
   const [size, setSize] = useState({
-    width: '80vw',
-    height: '90vh',
+    maxWidth: '100%',
+    maxHeight: '100%',
   });
 
   const calcRotation = (incr) => {
@@ -82,8 +80,14 @@ export default function Play({
 
   const calcSize = () => {
     return (rotation / 90) % 2 === 0
-      ? { width: '90vh', height: '80vw' }
-      : { width: '80vw', height: '90vh' };
+      ? {
+          maxWidth: document.getElementById('videoContainer').clientHeight - 6,
+          maxHeight: document.getElementById('videoContainer').clientWidth - 6,
+        }
+      : {
+          maxWidth: document.getElementById('videoContainer').clientWidth -6,
+          maxHeight: document.getElementById('videoContainer').clientHeight -6,
+        };
   };
 
   const rot = {
@@ -93,7 +97,7 @@ export default function Play({
 
   return (
     <div className={classes.container}>
-      <div className={classes.videoContainer}>
+      <div id="videoContainer" className={classes.videoContainer}>
         <img
           className={classes.video}
           style={rot}

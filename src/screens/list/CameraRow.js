@@ -3,8 +3,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import EditIcon from '@material-ui/icons/Edit';
 import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
+import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import { Fade } from '@material-ui/core';
 import colors from '../../constants/colors';
@@ -14,8 +13,8 @@ import clsx from 'clsx';
 import LinesEllipsis from 'react-lines-ellipsis';
 import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
 import InfoRow from './InfoRow';
-import { EDIT_MODAL } from './modals/types';
-import LightTooltip from "../utils/LightTooltip";
+import { EDIT_MODAL } from '../utils/modals/types';
+import LightTooltip from '../utils/LightTooltip';
 
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 
