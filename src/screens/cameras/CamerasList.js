@@ -37,6 +37,7 @@ class CamerasList extends Component {
       <div className={classes.container}>
         <AddButtonWithTooltip
           onClick={() => this.props.openModal(ADD_MODAL)}
+          title={'Add camera'}
           label={'Add camera'}
           style={classes.addButton}
         />

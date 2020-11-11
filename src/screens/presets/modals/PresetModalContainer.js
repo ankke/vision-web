@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Modal from './PresetModal';
 import { closeModal } from './modalsSlice';
-import { setCurrent } from '../../camerasSlice';
+import { setCurrent } from '../../cameras/camerasSlice';
 
 function mapStateToProps(state) {
   return {

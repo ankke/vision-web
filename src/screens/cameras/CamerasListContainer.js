@@ -8,7 +8,7 @@ import {
   getCamerasRequest,
 } from '../thunks';
 import { openModal } from '../utils/modals/modalsSlice';
-import { setCurrent } from '../camerasSlice';
+import { setCurrent } from './camerasSlice';
 
 function mapStateToProps(state) {
   const cameras = state.cameras.list;

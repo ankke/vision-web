@@ -6,7 +6,7 @@ import {
   deleteCamera,
 } from '../api/apiConf';
 import { get, post, _delete, put } from '../api/requests';
-import { getCameras } from './camerasSlice';
+import { getCameras } from './cameras/camerasSlice';
 
 export const addCameraRequest = ({ camera }) => {
   return async (dispatch) => {
