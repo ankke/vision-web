@@ -6,11 +6,11 @@ import IconButton from '@material-ui/core/IconButton';
 import { Fade } from '@material-ui/core';
 import colors from '../../constants/colors';
 import { CameraRow } from './CameraRow';
-import { ADD_MODAL, ModalsTranslator } from '../utils/modals/types';
+import {ADD_CAMERA_MODAL, ADD_MODAL, ModalsTranslator} from '../utils/modals/types';
 import LightTooltip from '../utils/LightTooltip';
 import AddButton from '../utils/buttons/AddButton';
 import AddButtonWithTooltip from '../utils/buttons/AddButtonWithTooltip';
-import {PresetRow} from "./PresetRow";
+import { CamerasList } from './CamerasList';
 
 const styles = {
   container: {
@@ -27,7 +27,7 @@ const styles = {
   },
 };
 
-class Presets extends Component {
+class CamerasScreen extends Component {
   componentDidMount() {
     this.props.getCameras();
   }
@@ -37,30 +37,27 @@ class Presets extends Component {
     return (
       <div className={classes.container}>
         <AddButtonWithTooltip
-          onClick={() => this.props.openModal(ADD_MODAL)}
-          label={'Add preset'}
-          title={'Add preset'}
+          onClick={() => this.props.openModal(ADD_CAMERA_MODAL)}
+          title={'Add camera'}
+          label={'Add camera'}
           style={classes.addButton}
         />
-        {this.props.presets.map((preset, index) => (
-          <PresetRow
-            preset={preset}
-            key={index}
-            _delete={this.props.delete}
-            setCurrent={this.props.setCurrent}
-            openModal={this.props.openModal}
-          />
-        ))}
-        <ModalsTranslator.ADD_MODAL action={this.props.addCamera} />
-        <ModalsTranslator.EDIT_MODAL action={this.props.editCamera} />
+        <CamerasList
+          cameras={this.props.cameras}
+          delete_={this.props.delete}
+          setCurrent={this.props.setCurrent}
+          openModal={this.props.openModal}
+        />
+        <ModalsTranslator.ADD_CAMERA_MODAL action={this.props.addCamera} />
+        <ModalsTranslator.EDIT_CAMERA_MODAL action={this.props.editCamera} />
       </div>
     );
   }
 }
 
-Presets.propTypes = {
+CamerasScreen.propTypes = {
   history: PropTypes.object.isRequired,
-  presets: PropTypes.array.isRequired,
+  cameras: PropTypes.array.isRequired,
   getCameras: PropTypes.func.isRequired,
   addCamera: PropTypes.func.isRequired,
   editCamera: PropTypes.func.isRequired,
@@ -70,4 +67,4 @@ Presets.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Presets);
+export default withStyles(styles)(CamerasScreen);

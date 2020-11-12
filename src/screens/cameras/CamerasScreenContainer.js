@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import CamerasList from './CamerasList';
 import {
   addCameraRequest,
   deleteCamerasRequest,
   editCameraRequest,
   getCamerasRequest,
-} from '../thunks';
+} from './thunks';
 import { openModal } from '../utils/modals/modalsSlice';
 import { setCurrent } from './camerasSlice';
+import CamerasScreen from './CamerasScreen';
 
 function mapStateToProps(state) {
   const cameras = state.cameras.list;
@@ -29,5 +29,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CamerasList)
+  connect(mapStateToProps, mapDispatchToProps)(CamerasScreen)
 );

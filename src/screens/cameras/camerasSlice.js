@@ -53,6 +53,11 @@ const camerasSlice = createSlice({
   },
 });
 
-export const { getCameras, setCurrent, removeCurrent, editCurrent } = camerasSlice.actions;
+export const {
+  getCameras,
+  setCurrent,
+  removeCurrent,
+  editCurrent,
+} = camerasSlice.actions;
 
 export default camerasSlice.reducer;

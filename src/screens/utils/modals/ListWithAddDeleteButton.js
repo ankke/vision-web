@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
 import InputRow from './InputRow';
 import Label from './Label';
-import Add from '@material-ui/icons/Add';
 import RemoveButton from '../buttons/RemoveButton';
 import AddButton from '../buttons/AddButton';
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    margin: '5px 0',
+  },
   circleButton: {
     height: 30,
     width: 30,
@@ -74,7 +75,7 @@ export default function ListWithAddDeleteButton({ list, label, onChange }) {
   };
 
   return (
-    <div>
+    <div className={classes.container}>
       <Label label={label} />
       {renderElements()}
       <AddButton

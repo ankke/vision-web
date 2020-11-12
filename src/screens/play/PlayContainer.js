@@ -4,7 +4,7 @@ import {
   getCamerasRequest,
   killCamerasRequest,
   takePhotoRequest,
-} from '../thunks';
+} from '../cameras/thunks';
 import { showCamera } from '../../api/apiConf';
 import Play from './Play';
 

@@ -19,9 +19,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import colors from '../../constants/colors.json';
 import { Route } from 'react-router';
 import { routes } from '../../constants/routes';
-import CamerasListContainer from '../cameras/CamerasListContainer';
 import { useHistory } from 'react-router';
-import SettingsContainer from "../settings/SettingsContainer";
+import SettingsContainer from '../settings/SettingsContainer';
+import CamerasScreenContainer from '../cameras/CamerasScreenContainer';
+import PresetsScreenContainer from '../presets/PresetsScreenContainer';
 
 const drawerWidth = 240;
 
@@ -200,9 +201,12 @@ export default function Menu() {
           </ListItem>
         </List>
       </Drawer>
-      <Route exact path={routes.camerasList} component={CamerasListContainer} />
-      <Route exact path={routes.presets} component={CamerasListContainer} />
-      <Route exact path={routes.presets} component={CamerasListContainer} />
+      <Route
+        exact
+        path={routes.camerasList}
+        component={CamerasScreenContainer}
+      />
+      <Route exact path={routes.presets} component={PresetsScreenContainer} />
       <Route exact path={routes.settings} component={SettingsContainer} />
     </div>
   );

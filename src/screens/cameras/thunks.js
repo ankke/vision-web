@@ -4,9 +4,9 @@ import {
   takePhoto,
   camera_,
   deleteCamera,
-} from '../api/apiConf';
-import { get, post, _delete, put } from '../api/requests';
-import { getCameras } from './cameras/camerasSlice';
+} from '../../api/apiConf';
+import { get, post, _delete, put } from '../../api/requests';
+import { getCameras } from './camerasSlice';
 
 export const addCameraRequest = ({ camera }) => {
   return async (dispatch) => {

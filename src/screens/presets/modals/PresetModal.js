@@ -5,23 +5,22 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import colors from '../../../constants/colors.json';
-import Add from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import IconButton from '@material-ui/core/IconButton';
+import InputRow from '../../utils/modals/InputRow';
+import CheckboxRow from '../../utils/modals/CheckboxRow';
+import Label from '../../utils/modals/Label';
+import {CamerasList} from "../../cameras/CamerasList";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexBasis: 500,
   },
   paper: {
     overflowY: 'scroll',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'stretch',
     background: 'white',
     borderColor: colors.MAIN,
     borderRadius: 3,
@@ -29,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
     color: colors.MAIN,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     fontSize: 20,
-    textAlign: 'center',
     padding: '30px 50px',
     outline: 'none',
     maxHeight: '70%',
+    width: 460,
   },
   button: {
     background: `linear-gradient(45deg, ${colors.MAIN} 50%, ${colors.MAIN_V} 100%)`,
@@ -46,22 +45,13 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
     alignSelf: 'flex-end',
   },
-  circleButton: {
-    outline: 'none',
-    background: 'white',
-    borderColor: colors.MAIN,
-    borderRadius: '50%',
-    border: 2,
-    color: colors.MAIN,
-    height: 30,
-    width: 30,
-    margin: 5,
-    boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
-    alignSelf: 'center',
+  checkBoxLabel: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
-  addRemove: {
-    display: 'flex',
-    alignSelf: 'center',
+  row: {
+    margin: '5px 0px',
   },
 }));
 
@@ -69,121 +59,56 @@ export default function FadeModal({
   action,
   opened,
   closeModal,
-  camera,
+  preset,
   modalId,
-  setCurrent,
+  removeCurrent,
+  editCurrent,
+  cameras,
 }) {
   const classes = useStyles();
 
   const handleClose = () => {
-    setCurrent(initialState);
     closeModal(modalId);
+    removeCurrent();
   };
 
   const initialState = {
     name: '',
-    url: '',
-    sub_streams: [],
-    suffix: '',
-    ptz_app: false,
-    udp_supported: false,
-    enabled: false,
+    subnet: '',
+    cameras: [],
   };
 
   const [state, setState] = useState(initialState);
-  const [sub_streams_no, setSubStreamsNo] = useState(0);
 
   useEffect(() => {
-    if (camera.id) {
-      setState(camera);
-      setSubStreamsNo(camera.sub_streams.length);
-    } else {
+    if (preset === undefined) {
       setState(initialState);
-      setSubStreamsNo(0);
+    } else {
+      setState(preset);
     }
-  }, [camera]);
+  }, [preset]);
 
   const onChange = (value, name) => {
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
-
-  const addSubStream = (value) => {
-    const newList = state.sub_streams.concat(value);
-    setState({
-      ...state,
-      sub_streams: newList,
-    });
-  };
-
-  const render_sub_streams_rows = () => {
-    const sub_streams_rows = [
-      <InputRow
-        label={'Sub streams:'}
-        name={'sub_streams'}
-        onChange={addSubStream}
-        key={0}
-      />,
-    ];
-    for (let i = 1; i < sub_streams_no; i++) {
-      sub_streams_rows.push(
-        <InputRow
-          label={''}
-          name={'sub_streams'}
-          onChange={addSubStream}
-          key={i}
-        />
-      );
-    }
-    return sub_streams_rows;
+    editCurrent(name)(value);
   };
 
   const rows = [
     {
       tag: InputRow,
-      args: {
+      label: {
         label: 'Name:',
+      },
+      args: {
         name: 'name',
         value: state['name'],
-        onChange: onChange,
       },
     },
     {
       tag: InputRow,
+      label: { label: 'Subnet:' },
       args: {
-        label: 'Url:',
-        name: 'url',
-        value: state['url'],
-        onChange: onChange,
-      },
-    },
-    {
-      tag: InputRow,
-      args: {
-        label: 'Suffix:',
-        name: 'suffix',
-        value: state['suffix'],
-        onChange: onChange,
-      },
-    },
-    {
-      tag: CheckboxRow,
-      args: {
-        label: 'Udp supported',
-        state: state['udp_supported'],
-        name: 'udp_supported',
-        onChange: onChange,
-      },
-    },
-    {
-      tag: CheckboxRow,
-      args: {
-        label: 'Ptz camera',
-        state: state['ptz_app'],
-        name: 'ptz_app',
-        onChange: onChange,
+        name: 'subnet',
+        value: state['subnet'],
       },
     },
   ];
@@ -208,25 +133,15 @@ export default function FadeModal({
       <Fade in={isOpen()}>
         <div className={classes.paper}>
           {rows.map((row, index) => {
-            return <row.tag {...row.args} key={index} />;
+            return (
+              <div key={index} className={classes.row}>
+                <Label key={index} {...row.label}>
+                  <row.tag {...row.args} key={index} onChange={onChange} />
+                </Label>
+              </div>
+            );
           })}
-          {render_sub_streams_rows()}
-          <div className={classes.addRemove}>
-            <IconButton
-              className={classes.circleButton}
-              aria-label="add"
-              onClick={() => setSubStreamsNo(sub_streams_no + 1)}
-            >
-              <Add />
-            </IconButton>
-            <IconButton
-              className={classes.circleButton}
-              aria-label="remove"
-              onClick={() => setSubStreamsNo(sub_streams_no - 1)}
-            >
-              <RemoveIcon />
-            </IconButton>
-          </div>
+          <CamerasList cameras={cameras} />
           <button
             className={classes.button}
             onClick={() => {
@@ -246,8 +161,10 @@ export default function FadeModal({
 FadeModal.propTypes = {
   action: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  setCurrent: PropTypes.func.isRequired,
+  editCurrent: PropTypes.func.isRequired,
+  removeCurrent: PropTypes.func.isRequired,
   opened: PropTypes.array.isRequired,
-  camera: PropTypes.object,
+  preset: PropTypes.object,
   modalId: PropTypes.string.isRequired,
+  cameras: PropTypes.array.isRequired,
 };
