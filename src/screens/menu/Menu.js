@@ -206,7 +206,7 @@ export default function Menu() {
         path={routes.camerasList}
         component={CamerasScreenContainer}
       />
-      <Route exact path={routes.presets} component={PresetsScreenContainer} />
+      <Route path={routes.presets} component={PresetsScreenContainer} />
       <Route exact path={routes.settings} component={SettingsContainer} />
     </div>
   );

@@ -9,7 +9,7 @@ import {
 import { openModal } from '../utils/modals/modalsSlice';
 import { setCurrent } from './presetsSlice';
 import PresetsScreen from './PresetsScreen';
-import {getCamerasRequest} from "../cameras/thunks";
+import {editCameraRequest, getCamerasRequest} from '../cameras/thunks';
 
 function mapStateToProps(state) {
   const presets = state.presets.list;
@@ -27,6 +27,7 @@ function mapDispatchToProps(dispatch) {
     addPreset: (preset) => dispatch(addPresetRequest({ preset })),
     editPreset: (preset) => dispatch(editPresetRequest({ preset })),
     setCurrent: (preset) => dispatch(setCurrent(preset)),
+    editCamera: (camera) => dispatch(editCameraRequest({ camera })),
   };
 }
 

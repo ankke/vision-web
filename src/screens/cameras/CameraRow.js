@@ -11,12 +11,21 @@ import { EDIT_CAMERA_MODAL } from '../utils/modals/types';
 import { ExpandableRow } from '../utils/ExpandableRow';
 
 const useStyles = makeStyles((theme) => ({
+  row: {
+    padding: 5,
+  },
   button: {
     color: 'white',
   },
 }));
 
-export function CameraRow({ camera, delete_, openModal, setCurrent }) {
+export function CameraRow({
+  camera,
+  delete_,
+  openModal,
+  setCurrent,
+  withoutButtons = false,
+}) {
   const classes = useStyles();
   const renderButtons = () => {
     return (
@@ -39,12 +48,14 @@ export function CameraRow({ camera, delete_, openModal, setCurrent }) {
           }}
           style={classes.button}
         />
-        <DeleteButtonWithTooltip
-          onClick={() => {
-            delete_(camera.id);
-          }}
-          style={classes.button}
-        />
+        {delete_ && (
+          <DeleteButtonWithTooltip
+            onClick={() => {
+              delete_(camera.id);
+            }}
+            style={classes.button}
+          />
+        )}
       </div>
     );
   };
@@ -62,17 +73,20 @@ export function CameraRow({ camera, delete_, openModal, setCurrent }) {
   };
 
   return (
-    <ExpandableRow
-      name={camera.name}
-      buttons={renderButtons}
-      info={renderInfoRows}
-    />
+    <div className={classes.row}>
+      <ExpandableRow
+        name={camera.name}
+        buttons={renderButtons}
+        info={renderInfoRows}
+      />
+    </div>
   );
 }
 
 CameraRow.propTypes = {
   camera: PropTypes.object.isRequired,
-  delete_: PropTypes.func.isRequired,
-  openModal: PropTypes.func.isRequired,
-  setCurrent: PropTypes.func.isRequired,
+  delete_: PropTypes.func,
+  openModal: PropTypes.func,
+  setCurrent: PropTypes.func,
+  withoutButtons: PropTypes.bool,
 };

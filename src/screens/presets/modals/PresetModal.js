@@ -6,9 +6,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import colors from '../../../constants/colors.json';
 import InputRow from '../../utils/modals/InputRow';
-import CheckboxRow from '../../utils/modals/CheckboxRow';
 import Label from '../../utils/modals/Label';
-import {CamerasList} from "../../cameras/CamerasList";
+import { CamerasListWithCheckboxes } from './CamerasListWithCheckboxes';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -141,7 +140,12 @@ export default function FadeModal({
               </div>
             );
           })}
-          <CamerasList cameras={cameras} />
+          <Label label={'Cameras:'} />
+          <CamerasListWithCheckboxes
+            cameras={preset.cameras}
+            camerasList={cameras}
+            onChange={editCurrent('cameras')}
+          />
           <button
             className={classes.button}
             onClick={() => {

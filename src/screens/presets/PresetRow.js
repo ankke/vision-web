@@ -6,8 +6,21 @@ import { EDIT_PRESET_MODAL } from '../utils/modals/types';
 import EditButtonWithTooltip from '../utils/buttons/EditButtonWithTooltip';
 import DeleteButtonWithTooltip from '../utils/buttons/DeleteButtonWithTooltip';
 import { ExpandableRow } from '../utils/ExpandableRow';
+import { useHistory } from 'react-router';
+import MoreButton from '../utils/MoreButton';
 
 const useStyles = makeStyles((theme) => ({
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 5,
+  },
+  moreButton: {
+    width: 30,
+    height: 30,
+    marginLeft: 20,
+  },
   button: {
     color: 'white',
   },
@@ -15,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function PresetRow({ preset, delete_, openModal, setCurrent }) {
   const classes = useStyles();
+  const history = useHistory();
 
   const renderButtons = () => {
     return (
@@ -46,11 +60,17 @@ export function PresetRow({ preset, delete_, openModal, setCurrent }) {
   };
 
   return (
-    <ExpandableRow
-      name={preset.name}
-      buttons={renderButtons}
-      info={renderInfoRows}
-    />
+    <div className={classes.row}>
+      <ExpandableRow
+        name={preset.name}
+        buttons={renderButtons}
+        info={renderInfoRows}
+      />
+      <MoreButton
+        style={classes.moreButton}
+        onClick={() => history.push(`/presets/${preset.id}/cameras`)}
+      />
+    </div>
   );
 }
 

@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  list: [{ name: 'name', subnet: 'sub', cameras: ['1', '2'] }],
+  list: [],
   current: {
-    name: 'name',
-    subnet: 'sub',
-    cameras: ['1', '2'],
+    name: '',
+    subnet: '',
+    cameras: [],
   },
+  camerasList: [],
 };
 
 const presetsSlice = createSlice({
@@ -44,6 +45,12 @@ const presetsSlice = createSlice({
         },
       };
     },
+    getCamerasForPreset(state, action) {
+      return {
+        ...state,
+        camerasList: action.payload,
+      };
+    },
   },
 });
 
@@ -52,6 +59,7 @@ export const {
   setCurrent,
   removeCurrent,
   editCurrent,
+  getCamerasForPreset,
 } = presetsSlice.actions;
 
 export default presetsSlice.reducer;

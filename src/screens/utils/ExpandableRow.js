@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     padding: '5px 30px',
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
-    marginBottom: 10,
+    flex: 1
   },
   name: {
     fontSize: 20,
@@ -96,6 +96,6 @@ export function ExpandableRow({ name, buttons, info }) {
 
 ExpandableRow.propTypes = {
   name: PropTypes.string.isRequired,
-  buttons: PropTypes.func.isRequired,
+  buttons: PropTypes.func,
   info: PropTypes.func.isRequired,
 };
