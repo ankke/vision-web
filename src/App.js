@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { routes } from './constants/routes';
 import Menu from './screens/menu/Menu';
 import PlayContainer from './screens/play/PlayContainer';
+import PropTypes from 'prop-types';
 
 function App({ store, history }) {
   return (
@@ -19,5 +20,9 @@ function App({ store, history }) {
   );
 }
 
-export default App;
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+  history: PropTypes.func.isRequired,
+};
 
+export default App;

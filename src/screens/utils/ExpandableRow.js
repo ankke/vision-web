@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     padding: '5px 30px',
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
-    flex: 1
+    flex: 1,
   },
   name: {
     fontSize: 20,

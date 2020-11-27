@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import Add from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import { Fade } from '@material-ui/core';
-import colors from '../../constants/colors';
-import { CameraRow } from './CameraRow';
-import {ADD_CAMERA_MODAL, ADD_MODAL, ModalsTranslator} from '../utils/modals/types';
-import LightTooltip from '../utils/LightTooltip';
-import AddButton from '../utils/buttons/AddButton';
+import { ADD_CAMERA_MODAL, ModalsTranslator } from '../utils/modals/types';
 import AddButtonWithTooltip from '../utils/buttons/AddButtonWithTooltip';
 import { CamerasList } from './CamerasList';
 
