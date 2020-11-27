@@ -5,7 +5,7 @@ import {
   getCamerasForConfiguration,
 } from '../../api/apiConf';
 import { _delete, get, post, put } from '../../api/requests';
-import {getCameras, getCamerasForPreset, getPresets} from './presetsSlice';
+import { getCameras, getCamerasForPreset, getPresets } from './presetsSlice';
 
 export const addPresetRequest = ({ preset }) => {
   return async (dispatch) => {
@@ -71,7 +71,7 @@ export const deletePresetRequest = (id) => {
 };
 
 export const getCamerasForPresetRequest = (id) => {
-  console.log('getCamerasForPresetRequest')
+  console.log('getCamerasForPresetRequest');
   return async (dispatch) => {
     const cameras = await get(getCamerasForConfiguration(id))
       .then((res) => {

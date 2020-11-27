@@ -73,7 +73,7 @@ export const getCamerasRequest = () => {
   return async (dispatch) => {
     const cam = await get(cameras)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         return res.json();
       })
       .catch((err) => {

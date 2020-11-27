@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 3,
-    boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
+    // boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
   },
   buttons: {
     alignSelf: 'center',
@@ -85,8 +85,8 @@ export default function Play({
           maxHeight: document.getElementById('videoContainer').clientWidth - 6,
         }
       : {
-          maxWidth: document.getElementById('videoContainer').clientWidth -6,
-          maxHeight: document.getElementById('videoContainer').clientHeight -6,
+          maxWidth: document.getElementById('videoContainer').clientWidth - 6,
+          maxHeight: document.getElementById('videoContainer').clientHeight - 6,
         };
   };
 
@@ -112,7 +112,12 @@ export default function Play({
             TransitionProps={{ timeout: 600 }}
             title="Stop the video stream"
           >
-            <IconButton aria-label="stop" onClick={() => killCamera(camera.id)}>
+            <IconButton
+              aria-label="stop"
+              onClick={() => {
+                killCamera(camera.id);
+              }}
+            >
               <StopIcon color={'error'} fontSize={'large'} />
             </IconButton>
           </LightTooltip>
