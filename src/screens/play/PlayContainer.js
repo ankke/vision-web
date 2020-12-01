@@ -7,6 +7,7 @@ import {
 } from '../cameras/thunks';
 import { showCamera } from '../../api/apiConf';
 import Play from './Play';
+import { openModal } from '../utils/modals/modalsSlice';
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -25,6 +26,7 @@ function mapDispatchToProps(dispatch) {
     killCamera: (id) => dispatch(killCamerasRequest(id)),
     takePhoto: (id) => dispatch(takePhotoRequest(id)),
     getCameras: () => dispatch(getCamerasRequest()),
+    openModal: (modalId) => dispatch(openModal(modalId)),
   };
 }
 

@@ -7,7 +7,7 @@ import {
   getCamerasRequest,
 } from './thunks';
 import { openModal } from '../utils/modals/modalsSlice';
-import { setCurrent } from './camerasSlice';
+import { removeCurrent, setCurrent } from './camerasSlice';
 import CamerasScreen from './CamerasScreen';
 
 function mapStateToProps(state) {
@@ -25,6 +25,7 @@ function mapDispatchToProps(dispatch) {
     addCamera: (camera) => dispatch(addCameraRequest({ camera })),
     editCamera: (camera) => dispatch(editCameraRequest({ camera })),
     setCurrent: (camera) => dispatch(setCurrent(camera)),
+    removeCurrent: (camera) => dispatch(removeCurrent(camera)),
   };
 }
 
