@@ -12,7 +12,7 @@ export default function AddButtonWithTooltip({ title, onClick, style }) {
 }
 
 AddButtonWithTooltip.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.string,
   title: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

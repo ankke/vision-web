@@ -7,7 +7,11 @@ import InfoRow from '../utils/InfoRow';
 import WithTooltip from '../utils/buttons/WithTooltip';
 import EditButtonWithTooltip from '../utils/buttons/EditButtonWithTooltip';
 import DeleteButtonWithTooltip from '../utils/buttons/DeleteButtonWithTooltip';
-import { EDIT_CAMERA_MODAL } from '../utils/modals/types';
+import {
+  CONFIRMATION_MODAL,
+  EDIT_CAMERA_MODAL,
+  ModalsTranslator,
+} from '../utils/modals/types';
 import { ExpandableRow } from '../utils/ExpandableRow';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +31,7 @@ export function CameraRow({
   withoutButtons = false,
 }) {
   const classes = useStyles();
+  const delModalId = CONFIRMATION_MODAL + 'camera' + camera.id;
   const renderButtons = () => {
     return (
       <div>
@@ -51,11 +56,16 @@ export function CameraRow({
         {delete_ && (
           <DeleteButtonWithTooltip
             onClick={() => {
-              delete_(camera.id);
+              openModal(delModalId);
             }}
             style={classes.button}
           />
         )}
+        <ModalsTranslator.CONFIRMATION_MODAL
+          action={() => delete_(camera.id)}
+          modalId={delModalId}
+          text={`Are you sure you want to delete camera ${camera.name}?`}
+        />
       </div>
     );
   };

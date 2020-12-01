@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Fade } from '@material-ui/core';
 import LightTooltip from '../utils/LightTooltip';
 import Arrows from './Arrows';
+import { CONFIRMATION_MODAL, ModalsTranslator } from '../utils/modals/types';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -62,8 +63,8 @@ export default function Play({
   killCamera,
   takePhoto,
   getCameras,
+  openModal,
 }) {
-  console.log(camera);
   const classes = useStyles();
   useEffect(() => {
     getCameras();
@@ -95,6 +96,8 @@ export default function Play({
     ...size,
   };
 
+  const killModalId = CONFIRMATION_MODAL + ' kill';
+
   return (
     <div className={classes.container}>
       <div id="videoContainer" className={classes.videoContainer}>
@@ -114,9 +117,7 @@ export default function Play({
           >
             <IconButton
               aria-label="stop"
-              onClick={() => {
-                killCamera(camera.id);
-              }}
+              onClick={() => openModal(killModalId)}
             >
               <StopIcon color={'error'} fontSize={'large'} />
             </IconButton>
@@ -183,6 +184,11 @@ export default function Play({
           </div>
           <Arrows />
         </div>
+        <ModalsTranslator.CONFIRMATION_MODAL
+          action={() => killCamera(camera.id)}
+          modalId={killModalId}
+          text={`Are you sure you want to finish streaming?`}
+        />
       </div>
     </div>
   );
@@ -195,4 +201,5 @@ Play.propTypes = {
   killCamera: PropTypes.func.isRequired,
   takePhoto: PropTypes.func.isRequired,
   getCameras: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
 };
