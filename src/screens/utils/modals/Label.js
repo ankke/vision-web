@@ -28,5 +28,5 @@ export default function Label({ label, style, children }) {
 Label.propTypes = {
   label: PropTypes.string.isRequired,
   children: PropTypes.object,
-  style: PropTypes.object,
+  style: PropTypes.string,
 };

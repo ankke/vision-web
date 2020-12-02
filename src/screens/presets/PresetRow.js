@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import InfoRow from '../utils/InfoRow';
-import { EDIT_PRESET_MODAL } from '../utils/modals/types';
+import {
+  CONFIRMATION_MODAL,
+  EDIT_PRESET_MODAL,
+  ModalsTranslator,
+} from '../utils/modals/types';
 import EditButtonWithTooltip from '../utils/buttons/EditButtonWithTooltip';
 import DeleteButtonWithTooltip from '../utils/buttons/DeleteButtonWithTooltip';
 import { ExpandableRow } from '../utils/ExpandableRow';
@@ -29,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 export function PresetRow({ preset, delete_, openModal, setCurrent }) {
   const classes = useStyles();
   const history = useHistory();
+  const delModalId = CONFIRMATION_MODAL + 'preset' + preset.id;
 
   const renderButtons = () => {
     return (
@@ -42,7 +47,7 @@ export function PresetRow({ preset, delete_, openModal, setCurrent }) {
         />
         <DeleteButtonWithTooltip
           onClick={() => {
-            delete_(preset.id);
+            openModal(delModalId);
           }}
           style={classes.button}
         />
@@ -69,6 +74,11 @@ export function PresetRow({ preset, delete_, openModal, setCurrent }) {
       <MoreButton
         style={classes.moreButton}
         onClick={() => history.push(`/presets/${preset.id}/cameras`)}
+      />
+      <ModalsTranslator.CONFIRMATION_MODAL
+        action={() => delete_(preset.id)}
+        modalId={delModalId}
+        text={`Are you sure you want to delete cameras set ${preset.name}?`}
       />
     </div>
   );

@@ -57,6 +57,7 @@ CamerasScreen.propTypes = {
   delete: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   setCurrent: PropTypes.func.isRequired,
+  removeCurrent: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
