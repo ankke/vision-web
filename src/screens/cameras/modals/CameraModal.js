@@ -4,11 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import colors from '../../../constants/colors.json';
 import InputRow from '../../utils/modals/InputRow';
 import CheckboxRow from '../../utils/modals/CheckboxRow';
 import ListWithAddDeleteButton from '../../utils/modals/ListWithAddDeleteButton';
 import Label from '../../utils/modals/Label';
+import { palette } from '../../../constants/palette';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'stretch',
     background: 'white',
-    borderColor: colors.MAIN,
+    borderColor: palette.primary.main,
     borderRadius: 3,
     border: 2,
-    color: colors.MAIN,
+    color: palette.primary.main,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     fontSize: 20,
     padding: '30px 50px',
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     width: 460,
   },
   button: {
-    background: `linear-gradient(45deg, ${colors.MAIN} 50%, ${colors.MAIN_V} 100%)`,
+    background: `linear-gradient(45deg, ${palette.primary.main} 50%, ${palette.primary.light} 100%)`,
     borderRadius: 3,
     border: 0,
     color: 'white',

@@ -3,7 +3,7 @@
   "name": "Vision application",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "spejs_logo.svg",
       "type": "image/png",
       "sizes": "512x512"
     }

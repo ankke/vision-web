@@ -2,15 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CamerasList } from '../cameras/CamerasList';
 import { withStyles } from '@material-ui/core/styles';
+import { palette } from '../../constants/palette';
 
 const styles = {
   container: {
     padding: '20px 20px',
-    marginTop: 154,
+    marginTop: 140,
     flex: 1,
     maxWidth: 500,
     display: 'flex',
     flexDirection: 'column',
+  },
+  title: {
+    heigth: 60,
+    fontSize: 30,
+    marginBottom: 15,
+    color: palette.secondary.main,
+    marginLeft: 10,
   },
 };
 
@@ -29,6 +37,7 @@ class PresetCameras extends Component {
     const classes = this.props.classes;
     return (
       <div className={classes.container}>
+        <div className={classes.title}>Cameras in set</div>
         <CamerasList
           cameras={this.props.cameras}
           setCurrent={this.props.setCurrent}

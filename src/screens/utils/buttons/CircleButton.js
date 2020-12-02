@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import colors from '../../../constants/colors.json';
 import IconButton from '@material-ui/core/IconButton';
+import { palette } from '../../../constants/palette';
 const classNames = require('classnames');
 
 const useStyles = makeStyles(() => ({
   circleButton: {
     outline: 'none',
     background: 'white',
-    borderColor: colors.MAIN,
+    borderColor: palette.primary.main,
     borderRadius: '50%',
     border: 2,
-    color: colors.MAIN,
+    color: palette.primary.main,
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
   },
 }));

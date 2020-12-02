@@ -7,12 +7,16 @@ import { PresetsList } from './PresetsList';
 import { routes } from '../../constants/routes';
 import { Route } from 'react-router';
 import PresetCamerasContainer from './PresetCamerasContainer';
+import { palette } from '../../constants/palette';
 
 const styles = {
   root: {
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
+    backgroundImage: "url('/spejs_logo.svg')",
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: ' right bottom',
   },
   container: {
     padding: '20px 20px',
@@ -22,10 +26,18 @@ const styles = {
     flexBasis: 550,
   },
   addButton: {
-    height: 60,
-    width: 60,
+    height: 50,
+    width: 50,
     marginBottom: 30,
     marginRight: 30,
+    marginLeft: 5,
+  },
+  title: {
+    heigth: 60,
+    fontSize: 30,
+    marginBottom: 15,
+    color: palette.secondary.main,
+    marginLeft: 10,
   },
 };
 
@@ -40,6 +52,7 @@ class PresetsScreen extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.container}>
+          <div className={classes.title}>Sets</div>
           <AddButtonWithTooltip
             onClick={() => this.props.openModal(ADD_PRESET_MODAL)}
             label={'Add preset'}

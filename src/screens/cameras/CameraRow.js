@@ -17,6 +17,7 @@ import { ExpandableRow } from '../utils/ExpandableRow';
 const useStyles = makeStyles((theme) => ({
   row: {
     padding: 5,
+    flex: 1,
   },
   button: {
     color: 'white',
@@ -33,6 +34,9 @@ export function CameraRow({
   const classes = useStyles();
   const delModalId = CONFIRMATION_MODAL + 'camera' + camera.id;
   const renderButtons = () => {
+    if (withoutButtons) {
+      return null;
+    }
     return (
       <div>
         <WithTooltip title={'Play camera'}>

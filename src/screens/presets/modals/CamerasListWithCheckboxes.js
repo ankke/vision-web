@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { CameraRow } from '../../cameras/CameraRow';
-import colors from '../../../constants/colors.json';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
+import { palette } from '../../../constants/palette';
 
 const useStyles = makeStyles((theme) => ({
   row: {
@@ -45,7 +45,7 @@ export function CamerasListWithCheckboxes({ cameras, onChange, camerasList }) {
                 removeElement(camera.id);
               }
             }}
-            color={colors.MAIN}
+            color={palette.primary.main}
           />
           <CameraRow camera={camera} key={index} withoutButtons />
         </div>

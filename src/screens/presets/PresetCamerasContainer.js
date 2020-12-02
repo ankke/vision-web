@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { getCamerasForPresetRequest } from './thunks';
 import PresetCameras from './PresetCameras';
 import { setCurrent } from '../cameras/camerasSlice';
-import { deleteCamerasRequest } from '../cameras/thunks';
 import { openModal } from '../utils/modals/modalsSlice';
 
 function mapStateToProps(state, ownProps) {

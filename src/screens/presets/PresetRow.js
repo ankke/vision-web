@@ -12,6 +12,7 @@ import DeleteButtonWithTooltip from '../utils/buttons/DeleteButtonWithTooltip';
 import { ExpandableRow } from '../utils/ExpandableRow';
 import { useHistory } from 'react-router';
 import MoreButton from '../utils/MoreButton';
+import { palette } from '../../constants/palette';
 
 const useStyles = makeStyles((theme) => ({
   row: {
