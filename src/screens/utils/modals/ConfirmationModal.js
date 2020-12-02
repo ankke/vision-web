@@ -102,7 +102,7 @@ export default function FadeModal({ action, opened, closeModal }) {
 }
 
 FadeModal.propTypes = {
-  action: PropTypes.func.isRequired,
+  action: PropTypes.object.isRequired,
   closeModal: PropTypes.func.isRequired,
   opened: PropTypes.array.isRequired,
 };

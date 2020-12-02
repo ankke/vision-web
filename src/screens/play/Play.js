@@ -197,7 +197,7 @@ export default function Play({
 Play.propTypes = {
   history: PropTypes.object.isRequired,
   src: PropTypes.string.isRequired,
-  camera: PropTypes.object.isRequired,
+  camera: PropTypes.object,
   killCamera: PropTypes.func.isRequired,
   takePhoto: PropTypes.func.isRequired,
   getCameras: PropTypes.func.isRequired,

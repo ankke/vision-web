@@ -33,7 +33,7 @@ export default function CircleButton({ children, style, label, onClick }) {
 
 CircleButton.propTypes = {
   label: PropTypes.string.isRequired,
-  style: PropTypes.object,
+  style: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
 };

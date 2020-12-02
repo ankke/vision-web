@@ -40,5 +40,5 @@ InputRow.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  style: PropTypes.object,
+  style: PropTypes.string,
 };

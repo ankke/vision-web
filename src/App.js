@@ -22,7 +22,7 @@ function App({ store, history }) {
 
 App.propTypes = {
   store: PropTypes.object.isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default App;

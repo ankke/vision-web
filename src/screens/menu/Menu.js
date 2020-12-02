@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {makeStyles, useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,12 +17,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import colors from '../../constants/colors.json';
-import { Route } from 'react-router';
-import { routes } from '../../constants/routes';
-import { useHistory } from 'react-router';
+import {Route, useHistory} from 'react-router';
+import {routes} from '../../constants/routes';
 import SettingsContainer from '../settings/SettingsContainer';
 import CamerasScreenContainer from '../cameras/CamerasScreenContainer';
 import PresetsScreenContainer from '../presets/PresetsScreenContainer';
+import PropTypes from 'prop-types';
 
 const drawerWidth = 240;
 
@@ -100,10 +100,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Menu() {
+function Menu({ forwardedRef }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const history = useHistory();
 
   const handleDrawerOpen = () => {
@@ -115,10 +115,10 @@ export default function Menu() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} ref={forwardedRef}>
       <AppBar
         position="fixed"
-        color={colors.YELLOW_MAIN}
+        color="inherit"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -211,3 +211,11 @@ export default function Menu() {
     </div>
   );
 }
+
+Menu.propTypes = {
+  forwardedRef: PropTypes.object.isRequired,
+};
+
+export default React.forwardRef(function menu(props, ref) {
+  return <Menu forwardedRef={ref} {...props} />;
+});
