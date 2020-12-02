@@ -182,7 +182,7 @@ export default function Play({
               </IconButton>
             </LightTooltip>
           </div>
-          <Arrows />
+          {camera && camera.udp_supported && <Arrows />}
         </div>
         <ModalsTranslator.CONFIRMATION_MODAL
           action={() => killCamera(camera.id)}

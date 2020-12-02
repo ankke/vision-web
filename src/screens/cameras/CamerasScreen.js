@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {ADD_CAMERA_MODAL, ModalsTranslator} from '../utils/modals/types';
+import { ADD_CAMERA_MODAL, ModalsTranslator } from '../utils/modals/types';
 import AddButtonWithTooltip from '../utils/buttons/AddButtonWithTooltip';
 import { CamerasList } from './CamerasList';
 
