@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     color: 'white',
   },
+  expandable: {
+    background: `linear-gradient(45deg, ${palette.primary.main} 50%, ${palette.primary.light} 100%)`,
+  },
 }));
 
 export function PresetRow({ preset, delete_, openModal, setCurrent }) {
@@ -71,6 +74,7 @@ export function PresetRow({ preset, delete_, openModal, setCurrent }) {
         name={preset.name}
         buttons={renderButtons}
         info={renderInfoRows}
+        style={classes.expandable}
       />
       <MoreButton
         style={classes.moreButton}
