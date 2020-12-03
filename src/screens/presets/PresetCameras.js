@@ -25,11 +25,13 @@ const styles = {
 class PresetCameras extends Component {
   componentDidMount() {
     this.props.getCamerasForPreset(this.props.presetId);
+    this.props.getPreset(this.props.presetId);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.presetId !== prevProps.presetId) {
       this.props.getCamerasForPreset(this.props.presetId);
+      this.props.getPreset(this.props.presetId);
     }
   }
 
@@ -52,10 +54,12 @@ PresetCameras.propTypes = {
   history: PropTypes.object.isRequired,
   cameras: PropTypes.array.isRequired,
   getCamerasForPreset: PropTypes.func.isRequired,
+  getPreset: PropTypes.func.isRequired,
   setCurrent: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   presetId: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
+  preset: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(PresetCameras);

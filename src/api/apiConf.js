@@ -9,6 +9,7 @@ export const deleteCamera = (cameraId) => camera_ + '/' + cameraId;
 
 // presets
 export const configuration = apiUrl + '/configuration';
+export const getConfiguration = (presetId) => configuration + '/' + presetId;
 export const configurations = apiUrl + '/configurations';
 export const deleteConfiguration = (presetId) => configuration + '/' + presetId;
 export const getCamerasForConfiguration = (presetId) =>

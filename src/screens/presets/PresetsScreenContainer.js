@@ -7,7 +7,7 @@ import {
   getPresetsRequest,
 } from './thunks';
 import { openModal } from '../utils/modals/modalsSlice';
-import { setCurrent } from './presetsSlice';
+import {removePresetDetails, setCurrent} from './presetsSlice';
 import PresetsScreen from './PresetsScreen';
 import { editCameraRequest, getCamerasRequest } from '../cameras/thunks';
 
@@ -23,6 +23,7 @@ function mapDispatchToProps(dispatch) {
     getPresets: () => dispatch(getPresetsRequest()),
     getCameras: () => dispatch(getCamerasRequest()),
     delete: (id) => dispatch(deletePresetRequest(id)),
+    removePresetDetails: () => dispatch(removePresetDetails()),
     openModal: (modalId) => dispatch(openModal(modalId)),
     addPreset: (preset) => dispatch(addPresetRequest({ preset })),
     editPreset: (preset) => dispatch(editPresetRequest({ preset })),

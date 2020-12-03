@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PresetRow } from './PresetRow';
+import PresetRowContainer from './PresetRowContainer';
 
 export function PresetsList({ presets, delete_, openModal, setCurrent }) {
   return (
     <div>
       {presets.map((preset, index) => (
-        <PresetRow
+        <PresetRowContainer
           preset={preset}
           key={index}
           delete_={delete_}

@@ -11,8 +11,9 @@ import EditButtonWithTooltip from '../utils/buttons/EditButtonWithTooltip';
 import DeleteButtonWithTooltip from '../utils/buttons/DeleteButtonWithTooltip';
 import { ExpandableRow } from '../utils/ExpandableRow';
 import { useHistory } from 'react-router';
-import MoreButton from '../utils/MoreButton';
+import MoreButton from '../utils/buttons/MoreButton';
 import { palette } from '../../constants/palette';
+const classNames = require('classnames');
 
 const useStyles = makeStyles((theme) => ({
   row: {
@@ -32,9 +33,18 @@ const useStyles = makeStyles((theme) => ({
   expandable: {
     background: `linear-gradient(45deg, ${palette.primary.main} 50%, ${palette.primary.light} 100%)`,
   },
+  opacity: {
+    opacity: 0.7,
+  },
 }));
 
-export function PresetRow({ preset, delete_, openModal, setCurrent }) {
+export function PresetRow({
+  preset,
+  delete_,
+  openModal,
+  setCurrent,
+  presetDetails,
+}) {
   const classes = useStyles();
   const history = useHistory();
   const delModalId = CONFIRMATION_MODAL + 'preset' + preset.id;
@@ -69,7 +79,12 @@ export function PresetRow({ preset, delete_, openModal, setCurrent }) {
   };
 
   return (
-    <div className={classes.row}>
+    <div
+      className={classNames(classes.row, {
+        [classes.opacity]:
+          presetDetails.id !== undefined && presetDetails.id !== preset.id,
+      })}
+    >
       <ExpandableRow
         name={preset.name}
         buttons={renderButtons}
@@ -91,6 +106,7 @@ export function PresetRow({ preset, delete_, openModal, setCurrent }) {
 
 PresetRow.propTypes = {
   preset: PropTypes.object.isRequired,
+  presetDetails: PropTypes.object.isRequired,
   delete_: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   setCurrent: PropTypes.func.isRequired,

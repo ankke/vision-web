@@ -45,6 +45,7 @@ class PresetsScreen extends Component {
   componentDidMount() {
     this.props.getPresets();
     this.props.getCameras();
+    this.props.removePresetDetails();
   }
 
   render() {
@@ -93,6 +94,7 @@ PresetsScreen.propTypes = {
   openModal: PropTypes.func.isRequired,
   setCurrent: PropTypes.func.isRequired,
   editCamera: PropTypes.func.isRequired,
+  removePresetDetails: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
