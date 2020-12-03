@@ -36,7 +36,7 @@ const styles = {
     heigth: 60,
     fontSize: 30,
     marginBottom: 15,
-    color: palette.secondary.main,
+    color: palette.primary.main,
     marginLeft: 10,
   },
 };

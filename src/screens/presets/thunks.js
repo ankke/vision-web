@@ -36,6 +36,7 @@ export const editPresetRequest = ({ preset }) => {
       .then(() => {
         dispatch(getPresetsRequest());
         dispatch(getCamerasForPresetRequest(id));
+        dispatch(getPresetRequest(id));
       })
       .catch((err) => {
         console.log(err);
