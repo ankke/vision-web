@@ -20,6 +20,7 @@ const useStyles = makeStyles(() => ({
     marginTop: 5,
     display: 'flex',
     alignSelf: 'stretch',
+    fontFamily: "'Bai Jamjuree', sans-serif",
   },
 }));
 
