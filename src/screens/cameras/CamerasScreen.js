@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { ADD_CAMERA_MODAL, ModalsTranslator } from '../utils/modals/types';
+import { ADD_CAMERA_MODAL } from '../utils/modals/types';
 import AddButtonWithTooltip from '../utils/buttons/AddButtonWithTooltip';
 import { CamerasList } from './CamerasList';
 import { palette } from '../../constants/palette';
+import { Route } from 'react-router';
+import { routes } from '../../constants/routes';
+import { AddCameraModal, EditCameraModal } from './modals/CameraModalContainer';
 
 const styles = {
   container: {
@@ -52,7 +55,7 @@ class CamerasScreen extends Component {
         <div className={classes.list}>
           <div className={classes.title}>Cameras</div>
           <AddButtonWithTooltip
-            onClick={() => this.props.openModal(ADD_CAMERA_MODAL)}
+            onClick={() => this.props.history.push(routes.camerasListAdd)}
             title={'Add camera'}
             label={'Add camera'}
             style={classes.addButton}
@@ -63,10 +66,13 @@ class CamerasScreen extends Component {
             setCurrent={this.props.setCurrent}
             openModal={this.props.openModal}
           />
-          <ModalsTranslator.ADD_CAMERA_MODAL action={this.props.addCamera} />
-          <ModalsTranslator.EDIT_CAMERA_MODAL action={this.props.editCamera} />
         </div>
-        <div className={classes.spejs} />
+        <Route
+          exact
+          path={routes.camerasListEdit}
+          component={EditCameraModal}
+        />
+        <Route exact path={routes.camerasListAdd} component={AddCameraModal} />
       </div>
     );
   }

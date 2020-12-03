@@ -6,6 +6,7 @@ export const showCamera = (cameraId) => camera_ + '/show?id=' + cameraId;
 export const takePhoto = (cameraId) => camera_ + '/photo?id=' + cameraId;
 export const killCamera = (cameraId) => camera_ + '/kill?id=' + cameraId;
 export const deleteCamera = (cameraId) => camera_ + '/' + cameraId;
+export const getCamera = (cameraId) => camera_ + '/' + cameraId;
 
 // presets
 export const configuration = apiUrl + '/configuration';

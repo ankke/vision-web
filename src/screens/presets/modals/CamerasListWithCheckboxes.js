@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     margin: '5px 0px',
     flex: 1,
+    fontSize: 16,
   },
 }));
 

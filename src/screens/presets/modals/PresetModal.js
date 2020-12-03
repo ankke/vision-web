@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     outline: 'none',
     maxHeight: '70%',
     width: 460,
+    fontFamily: "'Bai Jamjuree', sans-serif",
   },
   button: {
     background: `linear-gradient(45deg, ${palette.primary.main} 50%, ${palette.primary.light} 100%)`,
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
     alignSelf: 'flex-end',
+    fontFamily: "'Bai Jamjuree', sans-serif",
   },
   checkBoxLabel: {
     flexDirection: 'row-reverse',

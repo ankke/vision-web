@@ -13,6 +13,7 @@ import {
   ModalsTranslator,
 } from '../utils/modals/types';
 import { ExpandableRow } from '../utils/ExpandableRow';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   row: {
@@ -32,6 +33,7 @@ export function CameraRow({
   withoutButtons = false,
 }) {
   const classes = useStyles();
+  const history = useHistory();
   const delModalId = CONFIRMATION_MODAL + 'camera' + camera.id;
   const renderButtons = () => {
     if (withoutButtons) {
@@ -53,7 +55,7 @@ export function CameraRow({
         <EditButtonWithTooltip
           onClick={() => {
             setCurrent(camera);
-            openModal(EDIT_CAMERA_MODAL);
+            history.push(`/cameras/${camera.id}/edit`);
           }}
           style={classes.button}
         />
