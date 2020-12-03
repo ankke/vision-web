@@ -17,3 +17,4 @@ export const getCamerasForConfiguration = (presetId) =>
   configuration + '/' + presetId + '/cameras';
 
 // settings
+export const settings_ = apiUrl + '/settings';

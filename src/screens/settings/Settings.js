@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputRow from '../utils/modals/InputRow';
 import Label from '../utils/modals/Label';
 import { palette } from '../../constants/palette';
 import CheckboxRow from '../utils/modals/CheckboxRow';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -51,15 +52,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Settings() {
+export function Settings({
+  settings,
+  editSettingsRequest,
+  getSettingsRequest,
+}) {
   const classes = useStyles();
+
+  useEffect(() => {
+    getSettingsRequest();
+  }, []);
 
   const initialState = {
     path: '',
     udp_preffered: true,
   };
 
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState(settings ? settings : initialState);
   const [editable, setEditable] = useState(false);
 
   const rows = [
@@ -82,8 +91,8 @@ export function Settings() {
         style: classes.checkBoxLabel,
       },
       args: {
-        state: state['udp_preffered'],
-        name: 'udp_preffered',
+        state: state['udp_preferred'],
+        name: 'udp_preferred',
       },
     },
   ];
@@ -112,6 +121,7 @@ export function Settings() {
           className={classes.button}
           onClick={() => {
             setEditable(false);
+            editSettingsRequest(state);
           }}
         >
           Save
@@ -128,3 +138,9 @@ export function Settings() {
     </div>
   );
 }
+
+Settings.propTypes = {
+  editSettingsRequest: PropTypes.func.isRequired,
+  getSettingsRequest: PropTypes.func.isRequired,
+  settings: PropTypes.object.isRequired,
+};
