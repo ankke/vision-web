@@ -2,7 +2,8 @@ import {
   configuration,
   configurations,
   deleteConfiguration,
-  getCamerasForConfiguration, getConfiguration,
+  getCamerasForConfiguration,
+  getConfiguration,
 } from '../../api/apiConf';
 import { _delete, get, post, put } from '../../api/requests';
 import { setPreset, getCamerasForPreset, getPresets } from './presetsSlice';

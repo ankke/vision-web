@@ -227,10 +227,7 @@ function Menu({ forwardedRef }) {
           </ListItem>
         </List>
       </Drawer>
-      <Route
-        path={routes.camerasList}
-        component={CamerasScreenContainer}
-      />
+      <Route path={routes.camerasList} component={CamerasScreenContainer} />
       <Route path={routes.presets} component={PresetsScreenContainer} />
       <Route path={routes.settings} component={SettingsContainer} />
     </div>

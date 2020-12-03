@@ -7,7 +7,7 @@ import {
   getPresetsRequest,
 } from './thunks';
 import { openModal } from '../utils/modals/modalsSlice';
-import {removePresetDetails, setCurrent} from './presetsSlice';
+import { removePresetDetails, setCurrent } from './presetsSlice';
 import PresetsScreen from './PresetsScreen';
 import { editCameraRequest, getCamerasRequest } from '../cameras/thunks';
 

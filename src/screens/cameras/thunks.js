@@ -4,11 +4,12 @@ import {
   takePhoto,
   camera_,
   deleteCamera,
-  getConfiguration, getCamera,
+  getConfiguration,
+  getCamera,
 } from '../../api/apiConf';
 import { get, post, _delete, put } from '../../api/requests';
 import { getCameras } from './camerasSlice';
-import {setCurrent, setPreset} from '../presets/presetsSlice';
+import { setCurrent, setPreset } from '../presets/presetsSlice';
 
 export const addCameraRequest = ({ camera }) => {
   return async (dispatch) => {

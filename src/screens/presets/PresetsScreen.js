@@ -71,7 +71,6 @@ class PresetsScreen extends Component {
           />
           <ModalsTranslator.ADD_PRESET_MODAL action={this.props.addPreset} />
           <ModalsTranslator.EDIT_PRESET_MODAL action={this.props.editPreset} />
-          <ModalsTranslator.EDIT_CAMERA_MODAL action={this.props.editCamera} />
         </div>
         <Route
           exact
