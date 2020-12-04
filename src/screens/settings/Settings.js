@@ -5,6 +5,7 @@ import Label from '../utils/modals/Label';
 import { palette } from '../../constants/palette';
 import CheckboxRow from '../utils/modals/CheckboxRow';
 import PropTypes from 'prop-types';
+const classNames = require('classnames');
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -50,6 +51,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Bai Jamjuree', sans-serif",
     marginRight: 20,
   },
+  disabled: {
+    background: `linear-gradient(45deg, #989898 50%, #989890 100%)`,
+    backgroundColor: '',
+  },
 }));
 
 export function Settings({
@@ -65,11 +70,11 @@ export function Settings({
 
   const initialState = {
     path: '',
-    udp_preffered: true,
+    udp_preferred: true,
   };
 
   const [state, setState] = useState(settings ? settings : initialState);
-  const [editable, setEditable] = useState(false);
+  const [edited, setEdited] = useState(false);
 
   const rows = [
     {
@@ -98,15 +103,13 @@ export function Settings({
   ];
 
   const onChange = (value, name) => {
+    setEdited(true);
     setState({ ...state, [name]: value });
   };
 
   return (
     <div className={classes.container}>
       <div className={classes.title}>Settings</div>
-      <button className={classes.button} onClick={() => setEditable(true)}>
-        Edit
-      </button>
       {rows.map((row, index) => {
         return (
           <div key={index} className={classes.row}>
@@ -118,21 +121,16 @@ export function Settings({
       })}
       <div>
         <button
-          className={classes.button}
+          className={classNames(classes.button, {
+            [classes.disabled]: !edited,
+          })}
           onClick={() => {
-            setEditable(false);
+            setEdited(false);
             editSettingsRequest(state);
           }}
+          disabled={!edited}
         >
           Save
-        </button>
-        <button
-          className={classes.button}
-          onClick={() => {
-            setEditable(false);
-          }}
-        >
-          Cancel
         </button>
       </div>
     </div>

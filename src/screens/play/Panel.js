@@ -51,8 +51,8 @@ export default function Panel({
   takePhoto,
   openModal,
   rotate,
-                                calcZoom,
-    zoom
+  calcZoom,
+  zoom,
 }) {
   const classes = useStyles();
   const [tag, setTag] = useState('');
