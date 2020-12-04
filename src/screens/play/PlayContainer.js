@@ -3,28 +3,34 @@ import { withRouter } from 'react-router-dom';
 import {
   getCamerasRequest,
   killCamerasRequest,
+  killCamerasRequestWithoutClosing,
+  showCameraRequest,
   takePhotoRequest,
 } from '../cameras/thunks';
-import { showCamera } from '../../api/apiConf';
 import Play from './Play';
 import { openModal } from '../utils/modals/modalsSlice';
+import { showCamera } from '../../api/apiConf';
 
 const mapStateToProps = (state, ownProps) => {
   const {
     match: {
-      params: { id },
+      params: { id, sub_stream },
     },
   } = ownProps;
-
   return {
-    src: showCamera(id),
+    src: showCamera(id, sub_stream),
     camera: state.cameras.list.find((cam) => cam.id === parseInt(id)),
+    sub_stream: decodeURIComponent(sub_stream),
   };
 };
 function mapDispatchToProps(dispatch) {
   return {
-    killCamera: (id) => dispatch(killCamerasRequest(id)),
-    takePhoto: (id, tag) => dispatch(takePhotoRequest(id, tag)),
+    killCamera: (id, sub_stream) =>
+      dispatch(killCamerasRequest(id, sub_stream)),
+    killCamerasRequestWithoutClosing: (id, sub_stream) =>
+      dispatch(killCamerasRequestWithoutClosing(id, sub_stream)),
+    takePhoto: (id, tag, sub_stream) =>
+      dispatch(takePhotoRequest(id, tag, sub_stream)),
     getCameras: () => dispatch(getCamerasRequest()),
     openModal: (modalId) => dispatch(openModal(modalId)),
   };

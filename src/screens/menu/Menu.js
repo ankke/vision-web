@@ -9,11 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Camera from '@material-ui/icons/Camera';
+import InfoIcon from '@material-ui/icons/Info';
 import GridOn from '@material-ui/icons/GridOn';
 import Settings from '@material-ui/icons/Settings';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { Route, useHistory } from 'react-router';
@@ -185,7 +185,7 @@ function Menu({ forwardedRef }) {
             }}
           >
             <ListItemIcon>
-              <KeyboardReturnIcon className={classes.icon} />
+              <InfoIcon className={classes.icon} />
             </ListItemIcon>
             <div className={classes.text}>Start</div>
           </ListItem>

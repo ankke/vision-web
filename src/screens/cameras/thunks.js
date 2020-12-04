@@ -6,6 +6,7 @@ import {
   deleteCamera,
   getConfiguration,
   getCamera,
+  showCamera,
 } from '../../api/apiConf';
 import { get, post, _delete, put } from '../../api/requests';
 import { getCameras } from './camerasSlice';
@@ -100,9 +101,9 @@ export const deleteCamerasRequest = (id) => {
   };
 };
 
-export const killCamerasRequest = (id) => {
+export const killCamerasRequest = (id, subStream) => {
   return async () => {
-    await get(killCamera(id))
+    await get(killCamera(id, subStream))
       .then((res) => {
         window.open('about:blank', '_self');
         window.close();
@@ -113,9 +114,21 @@ export const killCamerasRequest = (id) => {
   };
 };
 
-export const takePhotoRequest = (id, tag) => {
+export const killCamerasRequestWithoutClosing = (id, subStream) => {
   return async () => {
-    await get(takePhoto(id, tag))
+    await get(killCamera(id, subStream))
+      .then((res) => {
+        window.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const takePhotoRequest = (id, tag, sub_stream) => {
+  return async () => {
+    await get(takePhoto(id, tag, sub_stream))
       .then((res) => {
         console.log(res.status);
       })
@@ -126,9 +139,8 @@ export const takePhotoRequest = (id, tag) => {
 };
 
 export const getCameraRequest = (id) => {
-  console.log('getPresetRequest');
   return async (dispatch) => {
-    const cameras = await get(getCamera(id))
+    const camera = await get(getCamera(id))
       .then((res) => {
         console.log(res);
         return res.json();
@@ -137,6 +149,24 @@ export const getCameraRequest = (id) => {
         console.log(err);
         return [];
       });
-    dispatch(setCurrent(cameras));
+    dispatch(setCurrent(camera));
   };
+};
+
+export const showCameraRequest = async (id, sub_stream) => {
+  if (!sub_stream) {
+    await get(getCamera(id))
+      .then((res) => {
+        const camera_ = res.json();
+        const sub_stream_default =
+          camera_.sub_stream.length > 0 ? camera_.sub_stream[0] : '';
+        return showCamera(id, sub_stream_default);
+      })
+      .catch((err) => {
+        console.log(err);
+        return undefined;
+      });
+  } else {
+    return showCamera(id, sub_stream);
+  }
 };
