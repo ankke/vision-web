@@ -19,6 +19,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     padding: 3,
     justifyContent: 'center',
+    overflow: 'scroll',
   },
   rotate: {
     display: 'flex',
@@ -57,6 +58,15 @@ export default function Play({
     maxWidth: '100%',
     maxHeight: '100%',
   });
+  const [zoom, setZoom] = useState(1);
+  const [scale, setScale] = useState(0);
+
+  const calcZoom = (event, newValue) => {
+    console.log(newValue);
+    const zoom = (2 * newValue) / 100 + 1;
+    setZoom(zoom);
+    setScale(newValue);
+  };
 
   const calcRotation = (incr) => {
     return (rotation + incr) % 360;
@@ -75,7 +85,7 @@ export default function Play({
   };
 
   const rot = {
-    transform: `rotate(${rotation}deg)`,
+    transform: `rotate(${rotation}deg) scale(${zoom})`,
     ...size,
   };
 
@@ -103,6 +113,8 @@ export default function Play({
           openModal={openModal}
           camera={camera}
           rotate={rotate}
+          calcZoom={calcZoom}
+          zoom={scale}
         />
       </div>
     </div>

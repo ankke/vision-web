@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
     width: 100,
     height: 100,
     alignItems: 'center',
-    marginTop: '15px',
+    marginTop: 15,
+    marginBottom: 30,
   },
   double_row: {
     display: 'flex',
