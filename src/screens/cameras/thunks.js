@@ -113,9 +113,9 @@ export const killCamerasRequest = (id) => {
   };
 };
 
-export const takePhotoRequest = (id) => {
+export const takePhotoRequest = (id, tag) => {
   return async () => {
-    await get(takePhoto(id))
+    await get(takePhoto(id, tag))
       .then((res) => {
         console.log(res.status);
       })

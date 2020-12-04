@@ -22,7 +22,7 @@ function mapStateToPropsEdit(state, ownProps) {
 function mapDispatchToPropsEdit(dispatch) {
   return {
     action: (camera) => dispatch(editCameraRequest({ camera })),
-    getCamera: (cameraId) => dispatch(getCameraRequest({ cameraId })),
+    getCamera: (cameraId) => dispatch(getCameraRequest(cameraId)),
   };
 }
 
