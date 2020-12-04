@@ -7,12 +7,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Fade } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import LightTooltip from '../utils/LightTooltip';
+import { palette } from '../../constants/palette';
 
 const useStyles = makeStyles((theme) => ({
   arrows: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
+    width: 100,
+    height: 100,
     alignItems: 'center',
     marginTop: '15px',
   },
@@ -20,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     width: '100%',
     justifyContent: 'space-between',
+  },
+  icon: {
+    color: palette.primary.main,
   },
 }));
 
@@ -39,7 +44,7 @@ export default function Arrows() {
             aria-label="up"
             onClick={() => console.log('up')}
           >
-            <ExpandLessIcon fontSize={'large'} />
+            <ExpandLessIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
         </LightTooltip>
       </div>
@@ -54,7 +59,7 @@ export default function Arrows() {
             aria-label="left"
             onClick={() => console.log('left')}
           >
-            <NavigateBeforeIcon fontSize={'large'} />
+            <NavigateBeforeIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
         </LightTooltip>
         <LightTooltip
@@ -67,7 +72,7 @@ export default function Arrows() {
             aria-label="right"
             onClick={() => console.log('right')}
           >
-            <NavigateNextIcon fontSize={'large'} />
+            <NavigateNextIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
         </LightTooltip>
       </div>
@@ -82,7 +87,7 @@ export default function Arrows() {
             aria-label="down"
             onClick={() => console.log('down')}
           >
-            <ExpandMoreIcon fontSize={'large'} />
+            <ExpandMoreIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
         </LightTooltip>
       </div>

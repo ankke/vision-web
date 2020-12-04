@@ -24,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
 function mapDispatchToProps(dispatch) {
   return {
     killCamera: (id) => dispatch(killCamerasRequest(id)),
-    takePhoto: (id) => dispatch(takePhotoRequest(id)),
+    takePhoto: (id, tag) => dispatch(takePhotoRequest(id, tag)),
     getCameras: () => dispatch(getCamerasRequest()),
     openModal: (modalId) => dispatch(openModal(modalId)),
   };
