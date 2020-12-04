@@ -4,9 +4,12 @@ import {
   takePhoto,
   camera_,
   deleteCamera,
+  getConfiguration,
+  getCamera,
 } from '../../api/apiConf';
 import { get, post, _delete, put } from '../../api/requests';
 import { getCameras } from './camerasSlice';
+import { setCurrent, setPreset } from '../presets/presetsSlice';
 
 export const addCameraRequest = ({ camera }) => {
   return async (dispatch) => {
@@ -110,14 +113,30 @@ export const killCamerasRequest = (id) => {
   };
 };
 
-export const takePhotoRequest = (id) => {
+export const takePhotoRequest = (id, tag) => {
   return async () => {
-    await get(takePhoto(id))
+    await get(takePhoto(id, tag))
       .then((res) => {
         console.log(res.status);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+};
+
+export const getCameraRequest = (id) => {
+  console.log('getPresetRequest');
+  return async (dispatch) => {
+    const cameras = await get(getCamera(id))
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+        return [];
+      });
+    dispatch(setCurrent(cameras));
   };
 };

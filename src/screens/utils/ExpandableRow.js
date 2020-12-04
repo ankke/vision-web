@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import colors from '../../constants/colors';
 import Collapse from '@material-ui/core/Collapse';
 import { ExpandMore } from '@material-ui/icons';
 import LinesEllipsis from 'react-lines-ellipsis';
 import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
 import WithTooltip from '../utils/buttons/WithTooltip';
-
+import { palette } from '../../constants/palette';
 const classNames = require('classnames');
 
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   row: {
-    background: `linear-gradient(45deg, ${colors.MAIN} 50%, ${colors.MAIN_V} 100%)`,
+    background: `linear-gradient(45deg, ${palette.secondary.main} 50%, ${palette.secondary.light} 100%)`,
     borderRadius: 3,
     border: 0,
     color: 'white',
@@ -53,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function ExpandableRow({ name, buttons, info }) {
+export function ExpandableRow({ name, buttons, info, style }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -61,7 +60,7 @@ export function ExpandableRow({ name, buttons, info }) {
   };
 
   return (
-    <div className={classes.row}>
+    <div className={classNames(classes.row, style)}>
       <div className={classes.container}>
         <ResponsiveEllipsis
           text={name}
@@ -98,4 +97,5 @@ ExpandableRow.propTypes = {
   name: PropTypes.string.isRequired,
   buttons: PropTypes.func,
   info: PropTypes.func.isRequired,
+  style: PropTypes.string,
 };

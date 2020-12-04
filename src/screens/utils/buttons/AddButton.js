@@ -13,6 +13,6 @@ export default function AddButton({ onClick, style, label }) {
 
 AddButton.propTypes = {
   label: PropTypes.string.isRequired,
-  style: PropTypes.object,
+  style: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

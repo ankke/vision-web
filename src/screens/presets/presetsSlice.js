@@ -7,7 +7,10 @@ const initialState = {
     subnet: '',
     cameras: [],
   },
-  camerasList: [],
+  details: {
+    preset: {},
+    camerasList: [],
+  },
 };
 
 const presetsSlice = createSlice({
@@ -48,7 +51,27 @@ const presetsSlice = createSlice({
     getCamerasForPreset(state, action) {
       return {
         ...state,
-        camerasList: action.payload,
+        details: {
+          ...state.details,
+          camerasList: action.payload,
+        },
+      };
+    },
+    setPreset(state, action) {
+      return {
+        ...state,
+        details: {
+          ...state.details,
+          preset: action.payload,
+        },
+      };
+    },
+    removePresetDetails(state, _) {
+      return {
+        ...state,
+        details: {
+          ...initialState.details,
+        },
       };
     },
   },
@@ -60,6 +83,8 @@ export const {
   removeCurrent,
   editCurrent,
   getCamerasForPreset,
+  setPreset,
+  removePresetDetails,
 } = presetsSlice.actions;
 
 export default presetsSlice.reducer;

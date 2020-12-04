@@ -1,21 +1,40 @@
 import { connect } from 'react-redux';
 import Modal from './CameraModal';
-import { closeModal } from '../../utils/modals/modalsSlice';
-import { editCurrent, removeCurrent } from '../camerasSlice';
+import {
+  addCameraRequest,
+  editCameraRequest,
+  getCameraRequest,
+} from '../thunks';
 
-function mapStateToProps(state) {
+function mapStateToPropsEdit(state, ownProps) {
+  const {
+    match: {
+      params: { id },
+    },
+  } = ownProps;
+
   return {
-    opened: state.modals.open,
+    cameraId: id,
     camera: state.cameras.current,
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToPropsEdit(dispatch) {
   return {
-    closeModal: (modalId) => dispatch(closeModal(modalId)),
-    removeCurrent: () => dispatch(removeCurrent()),
-    editCurrent: (key) => (value) => dispatch(editCurrent({ [key]: value })),
+    action: (camera) => dispatch(editCameraRequest({ camera })),
+    getCamera: (cameraId) => dispatch(getCameraRequest(cameraId)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export const EditCameraModal = connect(
+  mapStateToPropsEdit,
+  mapDispatchToPropsEdit
+)(Modal);
+
+function mapDispatchToPropsAdd(dispatch) {
+  return {
+    action: (camera) => dispatch(addCameraRequest({ camera })),
+  };
+}
+
+export const AddCameraModal = connect(null, mapDispatchToPropsAdd)(Modal);

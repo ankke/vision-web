@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import WithTooltip from './buttons/WithTooltip';
-import CircleButton from './buttons/CircleButton';
+import WithTooltip from './WithTooltip';
+import CircleButton from './CircleButton';
 
-export default function MoreButton({ title, onClick, style }) {
+export default function MoreButton({ onClick, style }) {
   return (
-    <WithTooltip title={title ? title : 'More'}>
+    <WithTooltip title="More">
       <CircleButton onClick={onClick} label="more" style={style}>
         <MoreHorizIcon />
       </CircleButton>
@@ -15,7 +15,7 @@ export default function MoreButton({ title, onClick, style }) {
 }
 
 MoreButton.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.string,
   title: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

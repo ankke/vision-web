@@ -15,6 +15,6 @@ export default function EditButtonWithTooltip({ onClick, style }) {
 }
 
 EditButtonWithTooltip.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

@@ -3,9 +3,10 @@ import {
   configurations,
   deleteConfiguration,
   getCamerasForConfiguration,
+  getConfiguration,
 } from '../../api/apiConf';
 import { _delete, get, post, put } from '../../api/requests';
-import { getCameras, getCamerasForPreset, getPresets } from './presetsSlice';
+import { setPreset, getCamerasForPreset, getPresets } from './presetsSlice';
 
 export const addPresetRequest = ({ preset }) => {
   return async (dispatch) => {
@@ -36,6 +37,7 @@ export const editPresetRequest = ({ preset }) => {
       .then(() => {
         dispatch(getPresetsRequest());
         dispatch(getCamerasForPresetRequest(id));
+        dispatch(getPresetRequest(id));
       })
       .catch((err) => {
         console.log(err);
@@ -83,5 +85,21 @@ export const getCamerasForPresetRequest = (id) => {
         return [];
       });
     dispatch(getCamerasForPreset(cameras));
+  };
+};
+
+export const getPresetRequest = (id) => {
+  console.log('getPresetRequest');
+  return async (dispatch) => {
+    const cameras = await get(getConfiguration(id))
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+        return [];
+      });
+    dispatch(setPreset(cameras));
   };
 };

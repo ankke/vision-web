@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import colors from '../../../constants/colors.json';
+import { palette } from '../../../constants/palette';
 const classNames = require('classnames');
 
 const useStyles = makeStyles(() => ({
@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    color: colors.MAIN,
+    color: palette.primary.main,
     fontSize: 16,
     textAlign: 'center',
   },

@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import colors from '../../../constants/colors.json';
+import { palette } from '../../../constants/palette';
 const classNames = require('classnames');
 
 const useStyles = makeStyles(() => ({
   item: {
     outline: 'none',
     background: 'white',
-    borderColor: colors.MAIN,
+    borderColor: palette.primary.main,
     borderRadius: 3,
     border: 2,
-    color: colors.MAIN,
+    color: palette.primary.main,
     height: 30,
     padding: '0 30px',
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
@@ -20,6 +20,7 @@ const useStyles = makeStyles(() => ({
     marginTop: 5,
     display: 'flex',
     alignSelf: 'stretch',
+    fontFamily: "'Bai Jamjuree', sans-serif",
   },
 }));
 
@@ -40,5 +41,5 @@ InputRow.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  style: PropTypes.object,
+  style: PropTypes.string,
 };

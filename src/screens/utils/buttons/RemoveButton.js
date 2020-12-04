@@ -13,6 +13,6 @@ export default function RemoveButton({ onClick, style, label }) {
 
 RemoveButton.propTypes = {
   label: PropTypes.string.isRequired,
-  style: PropTypes.object,
+  style: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

@@ -15,6 +15,6 @@ export default function DeleteButtonWithTooltip({ onClick, style }) {
 }
 
 DeleteButtonWithTooltip.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

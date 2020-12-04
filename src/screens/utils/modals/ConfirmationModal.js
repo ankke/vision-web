@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import colors from '../../../constants/colors.json';
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Backdrop from '@material-ui/core/Backdrop';
+import { palette } from '../../../constants/palette';
 const classNames = require('classnames');
 
 const useStyles = makeStyles((theme) => ({
@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     background: 'white',
-    borderColor: colors.MAIN,
+    borderColor: palette.primary.main,
     borderRadius: 3,
     border: 2,
-    color: colors.MAIN,
+    color: palette.primary.main,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     fontSize: 20,
     padding: '30px 50px',
@@ -102,7 +102,7 @@ export default function FadeModal({ action, opened, closeModal }) {
 }
 
 FadeModal.propTypes = {
-  action: PropTypes.func.isRequired,
+  action: PropTypes.object.isRequired,
   closeModal: PropTypes.func.isRequired,
   opened: PropTypes.array.isRequired,
 };

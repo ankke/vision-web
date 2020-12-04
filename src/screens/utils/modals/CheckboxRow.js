@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import colors from '../../../constants/colors.json';
 import Checkbox from '@material-ui/core/Checkbox';
+import { palette } from '../../../constants/palette';
 
 export default function CheckboxRow({ name, state, onChange }) {
   return (
@@ -9,7 +9,7 @@ export default function CheckboxRow({ name, state, onChange }) {
       checked={state}
       onChange={(event) => onChange(event.target.checked, name)}
       name={name}
-      color={colors.MAIN}
+      color={palette.primary.main}
     />
   );
 }

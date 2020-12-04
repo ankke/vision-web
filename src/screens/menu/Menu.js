@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -13,16 +13,17 @@ import GridOn from '@material-ui/icons/GridOn';
 import Settings from '@material-ui/icons/Settings';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import colors from '../../constants/colors.json';
-import { Route } from 'react-router';
+import { Route, useHistory } from 'react-router';
 import { routes } from '../../constants/routes';
-import { useHistory } from 'react-router';
 import SettingsContainer from '../settings/SettingsContainer';
 import CamerasScreenContainer from '../cameras/CamerasScreenContainer';
 import PresetsScreenContainer from '../presets/PresetsScreenContainer';
+import PropTypes from 'prop-types';
+import { palette } from '../../constants/palette';
+const classNames = require('classnames');
 
 const drawerWidth = 240;
 
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'center',
     height: '100%',
     flex: 1,
+    backgroundImage: "url('/spejs_logo.svg')",
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: ' right bottom',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -39,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    fontFamily: "'Bai Jamjuree', sans-serif",
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -47,7 +52,6 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    colorPrimary: colors.YELLOW_MAIN,
   },
   menuButton: {
     marginRight: 36,
@@ -83,7 +87,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    backGroundColor: colors.NAVY_MAIN,
     ...theme.mixins.toolbar,
   },
   content: {
@@ -94,16 +97,24 @@ const useStyles = makeStyles((theme) => ({
   shadow: {
     boxShadow: '0 3px 5px 2px rgba(150, 60, 90, .3)',
   },
-  color: {
-    color: colors.MAIN,
+  text: {
+    color: palette.primary.main,
+    fontSize: 20,
+    fontFamily: "'Bai Jamjuree', sans-serif",
+  },
+  icon: {
+    color: palette.primary.main,
+    fontSize: 30,
+  },
+  title: {
     fontSize: 30,
   },
 }));
 
-export default function Menu() {
+function Menu({ forwardedRef }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const history = useHistory();
 
   const handleDrawerOpen = () => {
@@ -115,10 +126,10 @@ export default function Menu() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} ref={forwardedRef}>
       <AppBar
         position="fixed"
-        color={colors.YELLOW_MAIN}
+        color="inherit"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -133,9 +144,12 @@ export default function Menu() {
               [classes.hide]: open,
             })}
           >
-            <MenuIcon className={classes.color} />
+            <MenuIcon className={classes.icon} />
           </IconButton>
-          <Typography noWrap className={classes.color}>
+          <Typography
+            noWrap
+            className={classNames(classes.text, classes.title)}
+          >
             Camera Vision
           </Typography>
         </Toolbar>
@@ -156,13 +170,25 @@ export default function Menu() {
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
-              <ChevronRightIcon className={classes.color} />
+              <ChevronRightIcon className={classes.icon} />
             ) : (
-              <ChevronLeftIcon className={classes.color} />
+              <ChevronLeftIcon className={classes.icon} />
             )}
           </IconButton>
         </div>
         <List>
+          <ListItem
+            button
+            key={'Start'}
+            onClick={() => {
+              history.push(routes.homepage);
+            }}
+          >
+            <ListItemIcon>
+              <KeyboardReturnIcon className={classes.icon} />
+            </ListItemIcon>
+            <div className={classes.text}>Start</div>
+          </ListItem>
           <ListItem
             button
             key={'Cameras'}
@@ -171,21 +197,21 @@ export default function Menu() {
             }}
           >
             <ListItemIcon>
-              <Camera className={classes.color} />
+              <Camera className={classes.icon} />
             </ListItemIcon>
-            <ListItemText primary={'Cameras'} className={classes.color} />
+            <div className={classes.text}>Cameras</div>
           </ListItem>
           <ListItem
             button
-            key={'Presets'}
+            key={'Sets'}
             onClick={() => {
               history.push(routes.presets);
             }}
           >
             <ListItemIcon>
-              <GridOn className={classes.color} />
+              <GridOn className={classes.icon} />
             </ListItemIcon>
-            <ListItemText primary={'Presets'} className={classes.color} />
+            <div className={classes.text}>Sets</div>
           </ListItem>
           <ListItem
             button
@@ -195,19 +221,23 @@ export default function Menu() {
             }}
           >
             <ListItemIcon>
-              <Settings className={classes.color} />
+              <Settings className={classes.icon} />
             </ListItemIcon>
-            <ListItemText primary={'Settings'} className={classes.color} />
+            <div className={classes.text}>Settings</div>
           </ListItem>
         </List>
       </Drawer>
-      <Route
-        exact
-        path={routes.camerasList}
-        component={CamerasScreenContainer}
-      />
+      <Route path={routes.camerasList} component={CamerasScreenContainer} />
       <Route path={routes.presets} component={PresetsScreenContainer} />
-      <Route exact path={routes.settings} component={SettingsContainer} />
+      <Route path={routes.settings} component={SettingsContainer} />
     </div>
   );
 }
+
+Menu.propTypes = {
+  forwardedRef: PropTypes.object.isRequired,
+};
+
+export default React.forwardRef(function menu(props, ref) {
+  return <Menu forwardedRef={ref} {...props} />;
+});
