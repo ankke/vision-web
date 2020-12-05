@@ -38,16 +38,23 @@ export default function Arrows({ move, rotValue }) {
     return function cleanup() {
       document.removeEventListener('keydown', handleKeyDown, false);
     };
-  }, []);
+  }, [rotValue]);
 
   const handleKeyDown = (event) => {
     if (event.keyCode === 38) {
+      console.log('up' + rotValue);
       move(UP, rotValue);
     } else if (event.keyCode === 39) {
+      console.log('right' + rotValue);
+
       move(RIGHT, rotValue);
     } else if (event.keyCode === 40) {
+      console.log('down' + rotValue);
+
       move(DOWN, rotValue);
     } else if (event.keyCode === 37) {
+      console.log('left' + rotValue);
+
       move(LEFT, rotValue);
     }
   };
@@ -63,7 +70,10 @@ export default function Arrows({ move, rotValue }) {
           <IconButton
             style={{ padding: 'unset' }}
             aria-label="up"
-            onClick={() => move(UP, rotValue)}
+            onClick={() => {
+              console.log(rotValue);
+              move(UP, rotValue);
+            }}
             onKeyDown={handleKeyDown}
           >
             <ExpandLessIcon className={classes.icon} fontSize={'large'} />
