@@ -43,7 +43,12 @@ export function CameraRow({
       <div>
         <WithTooltip title={'Play camera'}>
           <a
-            href={'http://127.0.0.1:3000/play/' + camera.id}
+            href={
+              'http://127.0.0.1:3000/play/' +
+              camera.id +
+              '/' +
+              encodeURIComponent(camera.sub_streams[0])
+            }
             target={'_blank'}
             rel="noopener noreferrer"
           >

@@ -2,10 +2,26 @@ const apiUrl = 'http://127.0.0.1:5000';
 // cameras
 export const camera_ = apiUrl + '/camera';
 export const cameras = apiUrl + '/cameras';
-export const showCamera = (cameraId) => camera_ + '/show?id=' + cameraId;
-export const takePhoto = (cameraId, tag) =>
-  camera_ + '/photo?id=' + cameraId + '&tag=' + tag;
-export const killCamera = (cameraId) => camera_ + '/kill?id=' + cameraId;
+export const showCamera = (cameraId, sub_stream) =>
+  camera_ +
+  '/show?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
+export const takePhoto = (cameraId, tag, sub_stream) =>
+  camera_ +
+  '/photo?id=' +
+  cameraId +
+  '&tag=' +
+  tag +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
+export const killCamera = (cameraId, sub_stream) =>
+  camera_ +
+  '/kill?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
 export const deleteCamera = (cameraId) => camera_ + '/' + cameraId;
 export const getCamera = (cameraId) => camera_ + '/' + cameraId;
 
@@ -19,3 +35,37 @@ export const getCamerasForConfiguration = (presetId) =>
 
 // settings
 export const settings_ = apiUrl + '/settings';
+
+//ptz
+export const left = (cameraId, sub_stream) =>
+  apiUrl +
+  '/ptz/left?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
+export const right = (cameraId, sub_stream) =>
+  apiUrl +
+  '/ptz/right?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
+export const up = (cameraId, sub_stream) =>
+  apiUrl +
+  '/ptz/up?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
+export const down = (cameraId, sub_stream) =>
+  apiUrl +
+  '/ptz/down?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
+export const pano = (cameraId, tag, sub_stream) =>
+  apiUrl +
+  '/ptz/pano?id=' +
+  cameraId +
+  '&tag=' +
+  tag +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);

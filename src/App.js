@@ -12,7 +12,7 @@ function App({ store, history }) {
     <Provider store={store}>
       <Router history={history}>
         <Switch>
-          <Route exact path={routes.play} component={PlayContainer} />
+          <Route path={routes.play} component={PlayContainer} />
           <Route path={routes.homepage} component={Menu} />
         </Switch>
       </Router>

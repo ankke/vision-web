@@ -18,6 +18,10 @@ import Slider from '@material-ui/core/Slider';
 import Grid from '@material-ui/core/Grid';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -43,20 +47,53 @@ const useStyles = makeStyles(() => ({
     boxShadow: '0 3px 5px 2px rgba(17,31,60, .3)',
     marginBottom: 20,
   },
+  subStreams: {
+    borderColor: palette.primary.main,
+    borderRadius: 3,
+    border: 2,
+    color: palette.primary.main,
+    height: 30,
+    boxShadow: '0 3px 5px 2px rgba(17,31,60, .3)',
+    fontSize: 16,
+    textAlign: 'center',
+    fontFamily: "'Bai Jamjuree', sans-serif",
+    width: '100%',
+    outline: 'none',
+  },
+  text: {
+    fontFamily: "'Bai Jamjuree', sans-serif",
+    width: '100%',
+  },
 }));
 
 export default function Panel({
   camera,
   killCamera,
+  killCamerasRequestWithoutClosing,
   takePhoto,
   openModal,
   rotate,
   calcZoom,
   zoom,
+  sub_stream,
+  move,
+  takePanoPhoto,
 }) {
+  console.log(sub_stream);
   const classes = useStyles();
+  const history = useHistory();
   const [tag, setTag] = useState('');
   const killModalId = CONFIRMATION_MODAL + ' kill';
+  const [subStream, setSubStream] = useState(sub_stream);
+
+  const handleChange = (event) => {
+    killCamerasRequestWithoutClosing(camera.id, sub_stream);
+    const subStream = event.target.value;
+    setSubStream(subStream);
+    history.push(
+      '/play' + '/' + camera.id + '/' + encodeURIComponent(subStream)
+    );
+  };
 
   return (
     <div className={classes.container}>
@@ -70,6 +107,27 @@ export default function Panel({
         </IconButton>
       </LightTooltip>
       <div className={classes.buttons}>
+        {camera && camera.sub_streams.length > 0 && (
+          <FormControl variant="outlined" className={classes.text}>
+            Sub stream:
+            <Select
+              labelId="sub-stream"
+              id="sub-stream"
+              value={subStream}
+              onChange={handleChange}
+              className={classes.subStreams}
+            >
+              {camera &&
+                camera.sub_streams.map((sub_stream, index) => {
+                  return (
+                    <MenuItem key={index} value={sub_stream}>
+                      {sub_stream}
+                    </MenuItem>
+                  );
+                })}
+            </Select>
+          </FormControl>
+        )}
         <Label label={'Tag:'}>
           <InputRow
             onChange={setTag}
@@ -101,8 +159,8 @@ export default function Panel({
           title="Take a photo"
         >
           <IconButton
-            aria-label="rotate_right"
-            onClick={() => takePhoto(camera.id, tag)}
+            aria-label="take_photo"
+            onClick={() => takePhoto(camera.id, tag, sub_stream)}
           >
             <PhotoCameraIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -113,7 +171,10 @@ export default function Panel({
             TransitionProps={{ timeout: 600 }}
             title="Take a panorama"
           >
-            <IconButton aria-label="pano" onClick={() => takePhoto(camera.id)}>
+            <IconButton
+              aria-label="pano"
+              onClick={() => takePanoPhoto(camera.id, tag, sub_stream)}
+            >
               <PanoramaHorizontalIcon
                 className={classes.icon}
                 fontSize={'large'}
@@ -141,10 +202,12 @@ export default function Panel({
             </IconButton>
           </LightTooltip>
         </div>
-        {camera && camera.ptz_app && <Arrows />}
+        {camera && camera.ptz_app && (
+          <Arrows move={move(camera.id, sub_stream)} />
+        )}
       </div>
       <ModalsTranslator.CONFIRMATION_MODAL
-        action={() => killCamera(camera.id)}
+        action={() => killCamera(camera.id, sub_stream)}
         modalId={killModalId}
         text={`Are you sure you want to finish streaming?`}
       />
@@ -155,10 +218,14 @@ export default function Panel({
 Panel.propTypes = {
   camera: PropTypes.object,
   killCamera: PropTypes.func.isRequired,
+  killCamerasRequestWithoutClosing: PropTypes.func.isRequired,
   takePhoto: PropTypes.func.isRequired,
   getCameras: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   rotate: PropTypes.func.isRequired,
   calcZoom: PropTypes.func.isRequired,
-  zoom: PropTypes.object.isRequired,
+  move: PropTypes.func.isRequired,
+  takePanoPhoto: PropTypes.func.isRequired,
+  zoom: PropTypes.number.isRequired,
+  sub_stream: PropTypes.string.isRequired,
 };

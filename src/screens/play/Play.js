@@ -14,7 +14,6 @@ const useStyles = makeStyles(() => ({
   },
   videoContainer: {
     flex: 1,
-    borderRadius: 3,
     border: 10,
     display: 'flex',
     padding: 3,
@@ -45,11 +44,17 @@ export default function Play({
   src,
   camera,
   killCamera,
+  killCamerasRequestWithoutClosing,
   takePhoto,
   getCameras,
   openModal,
+  sub_stream,
+  move,
+  takePanoPhoto,
 }) {
+  console.log(src);
   const classes = useStyles();
+
   useEffect(() => {
     getCameras();
   }, []);
@@ -109,12 +114,16 @@ export default function Play({
         </div>
         <Panel
           killCamera={killCamera}
+          killCamerasRequestWithoutClosing={killCamerasRequestWithoutClosing}
           takePhoto={takePhoto}
           openModal={openModal}
           camera={camera}
           rotate={rotate}
           calcZoom={calcZoom}
           zoom={scale}
+          sub_stream={sub_stream}
+          move={move}
+          takePanoPhoto={takePanoPhoto}
         />
       </div>
     </div>
@@ -125,8 +134,12 @@ Play.propTypes = {
   history: PropTypes.object.isRequired,
   src: PropTypes.string.isRequired,
   camera: PropTypes.object,
+  sub_stream: PropTypes.string.isRequired,
   killCamera: PropTypes.func.isRequired,
+  killCamerasRequestWithoutClosing: PropTypes.func.isRequired,
   takePhoto: PropTypes.func.isRequired,
   getCameras: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
+  move: PropTypes.func.isRequired,
+  takePanoPhoto: PropTypes.func.isRequired,
 };

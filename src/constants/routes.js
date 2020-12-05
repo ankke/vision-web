@@ -4,7 +4,7 @@ export const routes = {
   camerasList: '/cameras',
   camerasListEdit: '/cameras/:id/edit',
   camerasListAdd: '/cameras/add',
-  play: '/play/:id',
+  play: '/play/:id/:sub_stream',
   presets: '/presets',
   presetsCameras: '/presets/:id/cameras',
   settings: '/settings',
