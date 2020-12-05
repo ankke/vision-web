@@ -78,6 +78,7 @@ export default function Panel({
   sub_stream,
   move,
   takePanoPhoto,
+                                rotValue
 }) {
   const classes = useStyles();
   const history = useHistory();
@@ -202,7 +203,7 @@ export default function Panel({
           </LightTooltip>
         </div>
         {camera && camera.ptz_app && (
-          <Arrows move={move(camera.id, sub_stream)} />
+          <Arrows move={move(camera.id, sub_stream)} rotValue={rotValue}/>
         )}
       </div>
       <ModalsTranslator.CONFIRMATION_MODAL
@@ -231,5 +232,6 @@ Panel.propTypes = {
   move: PropTypes.func.isRequired,
   takePanoPhoto: PropTypes.func.isRequired,
   zoom: PropTypes.number.isRequired,
+  rotValue: PropTypes.number.isRequired,
   sub_stream: PropTypes.string.isRequired,
 };

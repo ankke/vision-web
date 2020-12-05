@@ -9,8 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import LightTooltip from '../utils/LightTooltip';
 import { palette } from '../../constants/palette';
 import PropTypes from 'prop-types';
-import Play from './Play';
-import {DOWN, LEFT, RIGHT, UP} from "./thunks";
+import { DOWN, LEFT, RIGHT, UP } from './thunks';
 
 const useStyles = makeStyles((theme) => ({
   arrows: {
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Arrows({ move }) {
+export default function Arrows({ move, rotValue }) {
   const classes = useStyles();
   return (
     <div className={classes.arrows}>
@@ -45,7 +44,7 @@ export default function Arrows({ move }) {
           <IconButton
             style={{ padding: 'unset' }}
             aria-label="up"
-            onClick={() => move(UP)}
+            onClick={() => move(UP, rotValue)}
           >
             <ExpandLessIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -60,7 +59,7 @@ export default function Arrows({ move }) {
           <IconButton
             style={{ padding: 'unset' }}
             aria-label="left"
-            onClick={() => move(LEFT)}
+            onClick={() => move(LEFT, rotValue)}
           >
             <NavigateBeforeIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -73,7 +72,7 @@ export default function Arrows({ move }) {
           <IconButton
             style={{ padding: 'unset' }}
             aria-label="right"
-            onClick={() => move(RIGHT)}
+            onClick={() => move(RIGHT, rotValue)}
           >
             <NavigateNextIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -88,7 +87,7 @@ export default function Arrows({ move }) {
           <IconButton
             style={{ padding: 'unset' }}
             aria-label="down"
-            onClick={() => move(DOWN)}
+            onClick={() => move(DOWN, rotValue)}
           >
             <ExpandMoreIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -100,4 +99,5 @@ export default function Arrows({ move }) {
 
 Arrows.propTypes = {
   move: PropTypes.func.isRequired,
+  rotValue: PropTypes.number.isRequired,
 };

@@ -34,8 +34,8 @@ function mapDispatchToProps(dispatch) {
       dispatch(takePhotoRequest(id, tag, sub_stream)),
     getCameras: () => dispatch(getCamerasRequest()),
     openModal: (modalId) => dispatch(openModal(modalId)),
-    move: (id, sub_stream) => (direction) =>
-      dispatch(move(id, sub_stream)(direction)),
+    move: (id, sub_stream) => (direction, rotValue) =>
+      dispatch(move(id, sub_stream)(direction, rotValue)),
     takePanoPhoto: (id, tag, sub_stream) =>
       dispatch(takePanoPhotoRequest(id, tag, sub_stream)),
   };

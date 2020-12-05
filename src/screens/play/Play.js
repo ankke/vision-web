@@ -123,6 +123,7 @@ export default function Play({
           sub_stream={sub_stream}
           move={move}
           takePanoPhoto={takePanoPhoto}
+          rotValue={((rotation + 360) % 360) / 90} // 0 1 2 3
         />
       </div>
     </div>
