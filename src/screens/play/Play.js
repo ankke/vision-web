@@ -49,7 +49,8 @@ export default function Play({
   getCameras,
   openModal,
   sub_stream,
-    move,
+  move,
+  takePanoPhoto,
 }) {
   console.log(src);
   const classes = useStyles();
@@ -122,6 +123,7 @@ export default function Play({
           zoom={scale}
           sub_stream={sub_stream}
           move={move}
+          takePanoPhoto={takePanoPhoto}
         />
       </div>
     </div>
@@ -139,4 +141,5 @@ Play.propTypes = {
   getCameras: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   move: PropTypes.func.isRequired,
+  takePanoPhoto: PropTypes.func.isRequired,
 };

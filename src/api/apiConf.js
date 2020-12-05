@@ -15,7 +15,7 @@ export const takePhoto = (cameraId, tag, sub_stream) =>
   '&tag=' +
   tag +
   '&sub_stream=' +
-  sub_stream;
+  encodeURIComponent(sub_stream);
 export const killCamera = (cameraId, sub_stream) =>
   camera_ +
   '/kill?id=' +
@@ -38,10 +38,34 @@ export const settings_ = apiUrl + '/settings';
 
 //ptz
 export const left = (cameraId, sub_stream) =>
-  apiUrl + '/ptz/left?id=' + cameraId + '&sub_stream=' + encodeURIComponent(sub_stream);
+  apiUrl +
+  '/ptz/left?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
 export const right = (cameraId, sub_stream) =>
-  apiUrl + '/ptz/right?id=' + cameraId + '&sub_stream=' + encodeURIComponent(sub_stream);
+  apiUrl +
+  '/ptz/right?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
 export const up = (cameraId, sub_stream) =>
-  apiUrl + '/ptz/up?id=' + cameraId + '&sub_stream=' + encodeURIComponent(sub_stream);
+  apiUrl +
+  '/ptz/up?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
 export const down = (cameraId, sub_stream) =>
-  apiUrl + '/ptz/down?id=' + cameraId + '&sub_stream=' + encodeURIComponent(sub_stream);
+  apiUrl +
+  '/ptz/down?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
+export const pano = (cameraId, tag, sub_stream) =>
+  apiUrl +
+  '/ptz/pano?id=' +
+  cameraId +
+  '&tag=' +
+  tag +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);

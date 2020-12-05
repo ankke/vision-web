@@ -77,6 +77,7 @@ export default function Panel({
   zoom,
   sub_stream,
   move,
+  takePanoPhoto,
 }) {
   console.log(sub_stream);
   const classes = useStyles();
@@ -158,7 +159,7 @@ export default function Panel({
           title="Take a photo"
         >
           <IconButton
-            aria-label="rotate_right"
+            aria-label="take_photo"
             onClick={() => takePhoto(camera.id, tag, sub_stream)}
           >
             <PhotoCameraIcon className={classes.icon} fontSize={'large'} />
@@ -170,7 +171,10 @@ export default function Panel({
             TransitionProps={{ timeout: 600 }}
             title="Take a panorama"
           >
-            <IconButton aria-label="pano" onClick={() => takePhoto(camera.id)}>
+            <IconButton
+              aria-label="pano"
+              onClick={() => takePanoPhoto(camera.id, tag, sub_stream)}
+            >
               <PanoramaHorizontalIcon
                 className={classes.icon}
                 fontSize={'large'}
@@ -221,6 +225,7 @@ Panel.propTypes = {
   rotate: PropTypes.func.isRequired,
   calcZoom: PropTypes.func.isRequired,
   move: PropTypes.func.isRequired,
+  takePanoPhoto: PropTypes.func.isRequired,
   zoom: PropTypes.number.isRequired,
   sub_stream: PropTypes.string.isRequired,
 };
