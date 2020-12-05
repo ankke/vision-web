@@ -35,3 +35,13 @@ export const getCamerasForConfiguration = (presetId) =>
 
 // settings
 export const settings_ = apiUrl + '/settings';
+
+//ptz
+export const left = (cameraId, sub_stream) =>
+  apiUrl + '/ptz/left?id=' + cameraId + '&sub_stream=' + encodeURIComponent(sub_stream);
+export const right = (cameraId, sub_stream) =>
+  apiUrl + '/ptz/right?id=' + cameraId + '&sub_stream=' + encodeURIComponent(sub_stream);
+export const up = (cameraId, sub_stream) =>
+  apiUrl + '/ptz/up?id=' + cameraId + '&sub_stream=' + encodeURIComponent(sub_stream);
+export const down = (cameraId, sub_stream) =>
+  apiUrl + '/ptz/down?id=' + cameraId + '&sub_stream=' + encodeURIComponent(sub_stream);

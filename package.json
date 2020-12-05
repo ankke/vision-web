@@ -32,6 +32,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux-logger": "^3.0.6",
+    "socket.io-client": "^3.0.3",
     "websocket": "^1.0.31",
     "yup": "^0.32.0"
   },

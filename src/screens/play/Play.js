@@ -49,9 +49,11 @@ export default function Play({
   getCameras,
   openModal,
   sub_stream,
+    move,
 }) {
   console.log(src);
   const classes = useStyles();
+
   useEffect(() => {
     getCameras();
   }, []);
@@ -119,6 +121,7 @@ export default function Play({
           calcZoom={calcZoom}
           zoom={scale}
           sub_stream={sub_stream}
+          move={move}
         />
       </div>
     </div>
@@ -135,4 +138,5 @@ Play.propTypes = {
   takePhoto: PropTypes.func.isRequired,
   getCameras: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
+  move: PropTypes.func.isRequired,
 };

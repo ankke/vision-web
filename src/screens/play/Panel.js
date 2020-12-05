@@ -76,6 +76,7 @@ export default function Panel({
   calcZoom,
   zoom,
   sub_stream,
+  move,
 }) {
   console.log(sub_stream);
   const classes = useStyles();
@@ -197,7 +198,9 @@ export default function Panel({
             </IconButton>
           </LightTooltip>
         </div>
-        {camera && camera.ptz_app && <Arrows />}
+        {camera && camera.ptz_app && (
+          <Arrows move={move(camera.id, sub_stream)} />
+        )}
       </div>
       <ModalsTranslator.CONFIRMATION_MODAL
         action={() => killCamera(camera.id, sub_stream)}
@@ -217,6 +220,7 @@ Panel.propTypes = {
   openModal: PropTypes.func.isRequired,
   rotate: PropTypes.func.isRequired,
   calcZoom: PropTypes.func.isRequired,
+  move: PropTypes.func.isRequired,
   zoom: PropTypes.number.isRequired,
   sub_stream: PropTypes.string.isRequired,
 };

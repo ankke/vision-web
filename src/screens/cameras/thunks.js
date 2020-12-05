@@ -107,6 +107,8 @@ export const killCamerasRequest = (id, subStream) => {
       .then((res) => {
         window.open('about:blank', '_self');
         window.close();
+        window.open('about:blank', '_self');
+        window.close();
       })
       .catch((err) => {
         console.log(err);

@@ -8,6 +8,9 @@ import { Fade } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import LightTooltip from '../utils/LightTooltip';
 import { palette } from '../../constants/palette';
+import PropTypes from 'prop-types';
+import Play from './Play';
+import {DOWN, LEFT, RIGHT, UP} from "./thunks";
 
 const useStyles = makeStyles((theme) => ({
   arrows: {
@@ -29,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Arrows() {
+export default function Arrows({ move }) {
   const classes = useStyles();
-
+  console.log(move);
   return (
     <div className={classes.arrows}>
       <div>
@@ -43,7 +46,7 @@ export default function Arrows() {
           <IconButton
             style={{ padding: 'unset' }}
             aria-label="up"
-            onClick={() => console.log('up')}
+            onClick={() => move(UP)}
           >
             <ExpandLessIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -58,7 +61,7 @@ export default function Arrows() {
           <IconButton
             style={{ padding: 'unset' }}
             aria-label="left"
-            onClick={() => console.log('left')}
+            onClick={() => move(LEFT)}
           >
             <NavigateBeforeIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -71,7 +74,7 @@ export default function Arrows() {
           <IconButton
             style={{ padding: 'unset' }}
             aria-label="right"
-            onClick={() => console.log('right')}
+            onClick={() => move(RIGHT)}
           >
             <NavigateNextIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -86,7 +89,7 @@ export default function Arrows() {
           <IconButton
             style={{ padding: 'unset' }}
             aria-label="down"
-            onClick={() => console.log('down')}
+            onClick={() => move(DOWN)}
           >
             <ExpandMoreIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -95,3 +98,7 @@ export default function Arrows() {
     </div>
   );
 }
+
+Arrows.propTypes = {
+  move: PropTypes.func.isRequired,
+};

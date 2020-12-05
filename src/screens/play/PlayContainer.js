@@ -10,6 +10,7 @@ import {
 import Play from './Play';
 import { openModal } from '../utils/modals/modalsSlice';
 import { showCamera } from '../../api/apiConf';
+import { move } from './thunks';
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -33,6 +34,8 @@ function mapDispatchToProps(dispatch) {
       dispatch(takePhotoRequest(id, tag, sub_stream)),
     getCameras: () => dispatch(getCamerasRequest()),
     openModal: (modalId) => dispatch(openModal(modalId)),
+    move: (id, sub_stream) => (direction) =>
+      dispatch(move(id, sub_stream)(direction)),
   };
 }
 
