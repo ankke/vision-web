@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
@@ -32,6 +32,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Arrows({ move, rotValue }) {
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown, false);
+
+    return function cleanup() {
+      document.removeEventListener('keydown', handleKeyDown, false);
+    };
+  }, []);
+
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 38) {
+      move(UP, rotValue);
+    } else if (event.keyCode === 39) {
+      move(RIGHT, rotValue);
+    } else if (event.keyCode === 40) {
+      move(DOWN, rotValue);
+    } else if (event.keyCode === 37) {
+      move(LEFT, rotValue);
+    }
+  };
   const classes = useStyles();
   return (
     <div className={classes.arrows}>
@@ -45,6 +64,7 @@ export default function Arrows({ move, rotValue }) {
             style={{ padding: 'unset' }}
             aria-label="up"
             onClick={() => move(UP, rotValue)}
+            onKeyDown={handleKeyDown}
           >
             <ExpandLessIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -60,6 +80,7 @@ export default function Arrows({ move, rotValue }) {
             style={{ padding: 'unset' }}
             aria-label="left"
             onClick={() => move(LEFT, rotValue)}
+            onKeyDown={handleKeyDown}
           >
             <NavigateBeforeIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -73,6 +94,7 @@ export default function Arrows({ move, rotValue }) {
             style={{ padding: 'unset' }}
             aria-label="right"
             onClick={() => move(RIGHT, rotValue)}
+            onKeyDown={handleKeyDown}
           >
             <NavigateNextIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
@@ -88,6 +110,7 @@ export default function Arrows({ move, rotValue }) {
             style={{ padding: 'unset' }}
             aria-label="down"
             onClick={() => move(DOWN, rotValue)}
+            onKeyDown={handleKeyDown}
           >
             <ExpandMoreIcon className={classes.icon} fontSize={'large'} />
           </IconButton>
