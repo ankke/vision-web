@@ -179,18 +179,6 @@ function Menu({ forwardedRef }) {
         <List>
           <ListItem
             button
-            key={'Start'}
-            onClick={() => {
-              history.push(routes.homepage);
-            }}
-          >
-            <ListItemIcon>
-              <InfoIcon className={classes.icon} />
-            </ListItemIcon>
-            <div className={classes.text}>Start</div>
-          </ListItem>
-          <ListItem
-            button
             key={'Cameras'}
             onClick={() => {
               history.push(routes.camerasList);
@@ -227,6 +215,7 @@ function Menu({ forwardedRef }) {
           </ListItem>
         </List>
       </Drawer>
+      <Route exact path={routes.homepage} component={CamerasScreenContainer} />
       <Route path={routes.camerasList} component={CamerasScreenContainer} />
       <Route path={routes.presets} component={PresetsScreenContainer} />
       <Route path={routes.settings} component={SettingsContainer} />
