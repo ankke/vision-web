@@ -79,7 +79,6 @@ export default function Panel({
   move,
   takePanoPhoto,
 }) {
-  console.log(sub_stream);
   const classes = useStyles();
   const history = useHistory();
   const [tag, setTag] = useState('');
@@ -206,6 +205,11 @@ export default function Panel({
           <Arrows move={move(camera.id, sub_stream)} />
         )}
       </div>
+      <ModalsTranslator.CONFIRMATION_MODAL
+        action={() => takePanoPhoto(camera.id, tag, sub_stream)}
+        modalId={CONFIRMATION_MODAL + 'pano'}
+        text={`Taking pano photo was not successful. Would you like to retry? `}
+      />
       <ModalsTranslator.CONFIRMATION_MODAL
         action={() => killCamera(camera.id, sub_stream)}
         modalId={killModalId}

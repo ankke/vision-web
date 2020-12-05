@@ -52,7 +52,6 @@ export default function Play({
   move,
   takePanoPhoto,
 }) {
-  console.log(src);
   const classes = useStyles();
 
   useEffect(() => {

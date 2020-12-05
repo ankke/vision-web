@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Arrows({ move }) {
   const classes = useStyles();
-  console.log(move);
   return (
     <div className={classes.arrows}>
       <div>
