@@ -22,6 +22,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useHistory } from 'react-router';
+import VideoDisabled from '../../icons/video-disabled.svg';
+import VideoRecording from '../../icons/video-recording.svg';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -64,6 +66,14 @@ const useStyles = makeStyles(() => ({
     fontFamily: "'Bai Jamjuree', sans-serif",
     width: '100%',
   },
+  photo: {
+    display: 'flex',
+    width: 200,
+    justifyContent: 'space-around',
+  },
+  svg: {
+    width: 50,
+  },
 }));
 
 export default function Panel({
@@ -78,11 +88,14 @@ export default function Panel({
   sub_stream,
   move,
   takePanoPhoto,
+  rotValue,
+  startRecording,
+  stopRecording,
 }) {
-  console.log(sub_stream);
   const classes = useStyles();
   const history = useHistory();
   const [tag, setTag] = useState('');
+  const [recording, setRecording] = useState(false);
   const killModalId = CONFIRMATION_MODAL + ' kill';
   const [subStream, setSubStream] = useState(sub_stream);
 
@@ -152,36 +165,71 @@ export default function Panel({
             <ZoomInIcon className={classes.icon} />
           </Grid>
         </Grid>
-
-        <LightTooltip
-          TransitionComponent={Fade}
-          TransitionProps={{ timeout: 600 }}
-          title="Take a photo"
-        >
-          <IconButton
-            aria-label="take_photo"
-            onClick={() => takePhoto(camera.id, tag, sub_stream)}
-          >
-            <PhotoCameraIcon className={classes.icon} fontSize={'large'} />
-          </IconButton>
-        </LightTooltip>
-        {camera && camera.ptz_app && (
+        <div className={classes.photo}>
           <LightTooltip
             TransitionComponent={Fade}
             TransitionProps={{ timeout: 600 }}
-            title="Take a panorama"
+            title="Take a photo"
           >
             <IconButton
-              aria-label="pano"
-              onClick={() => takePanoPhoto(camera.id, tag, sub_stream)}
+              aria-label="take_photo"
+              onClick={() => takePhoto(camera.id, tag, sub_stream)}
             >
-              <PanoramaHorizontalIcon
-                className={classes.icon}
-                fontSize={'large'}
-              />
+              <PhotoCameraIcon className={classes.icon} fontSize={'large'} />
             </IconButton>
           </LightTooltip>
-        )}
+          {camera && camera.ptz_app && (
+            <LightTooltip
+              TransitionComponent={Fade}
+              TransitionProps={{ timeout: 600 }}
+              title="Take a panorama"
+            >
+              <IconButton
+                aria-label="pano"
+                onClick={() =>
+                  takePanoPhoto(camera.id, tag, sub_stream, rotValue)
+                }
+              >
+                <PanoramaHorizontalIcon
+                  className={classes.icon}
+                  fontSize={'large'}
+                />
+              </IconButton>
+            </LightTooltip>
+          )}
+        </div>
+        <LightTooltip
+          TransitionComponent={Fade}
+          TransitionProps={{ timeout: 600 }}
+          title={recording ? 'Stop recording' : 'Start recording'}
+        >
+          <IconButton
+            aria-label="video"
+            onClick={() => {
+              if (recording) {
+                setRecording(false);
+                stopRecording(camera.id, sub_stream);
+              } else {
+                setRecording(true);
+                startRecording(camera.id, tag, sub_stream);
+              }
+            }}
+          >
+            {recording ? (
+              <img
+                className={classes.svg}
+                src={VideoRecording}
+                alt="React Logo"
+              />
+            ) : (
+              <img
+                className={classes.svg}
+                src={VideoDisabled}
+                alt="React Logo"
+              />
+            )}
+          </IconButton>
+        </LightTooltip>
         <div className={classes.rotate}>
           <LightTooltip
             TransitionComponent={Fade}
@@ -203,9 +251,19 @@ export default function Panel({
           </LightTooltip>
         </div>
         {camera && camera.ptz_app && (
-          <Arrows move={move(camera.id, sub_stream)} />
+          <Arrows move={move(camera.id, sub_stream)} rotValue={rotValue} />
         )}
       </div>
+      <ModalsTranslator.CONFIRMATION_MODAL
+        action={() => takePanoPhoto(camera.id, tag, sub_stream, rotValue)}
+        modalId={CONFIRMATION_MODAL + 'pano'}
+        text={`Taking pano photo was not successful. Would you like to retry? `}
+      />
+      <ModalsTranslator.CONFIRMATION_MODAL
+        action={() => startRecording(camera.id, tag, sub_stream)}
+        modalId={CONFIRMATION_MODAL + 'video'}
+        text={`Starting video recording was not successful. Would you like to retry? `}
+      />
       <ModalsTranslator.CONFIRMATION_MODAL
         action={() => killCamera(camera.id, sub_stream)}
         modalId={killModalId}
@@ -226,6 +284,9 @@ Panel.propTypes = {
   calcZoom: PropTypes.func.isRequired,
   move: PropTypes.func.isRequired,
   takePanoPhoto: PropTypes.func.isRequired,
+  startRecording: PropTypes.func.isRequired,
+  stopRecording: PropTypes.func.isRequired,
   zoom: PropTypes.number.isRequired,
+  rotValue: PropTypes.number.isRequired,
   sub_stream: PropTypes.string.isRequired,
 };

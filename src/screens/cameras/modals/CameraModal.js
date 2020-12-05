@@ -173,6 +173,12 @@ export default function FadeModal({ action, camera, getCamera, cameraId }) {
           <button
             className={classes.button}
             onClick={() => {
+              const filteredSubStreams = state.sub_streams.filter((s) => s !== '')
+              setState({
+                ...state,
+                sub_streams: filteredSubStreams,
+              });
+              console.log(state);
               action(state);
               handleClose();
             }}
