@@ -25,9 +25,9 @@ export const move = (cameraId, sub_stream) => (direction, rotValue) => {
   };
 };
 
-export const takePanoPhotoRequest = (cameraId, tag, sub_stream) => {
+export const takePanoPhotoRequest = (cameraId, tag, sub_stream, rotValue) => {
   return async (dispatch) => {
-    await get(pano(cameraId, tag, sub_stream))
+    await get(pano(cameraId, tag, sub_stream, rotValue))
       .then((res) => {
         if (res.status === 537) {
           dispatch(openModal(CONFIRMATION_MODAL + 'pano'));

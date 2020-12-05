@@ -61,11 +61,13 @@ export const down = (cameraId, sub_stream) =>
   cameraId +
   '&sub_stream=' +
   encodeURIComponent(sub_stream);
-export const pano = (cameraId, tag, sub_stream) =>
+export const pano = (cameraId, tag, sub_stream, rotValue) =>
   apiUrl +
   '/ptz/pano?id=' +
   cameraId +
   '&tag=' +
   tag +
   '&sub_stream=' +
-  encodeURIComponent(sub_stream);
+  encodeURIComponent(sub_stream) +
+  '&rot_value=' +
+  rotValue;

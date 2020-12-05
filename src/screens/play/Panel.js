@@ -78,7 +78,7 @@ export default function Panel({
   sub_stream,
   move,
   takePanoPhoto,
-                                rotValue
+  rotValue,
 }) {
   const classes = useStyles();
   const history = useHistory();
@@ -173,7 +173,9 @@ export default function Panel({
           >
             <IconButton
               aria-label="pano"
-              onClick={() => takePanoPhoto(camera.id, tag, sub_stream)}
+              onClick={() =>
+                takePanoPhoto(camera.id, tag, sub_stream, rotValue)
+              }
             >
               <PanoramaHorizontalIcon
                 className={classes.icon}
@@ -203,11 +205,11 @@ export default function Panel({
           </LightTooltip>
         </div>
         {camera && camera.ptz_app && (
-          <Arrows move={move(camera.id, sub_stream)} rotValue={rotValue}/>
+          <Arrows move={move(camera.id, sub_stream)} rotValue={rotValue} />
         )}
       </div>
       <ModalsTranslator.CONFIRMATION_MODAL
-        action={() => takePanoPhoto(camera.id, tag, sub_stream)}
+        action={() => takePanoPhoto(camera.id, tag, sub_stream, rotValue)}
         modalId={CONFIRMATION_MODAL + 'pano'}
         text={`Taking pano photo was not successful. Would you like to retry? `}
       />
