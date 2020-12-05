@@ -9,7 +9,6 @@ import EditButtonWithTooltip from '../utils/buttons/EditButtonWithTooltip';
 import DeleteButtonWithTooltip from '../utils/buttons/DeleteButtonWithTooltip';
 import {
   CONFIRMATION_MODAL,
-  EDIT_CAMERA_MODAL,
   ModalsTranslator,
 } from '../utils/modals/types';
 import { ExpandableRow } from '../utils/ExpandableRow';

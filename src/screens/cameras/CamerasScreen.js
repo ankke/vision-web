@@ -23,7 +23,7 @@ const styles = {
   },
   list: {
     flex: 1,
-    maxWidth: 500,
+    maxWidth: 700,
     display: 'flex',
     flexDirection: 'column',
   },

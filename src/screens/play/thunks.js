@@ -1,4 +1,4 @@
-import { down, left, pano, right, up } from '../../api/apiConf';
+import {down, left, pano, right, start, stop_, up} from '../../api/apiConf';
 import { get } from '../../api/requests';
 import { openModal } from '../utils/modals/modalsSlice';
 import { CONFIRMATION_MODAL } from '../utils/modals/types';
@@ -36,5 +36,27 @@ export const takePanoPhotoRequest = (cameraId, tag, sub_stream, rotValue) => {
       .catch((err) => {
         console.log(err);
       });
+  };
+};
+
+export const startRecording = (cameraId, tag, sub_stream) => {
+  return async (dispatch) => {
+    await get(start(cameraId, tag, sub_stream))
+      .then((res) => {
+        if (res.status !== 200) {
+          dispatch(openModal(CONFIRMATION_MODAL + 'video'));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const stopRecording = (cameraId, sub_stream) => {
+  return async (_) => {
+    await get(stop_(cameraId, sub_stream)).catch((err) => {
+      console.log(err);
+    });
   };
 };

@@ -71,3 +71,17 @@ export const pano = (cameraId, tag, sub_stream, rotValue) =>
   encodeURIComponent(sub_stream) +
   '&rot_value=' +
   rotValue;
+export const start = (cameraId, tag, sub_stream) =>
+  apiUrl +
+  '/camera/start?id=' +
+  cameraId +
+  '&tag=' +
+  tag +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);
+export const stop_ = (cameraId, sub_stream) =>
+  apiUrl +
+  '/camera/stop?id=' +
+  cameraId +
+  '&sub_stream=' +
+  encodeURIComponent(sub_stream);

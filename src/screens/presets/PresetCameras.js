@@ -27,7 +27,7 @@ const styles = {
     marginLeft: 10,
   },
   list: {
-    maxWidth: 500,
+    maxWidth: 700,
   },
 };
 

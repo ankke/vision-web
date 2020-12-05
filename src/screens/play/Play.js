@@ -51,6 +51,8 @@ export default function Play({
   sub_stream,
   move,
   takePanoPhoto,
+  startRecording,
+  stopRecording,
 }) {
   const classes = useStyles();
 
@@ -124,6 +126,8 @@ export default function Play({
           move={move}
           takePanoPhoto={takePanoPhoto}
           rotValue={((rotation + 360) % 360) / 90} // 0 1 2 3
+          startRecording={startRecording}
+          stopRecording={stopRecording}
         />
       </div>
     </div>
@@ -142,4 +146,6 @@ Play.propTypes = {
   openModal: PropTypes.func.isRequired,
   move: PropTypes.func.isRequired,
   takePanoPhoto: PropTypes.func.isRequired,
+  startRecording: PropTypes.func.isRequired,
+  stopRecording: PropTypes.func.isRequired,
 };
