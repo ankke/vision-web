@@ -9,7 +9,7 @@ import {
 } from '../cameras/thunks';
 import Play from './Play';
 import { openModal } from '../utils/modals/modalsSlice';
-import { showCamera } from '../../api/apiConf';
+import { streamCamera } from '../../api/apiConf';
 import {move, startRecording, stopRecording, takePanoPhotoRequest} from './thunks';
 
 const mapStateToProps = (state, ownProps) => {
@@ -19,7 +19,7 @@ const mapStateToProps = (state, ownProps) => {
     },
   } = ownProps;
   return {
-    src: showCamera(id, sub_stream),
+    src: streamCamera(id, sub_stream),
     camera: state.cameras.list.find((cam) => cam.id === parseInt(id)),
     sub_stream: decodeURIComponent(sub_stream),
   };

@@ -13,6 +13,9 @@ import { ExpandableRow } from '../utils/ExpandableRow';
 import { useHistory } from 'react-router';
 import MoreButton from '../utils/buttons/MoreButton';
 import { palette } from '../../constants/palette';
+import IconButton from '@material-ui/core/IconButton';
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
+import WithTooltip from '../utils/buttons/WithTooltip';
 const classNames = require('classnames');
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +47,7 @@ export function PresetRow({
   openModal,
   setCurrent,
   presetDetails,
+    addPreset
 }) {
   const classes = useStyles();
   const history = useHistory();
@@ -65,6 +69,15 @@ export function PresetRow({
           }}
           style={classes.button}
         />
+        <WithTooltip title={'Clone set'}>
+          <IconButton
+            className={classes.button}
+            aria-label="clone"
+            onClick={() => addPreset(preset)}
+          >
+            <AddToPhotosIcon />
+          </IconButton>
+        </WithTooltip>
       </div>
     );
   };
@@ -110,4 +123,5 @@ PresetRow.propTypes = {
   delete_: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   setCurrent: PropTypes.func.isRequired,
+  addPreset: PropTypes.func.isRequired,
 };

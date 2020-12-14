@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 20,
     padding: '30px 50px',
     outline: 'none',
-    width: 460,
+    width: 410,
     alignItems: 'center',
   },
   button: {
@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
   row: {
     alignSelf: 'flex-end',
+  },
+  text: {
+    textAlign: 'center',
   },
 }));
 
@@ -75,7 +78,7 @@ export default function FadeModal({ action, opened, closeModal }) {
     >
       <Fade in={isOpen()}>
         <div className={classes.paper}>
-          <div>{action.text}</div>
+          <div className={classes.text}>{action.text}</div>
           <div className={classes.row}>
             <button
               className={classNames(classes.button, classes.yes)}

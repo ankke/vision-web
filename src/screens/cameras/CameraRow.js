@@ -3,14 +3,12 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import InfoRow from '../utils/InfoRow';
 import WithTooltip from '../utils/buttons/WithTooltip';
 import EditButtonWithTooltip from '../utils/buttons/EditButtonWithTooltip';
 import DeleteButtonWithTooltip from '../utils/buttons/DeleteButtonWithTooltip';
-import {
-  CONFIRMATION_MODAL,
-  ModalsTranslator,
-} from '../utils/modals/types';
+import { CONFIRMATION_MODAL, ModalsTranslator } from '../utils/modals/types';
 import { ExpandableRow } from '../utils/ExpandableRow';
 import { useHistory } from 'react-router';
 
@@ -29,6 +27,7 @@ export function CameraRow({
   delete_,
   openModal,
   setCurrent,
+  cloneCamera,
   withoutButtons = false,
 }) {
   const classes = useStyles();
@@ -56,13 +55,15 @@ export function CameraRow({
             </IconButton>
           </a>
         </WithTooltip>
-        <EditButtonWithTooltip
-          onClick={() => {
-            setCurrent(camera);
-            history.push(`/cameras/${camera.id}/edit`);
-          }}
-          style={classes.button}
-        />
+        {delete_ && (
+          <EditButtonWithTooltip
+            onClick={() => {
+              setCurrent(camera);
+              history.push(`/cameras/${camera.id}/edit`);
+            }}
+            style={classes.button}
+          />
+        )}
         {delete_ && (
           <DeleteButtonWithTooltip
             onClick={() => {
@@ -70,6 +71,19 @@ export function CameraRow({
             }}
             style={classes.button}
           />
+        )}
+        {delete_ && (
+          <WithTooltip title={'Clone camera'}>
+            <IconButton
+              className={classes.button}
+              aria-label="clone"
+              onClick={() => {
+                cloneCamera(camera);
+              }}
+            >
+              <AddToPhotosIcon />
+            </IconButton>
+          </WithTooltip>
         )}
         <ModalsTranslator.CONFIRMATION_MODAL
           action={() => delete_(camera.id)}
@@ -83,11 +97,11 @@ export function CameraRow({
   const renderInfoRows = () => {
     return (
       <div>
-        <InfoRow name={'Url:'} value={camera.url} />
+        <InfoRow name={'URL:'} value={camera.url} />
         <InfoRow name={'Sub streams:'} value={camera.sub_streams} />
         <InfoRow name={'Suffix:'} value={camera.suffix} />
-        <InfoRow name={'Ptz app:'} value={camera.ptz_app} />
-        <InfoRow name={'Udp:'} value={camera.udp_supported} />
+        <InfoRow name={'PTZ camera:'} value={camera.ptz} />
+        <InfoRow name={'UDP supported:'} value={camera.udp_supported} />
       </div>
     );
   };
@@ -108,5 +122,6 @@ CameraRow.propTypes = {
   delete_: PropTypes.func,
   openModal: PropTypes.func,
   setCurrent: PropTypes.func,
+  cloneCamera: PropTypes.func,
   withoutButtons: PropTypes.bool,
 };

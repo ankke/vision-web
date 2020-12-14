@@ -77,7 +77,7 @@ export default function FadeModal({ action, camera, getCamera, cameraId }) {
     url: '',
     sub_streams: [],
     suffix: '',
-    ptz_app: false,
+    ptz: false,
     udp_supported: false,
     enabled: false,
   };
@@ -135,8 +135,8 @@ export default function FadeModal({ action, camera, getCamera, cameraId }) {
         style: classes.checkBoxLabel,
       },
       args: {
-        state: state['ptz_app'],
-        name: 'ptz_app',
+        state: state['ptz'],
+        name: 'ptz',
       },
     },
   ];

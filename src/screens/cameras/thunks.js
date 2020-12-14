@@ -6,7 +6,7 @@ import {
   deleteCamera,
   getConfiguration,
   getCamera,
-  showCamera,
+  streamCamera,
 } from '../../api/apiConf';
 import { get, post, _delete, put } from '../../api/requests';
 import { getCameras } from './camerasSlice';
@@ -20,7 +20,7 @@ export const addCameraRequest = ({ camera }) => {
       sub_streams,
       suffix,
       udp_supported,
-      ptz_app,
+      ptz,
       enabled,
     } = camera;
     await post(camera_, {
@@ -29,7 +29,7 @@ export const addCameraRequest = ({ camera }) => {
       sub_streams,
       suffix,
       udp_supported,
-      ptz_app,
+      ptz,
       enabled,
     })
       .then(() => {
@@ -51,7 +51,7 @@ export const editCameraRequest = ({ camera }) => {
       sub_streams,
       suffix,
       udp_supported,
-      ptz_app,
+      ptz,
       enabled,
     } = camera;
     await put(camera_, {
@@ -61,7 +61,7 @@ export const editCameraRequest = ({ camera }) => {
       sub_streams,
       suffix,
       udp_supported,
-      ptz_app,
+      ptz,
       enabled,
     })
       .then(() => {
@@ -77,7 +77,6 @@ export const getCamerasRequest = () => {
   return async (dispatch) => {
     const cam = await get(cameras)
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .catch((err) => {
@@ -162,13 +161,13 @@ export const showCameraRequest = async (id, sub_stream) => {
         const camera_ = res.json();
         const sub_stream_default =
           camera_.sub_stream.length > 0 ? camera_.sub_stream[0] : '';
-        return showCamera(id, sub_stream_default);
+        return streamCamera(id, sub_stream_default);
       })
       .catch((err) => {
         console.log(err);
         return undefined;
       });
   } else {
-    return showCamera(id, sub_stream);
+    return streamCamera(id, sub_stream);
   }
 };
