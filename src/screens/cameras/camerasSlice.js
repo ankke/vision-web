@@ -12,6 +12,11 @@ const camerasSlice = createSlice({
       ptz: false,
       udp_supported: false,
       enabled: false,
+      login: '',
+      password: '',
+      port: '',
+      ptz_port: '',
+      ip_address: '',
     },
   },
   reducers: {
@@ -47,6 +52,11 @@ const camerasSlice = createSlice({
           ptz: false,
           udp_supported: false,
           enabled: false,
+          login: '',
+          password: '',
+          port: '',
+          ptz_port: '',
+          ip_address: '',
         },
       };
     },

@@ -22,6 +22,11 @@ export const addCameraRequest = ({ camera }) => {
       udp_supported,
       ptz,
       enabled,
+      login,
+      password,
+      ptz_port,
+      port,
+      ip_address,
     } = camera;
     await post(camera_, {
       name,
@@ -31,6 +36,11 @@ export const addCameraRequest = ({ camera }) => {
       udp_supported,
       ptz,
       enabled,
+      login,
+      password,
+      ptz_port,
+      port,
+      ip_address,
     })
       .then(() => {
         dispatch(getCamerasRequest());

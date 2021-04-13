@@ -80,6 +80,11 @@ export default function FadeModal({ action, camera, getCamera, cameraId }) {
     ptz: false,
     udp_supported: false,
     enabled: false,
+    login: '',
+    password: '',
+    port: '',
+    ptz_port: '',
+    ip_address: ''
   };
 
   const [state, setState] = useState(cameraId ? camera : initialState);
@@ -101,10 +106,48 @@ export default function FadeModal({ action, camera, getCamera, cameraId }) {
     },
     {
       tag: InputRow,
-      label: { label: 'Url:' },
+      label: {
+        label: 'IP:',
+      },
       args: {
-        name: 'url',
-        value: state['url'],
+        name: 'ip_address',
+        value: state['ip_address'],
+      },
+    },
+    {
+      tag: InputRow,
+      label: {
+        label: 'Streaming port:',
+      },
+      args: {
+        name: 'port',
+        value: state['port'],
+      },
+    },
+    {
+      tag: InputRow,
+      label: {
+        label: 'Steering port:',
+      },
+      args: {
+        name: 'ptz_port',
+        value: state['ptz_port'],
+      },
+    },
+    {
+      tag: InputRow,
+      label: { label: 'Login:' },
+      args: {
+        name: 'login',
+        value: state['login'],
+      },
+    },
+    {
+      tag: InputRow,
+      label: { label: 'Password:' },
+      args: {
+        name: 'password',
+        value: state['password'],
       },
     },
     {
@@ -173,7 +216,9 @@ export default function FadeModal({ action, camera, getCamera, cameraId }) {
           <button
             className={classes.button}
             onClick={() => {
-              const filteredSubStreams = state.sub_streams.filter((s) => s !== '')
+              const filteredSubStreams = state.sub_streams.filter(
+                (s) => s !== ''
+              );
               setState({
                 ...state,
                 sub_streams: filteredSubStreams,
