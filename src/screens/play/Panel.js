@@ -178,7 +178,7 @@ export default function Panel({
               <PhotoCameraIcon className={classes.icon} fontSize={'large'} />
             </IconButton>
           </LightTooltip>
-          {camera && camera.ptz_app && (
+          {camera && camera.ptz && (
             <LightTooltip
               TransitionComponent={Fade}
               TransitionProps={{ timeout: 600 }}
@@ -250,7 +250,7 @@ export default function Panel({
             </IconButton>
           </LightTooltip>
         </div>
-        {camera && camera.ptz_app && (
+        {camera && camera.ptz && (
           <Arrows move={move(camera.id, sub_stream)} rotValue={rotValue} />
         )}
       </div>

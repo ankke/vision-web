@@ -2,9 +2,9 @@ const apiUrl = 'http://127.0.0.1:5000';
 // cameras
 export const camera_ = apiUrl + '/camera';
 export const cameras = apiUrl + '/cameras';
-export const showCamera = (cameraId, sub_stream) =>
+export const streamCamera = (cameraId, sub_stream) =>
   camera_ +
-  '/show?id=' +
+  '/stream?id=' +
   cameraId +
   '&sub_stream=' +
   encodeURIComponent(sub_stream);

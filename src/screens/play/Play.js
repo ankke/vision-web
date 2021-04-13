@@ -19,6 +19,7 @@ const useStyles = makeStyles(() => ({
     padding: 3,
     justifyContent: 'center',
     overflow: 'scroll',
+    alignItems: 'center',
   },
   rotate: {
     display: 'flex',

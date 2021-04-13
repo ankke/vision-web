@@ -65,6 +65,7 @@ class CamerasScreen extends Component {
             delete_={this.props.delete}
             setCurrent={this.props.setCurrent}
             openModal={this.props.openModal}
+            cloneCamera={this.props.addCamera}
           />
         </div>
         <Route
