@@ -1,9 +1,9 @@
 # Application for low latency video streaming from a mobile robot
-Developed for the Kalman Rover Team at AGH Space Systems student initiative. Application was used during Rover Challenge competitions. 
+### Developed for the Kalman Rover Team at AGH Space Systems student initiative. Application was used during Rover Challenge competitions. 
 ![zdjecie2](https://user-images.githubusercontent.com/48625325/221822752-9b996d82-1f32-4668-babb-3c53f1f525db.png)
 ![zdjecie4](https://user-images.githubusercontent.com/48625325/221822823-3722e22f-ab3f-401b-b18f-693b34a489cc.png)
 
-
+### This is the frontend repository. For server implementation refer to: https://github.com/ankke/vision-server
 # Architecture
 ![arch](https://user-images.githubusercontent.com/48625325/221819622-5a619e40-27c7-4f73-bda1-33be2ec3d678.png)
 
